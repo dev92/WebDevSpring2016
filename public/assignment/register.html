@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,6 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -43,7 +42,7 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="register.html"><span class="glyphicon glyphicon-hand-up"></span> Register</a></li>
+                <li class="active"><a href="register.html"><span class="glyphicon glyphicon-hand-up"></span> Register</a></li>
                 <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Username</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -56,25 +55,45 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="home.html"><span class="glyphicon glyphicon-home"></span> Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="home.html"><span class="glyphicon glyphicon-home"></span> Home <span class="sr-only">(current)</span></a></li>
                 <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                 <li><a href="admin.html"><span class="glyphicon glyphicon-king"></span> Admin</a></li>
                 <li><a href="forms.html"><span class="glyphicon glyphicon-list-alt"></span> Forms</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Welcome !</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus,
-                ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique,
-                tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris
-                sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum
-                in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate
-                eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula,
-                a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at
-                ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.
-            </p>
+            <h1 class="page-header">Register</h1>
+            <form class="form-horizontal" action="profile.html">
+                <div class="form-group">
+                    <label for="inputusername" class="col-sm-2 control-label">Username: </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputusername" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="verifypswd" class="col-sm-2 control-label">Verify Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="verifypswd" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputemail" class="col-sm-2 control-label">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputemail" placeholder="example@xyz.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary btn-md btn-block">Register</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
