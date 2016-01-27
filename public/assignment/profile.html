@@ -28,6 +28,8 @@
     <![endif]-->
 </head>
 <body>
+
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -41,8 +43,6 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="register.html"><span class="glyphicon glyphicon-hand-up"></span> Register</a></li>
-                <li class="active"><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-user"></span> Username</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
@@ -55,13 +55,13 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="home.html"><span class="glyphicon glyphicon-home"></span> Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li class="active"><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                 <li><a href="admin.html"><span class="glyphicon glyphicon-king"></span> Admin</a></li>
                 <li><a href="forms.html"><span class="glyphicon glyphicon-list-alt"></span> Forms</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Login</h1>
+            <h1 class="page-header">Profile</h1>
             <form class="form-horizontal" action="profile.html">
                 <div class="form-group">
                     <label for="inputusername" class="col-sm-2 control-label">Username: </label>
@@ -76,19 +76,39 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="firstname" class="col-sm-2 control-label">First Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="firstname" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">Last Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="lastname" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputemail" class="col-sm-2 control-label">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputemail" placeholder="example@xyz.com">
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary btn-md btn-block">Login</button>
+                        <button type="submit" class="btn btn-primary btn-md btn-block">Update</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 </body>
 </html>
