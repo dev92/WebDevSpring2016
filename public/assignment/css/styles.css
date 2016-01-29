@@ -2,3 +2,28 @@
 .navbartitle {
     font-size: xx-large;
 }
+.glybutton {
+    cursor: pointer;
+    font-size: large;
+    padding-left: 5px;
+}
+
+.glyplus {
+    color: green;
+}
+
+.glyremove {
+    color: red;
+}
+
+.glypencil {
+    color: orange;
+}
+
+.glyalign {
+    color: darkslategray;
+}
+
+.glycheck {
+    color: dodgerblue;
+}
