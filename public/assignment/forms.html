@@ -55,39 +55,30 @@
             <ul class="nav nav-sidebar">
                 <li><a href="home.html"><span class="glyphicon glyphicon-home"></span> Home <span class="sr-only">(current)</span></a></li>
                 <li><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                <li class="active"><a href="admin.html"><span class="glyphicon glyphicon-king"></span> Admin</a></li>
-                <li><a href="forms.html"><span class="glyphicon glyphicon-list-alt"></span> Forms</a></li>
+                <li><a href="admin.html"><span class="glyphicon glyphicon-king"></span> Admin</a></li>
+                <li class="active"><a href="forms.html"><span class="glyphicon glyphicon-list-alt"></span> Forms</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Admin</h1>
-            <h2 class="sub-header">Users</h2>
+            <h1 class="page-header">Forms</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="forms.html">Forms</a></li>
+                <li role="presentation"><a href="form-fields.html">Fields</a></li>
+            </ul>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Username</th>
-                        <th><span class="glyphicon glyphicon-sort-by-attributes-alt"></span> Password</th>
-                        <th><span class="glyphicon glyphicon-sort-by-order"></span> Role</th>
+                        <th><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Form Name</th>
                         <th>Action</th>
                     </tr>
                     <tr>
-                        <td>
+                        <th>
                             <div class="input-group">
-                                <input type="text" class="form-control"  placeholder="Username">
+                                <input type="text" class="form-control"  placeholder="name">
                             </div>
-                        </td>
-                        <td>
-                            <div class="input-group">
-                                <input type="password" class="form-control" placeholder="Password">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="role1, role2">
-                            </div>
-                        </td>
-                        <td>
+                        </th>
+                        <td align="right">
                             <span class="glyphicon glyphicon-plus glybutton glyplus"></span>
                             <span class="glyphicon glyphicon-ok glybutton glycheck"></span>
                         </td>
@@ -95,28 +86,22 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>alice</td>
-                        <td style="visibility: hidden"></td>
-                        <td>student</td>
-                        <td>
+                        <td>Registration Form</td>
+                        <td align="right">
                             <span class="glyphicon glyphicon-remove glybutton glyremove"></span>
                             <span class="glyphicon glyphicon-pencil glybutton glypencil"></span>
                         </td>
                     </tr>
                     <tr>
-                        <td>bob</td>
-                        <td></td>
-                        <td>faculty | admin</td>
-                        <td>
+                        <td>Contact List</td>
+                        <td align="right">
                             <span class="glyphicon glyphicon-remove glybutton glyremove"></span>
                             <span class="glyphicon glyphicon-pencil glybutton glypencil"></span>
                         </td>
                     </tr>
                     <tr>
-                        <td>charlie</td>
-                        <td></td>
-                        <td></td>
-                        <td>
+                        <td>To Do List</td>
+                        <td align="right">
                             <span class="glyphicon glyphicon-remove glybutton glyremove"></span>
                             <span class="glyphicon glyphicon-pencil glybutton glypencil"></span>
                         </td>
