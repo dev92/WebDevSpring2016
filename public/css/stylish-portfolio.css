@@ -300,7 +300,7 @@ footer {
     float: left;
     font-weight: 600;
     overflow: hidden;
-    height: 40px;
+    height: 44px;
 }
 .animated-p {
     display: inline;
@@ -310,7 +310,7 @@ footer {
 .animated-ul {
     margin-top: 0;
     padding-left:45%;
-    text-align: left;
+    text-align: center;
     list-style: none;
     animation: 6s linear 0s normal none infinite change;
     -webkit-animation: 6s linear 0s normal none infinite change;
@@ -318,7 +318,7 @@ footer {
     -o-animation: 6s linear 0s normal none infinite change;
 }
 .animated-ul .animated-li {
-    line-height: 40px;
+    line-height: 42px;
     margin: 0;
     color: steelblue;
 }
