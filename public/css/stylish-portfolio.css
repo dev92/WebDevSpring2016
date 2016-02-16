@@ -1,0 +1,404 @@
+/*!
+ * Start Bootstrap - Stylish Portfolio Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Global Styles */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/*.text-vertical-center {*/
+    /*display: table-cell;*/
+    /*text-align: start;*/
+    /*padding-top: 70px;*/
+    /*padding-left: 40px;*/
+
+/*}*/
+
+/*.text-vertical-center h1 {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*vertical-align: text-top;*/
+    /*font-size: 5.5vw;*/
+    /*font-weight: 700;*/
+/*}*/
+
+.intro-text .name {
+    display: block;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2em;
+}
+header .intro-text .skills {
+    font-size: 1.25em;
+    font-weight: 300;
+}
+@media (min-width: 768px) {
+    header .container {
+        padding-top: 200px;
+        padding-bottom: 100px;
+    }
+    header .intro-text .name {
+        font-size: 4.75em;
+    }
+    header .intro-text .skills {
+        font-size: 1.75em;
+    }
+}
+
+section {
+    padding: 100px 0;
+}
+
+
+.navbar {
+    text-transform: uppercase;
+
+}
+
+
+/* Header */
+
+.header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 600px;
+    background: url("../media/dev_snow.jpg") no-repeat top center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    /*background-size:100% auto;*/
+    -o-background-size: cover;
+}
+
+/* About */
+
+.about {
+    padding: 50px 0;
+}
+
+/* Services */
+
+.services {
+    padding: 50px 0;
+}
+
+.service-item {
+    margin-bottom: 30px;
+}
+
+/* Portfolio */
+
+#portfolio .portfolio-item {
+    margin: 0 0 15px;
+    right: 0;
+}
+#portfolio .portfolio-item .portfolio-link {
+    display: block;
+    position: relative;
+    max-width: 200px;
+    margin: 0 auto;
+}
+#portfolio .portfolio-item .portfolio-link .caption{
+    background: rgba(24, 188, 156, 0.9);
+    position: absolute;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+}
+#portfolio .portfolio-item .portfolio-link .caption:hover {
+    opacity: 1;
+}
+#portfolio .portfolio-item .portfolio-link .caption .caption-content {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    font-size: 20px;
+    text-align: center;
+    top: 50%;
+    /*right: 17%;*/
+    margin-top: -12px;
+    color: white;
+}
+#portfolio .portfolio-item .portfolio-link .caption .caption-content i {
+    margin-top: -12px;
+}
+#portfolio .portfolio-item .portfolio-link .caption .caption-content h3,
+#portfolio .portfolio-item .portfolio-link .caption .caption-content h4 {
+    margin: 0;
+}
+#portfolio * {
+    z-index: 2;
+}
+@media (min-width: 767px) {
+    #portfolio .portfolio-item {
+        margin: 0 0 30px;
+    }
+}
+
+/*Btn css*/
+
+.btn-outline {
+    color: white;
+    font-size: 20px;
+    border: solid 2px white;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+    margin-top: 15px;
+}
+
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active,
+.btn-outline.active {
+    color: #18bc9c;
+    background: white;
+    border: solid 2px white;
+}
+
+.btn-social {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border: 2px solid white;
+    border-radius: 100%;
+    text-align: center;
+    font-size: 20px;
+    line-height: 45px;
+}
+
+
+/* Footer */
+
+footer {
+    padding: 100px 0;
+}
+
+/*Modal*/
+
+.portfolio-modal .modal-content {
+    border-radius: 0;
+    background-clip: border-box;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    min-height: 100%;
+    padding: 100px 0;
+    /*text-align: center;*/
+}
+
+.portfolio-modal .modal-content h2 {
+    margin: 0;
+    font-size: 3em;
+    text-align: center;
+}
+.portfolio-modal .modal-content img {
+    margin-bottom: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.portfolio-modal .modal-content .item-details {
+    margin: 30px 0;
+}
+.portfolio-modal .close-modal {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    background-color: transparent;
+    top: 25px;
+    right: 25px;
+    cursor: pointer;
+}
+.portfolio-modal .close-modal:hover {
+    opacity: 0.3;
+}
+.portfolio-modal .close-modal .lr {
+    height: 75px;
+    width: 1px;
+    margin-left: 35px;
+    background-color: #2c3e50;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Safari and Chrome */
+    z-index: 1051;
+}
+.portfolio-modal .close-modal .lr .rl {
+    height: 75px;
+    width: 1px;
+    background-color: #2c3e50;
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    /* IE 9 */
+    -webkit-transform: rotate(90deg);
+    /* Safari and Chrome */
+    z-index: 1052;
+}
+.portfolio-modal .modal-backdrop {
+    opacity: 0;
+    display: none;
+}
+
+
+/*Animated text*/
+.content {
+    width: auto;
+    /*font-size: 56px;*/
+    font-size: 6.2vmin;
+    line-height: 40px;
+    /*font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    color: black;
+    height: 40px;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    /*margin-top: -18px;*/
+    /*margin-left: -118px;*/
+    /*opacity: 0.75;*/
+}
+.content:before {
+    content: '[';
+    position: absolute;
+    left: -30px;
+    line-height: 40px;
+}
+.content:after {
+    content: ']';
+    position: absolute;
+    right: -30px;
+    line-height: 40px;
+}
+.content:after,
+.content:before {
+    color: black;
+    font-size: 42px;
+    animation: 2s linear 0s normal none infinite opacity;
+    -webkit-animation: 2s ease-out 0s normal none infinite opacity;
+    -moz-animation: 2s ease-out 0s normal none infinite opacity;
+    -o-animation: 2s ease-out 0s normal none infinite opacity;
+}
+.visible {
+    float: left;
+    font-weight: 600;
+    overflow: hidden;
+    height: 40px;
+}
+.animated-p {
+    display: inline;
+    float: left;
+    margin: 0;
+}
+.animated-ul {
+    margin-top: 0;
+    padding-left:45%;
+    text-align: left;
+    list-style: none;
+    animation: 6s linear 0s normal none infinite change;
+    -webkit-animation: 6s linear 0s normal none infinite change;
+    -moz-animation: 6s linear 0s normal none infinite change;
+    -o-animation: 6s linear 0s normal none infinite change;
+}
+.animated-ul .animated-li {
+    line-height: 40px;
+    margin: 0;
+    color: steelblue;
+}
+@-webkit-keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@-webkit-keyframes change {
+    0% {
+        margin-top: 0;
+    }
+    15% {
+        margin-top: 0;
+    }
+    25% {
+        margin-top: -40px;
+    }
+    40% {
+        margin-top: -40px;
+    }
+    50% {
+        margin-top: -80px;
+    }
+    65% {
+        margin-top: -80px;
+    }
+    75% {
+        margin-top: -40px;
+    }
+    85% {
+        margin-top: -40px;
+    }
+    100% {
+        margin-top: 0;
+    }
+}
+@keyframes change {
+    0% {
+        margin-top: 0;
+    }
+    15% {
+        margin-top: 0;
+    }
+    25% {
+        margin-top: -40px;
+    }
+    40% {
+        margin-top: -40px;
+    }
+    50% {
+        margin-top: -80px;
+    }
+    65% {
+        margin-top: -80px;
+    }
+    75% {
+        margin-top: -40px;
+    }
+    85% {
+        margin-top: -40px;
+    }
+    100% {
+        margin-top: 0;
+    }
+}
