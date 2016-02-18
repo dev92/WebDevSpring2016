@@ -264,7 +264,7 @@ footer {
     width: auto;
     /*font-size: 56px;*/
     font-size: 6.2vmin;
-    line-height: 40px;
+    line-height: 45px;
     /*font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;*/
     color: black;
     height: 40px;
@@ -300,7 +300,7 @@ footer {
     float: left;
     font-weight: 600;
     overflow: hidden;
-    height: 44px;
+    height: 47px;
 }
 .animated-p {
     display: inline;
@@ -310,7 +310,7 @@ footer {
 .animated-ul {
     margin-top: 0;
     padding-left:45%;
-    text-align: center;
+    text-align: left;
     list-style: none;
     animation: 6s linear 0s normal none infinite change;
     -webkit-animation: 6s linear 0s normal none infinite change;
