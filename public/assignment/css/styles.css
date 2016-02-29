@@ -2,6 +2,11 @@
 .navbartitle {
     font-size: xx-large;
 }
+
+.sidebar-contents{
+    text-align: center;
+    font-size: large
+}
 .glybutton {
     cursor: pointer;
     font-size: large;

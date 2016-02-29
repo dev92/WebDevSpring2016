@@ -1,0 +1,35 @@
+<h1 class="page-header">Forms</h1>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
+    <li role="presentation"><a href="#/fields">Fields</a></li>
+</ul>
+<div class="table-responsive" ng-controller="FormController">
+    <table class="table table-striped table-bordered table-hover text-center">
+        <thead>
+        <tr>
+            <th class="col-md-6 text-center"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Form Name</th>
+            <th class="col-md-6 text-center"><span class="glyphicon glyphicon-sort-by-order"></span> Action</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-group col-md-12">
+                    <input type="text" ng-model = "formName" class="form-control" placeholder="Form name">
+                </div>
+            </td>
+            <td>
+                <span ng-class="disable ? 'glyphicon glyphicon-plus glybutton glyplus' : 'glyphicon glyphicon-plus glyplus link-disable'"  ng-click="disable && addForm()"></span>
+                <span ng-class="!disable ? 'glyphicon glyphicon-ok glybutton glycheck' : 'glyphicon glyphicon-ok glycheck link-disable'" ng-click="!disable && updateForm()"></span>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="form in forms" ng-class="{'success' : $index == selectedFormIndex}">
+            <td><a href="#/fields">{{form.title}}</a></td>
+            <td>
+                <span class="glyphicon glyphicon-remove glybutton glyremove" ng-click="deleteForm($index)"></span>
+                <span class="glyphicon glyphicon-pencil glybutton glypencil" ng-click="selectForm($index)"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

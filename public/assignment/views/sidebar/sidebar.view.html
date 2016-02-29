@@ -1,0 +1,12 @@
+<div class="container-fluid" ng-controller="SidebarController">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar" class="sidebar-contents">
+            <ul class="nav nav-sidebar">
+                <li ng-class="{'active' : $location.url() == '/home'}"><a href="#/home"><span class="glyphicon glyphicon-home"></span> Home <span class="sr-only">(current)</span></a></li>
+                <li ng-show="currentusr" ng-class="{'active' : $location.url() == '/profile'}"><a href="#/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                <li ng-show="currentusr.roles.indexOf('admin') >= 0" ng-class="{'active' : $location.url() == '/admin'}"><a href="#/admin"><span class="glyphicon glyphicon-king"></span> Admin</a></li>
+                <li ng-class="{'active' : $location.url() == '/forms'}"><a href="#/forms"><span class="glyphicon glyphicon-list-alt"></span> Forms</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
