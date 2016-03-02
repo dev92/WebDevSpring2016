@@ -6,8 +6,7 @@
 
     function RegisterController($rootScope, $scope, $location, UserService) {
 
-        $scope.hide = true;
-        $scope.dispalert = false;
+        $scope.message = null;
 
         $scope.validate = function(user){
 
@@ -19,27 +18,45 @@
 
             else if(user.password!==user.vpassword && user.vpassword!=null
                 && user.vpassword!='' && user.password!=''){
-                $scope.hide = true;
                 return "form-group has-error";
             }
             else if(user.password==user.vpassword &&
                 user.vpassword!=null && user.password!=null
                 && user.vpassword!='' && user.password!=''){
-                $scope.hide = false;
                 return "form-group has-success";
             }
         }
 
         $scope.register = function(user) {
+
+            if (user == null) {
+                $scope.message = "Please fill in the required * fields";
+                return;
+            }
+            if (user.username == null || !user.username) {
+                $scope.message = "Please provide a username";
+                return;
+            }
+            if (user.password == null || user.vpassword == null) {
+                $scope.message = "Please provide a password";
+                return;
+            }
+            if (user.password !== user.vpassword) {
+                $scope.message = "Passwords must match";
+                return;
+            }
+
             UserService.checkExistingUser(user,
                 function(response){
-                    $scope.dispalert = response;
+                    $scope.message = response;
                 });
-            if(!$scope.dispalert){
+
+            console.log($scope.message);
+
+            if($scope.message == null){
                 UserService.createUser(user,
                     function(response){
                         $rootScope.currentusr = response;
-                        console.log($rootScope.currentusr);
                     });
                 $location.path('/profile');
             }

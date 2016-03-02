@@ -78,13 +78,18 @@
 
 
         function checkExistingUser(user,callback) {
-            var bool = false;
+            var msg = null;
             for (i = 0; i < users.length; i++) {
-                if (users[i].username == user.username || users[i].email == user.email) {
-                    bool = true;
+                if (users[i].username == user.username){
+                    msg = "Username already exists!";
+                    break;
+                }
+                else if(users[i].email == user.email && user.email!=null) {
+                    msg = "Email already exists!";
+                    break;
                 }
             }
-            callback(bool);
+            callback(msg);
         }
 
 

@@ -6,10 +6,17 @@
 
     function FormController($rootScope,$scope,FormService) {
 
-        FormService.findAllFormsForUser($rootScope.currentusr._id,
-            function(response){
-                $scope.forms = response;
-            });
+        $scope.forms = [];
+
+        if($rootScope.currentusr){
+
+            FormService.findAllFormsForUser($rootScope.currentusr._id,
+                function(response){
+                    $scope.forms = response;
+                });
+        }
+
+
 
         $scope.selectedFormIndex = null;
         $scope.disable = true;
@@ -50,6 +57,8 @@
                 function(response){
                     $scope.forms.splice(index,1);
                 });
+            $scope.selectedFormIndex = null;
+            $scope.formName = null;
 
         }
 

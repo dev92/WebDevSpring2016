@@ -13,8 +13,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="currentusr" ng-class="{'active': $location.url()=='/register'}"><a href="#/register"><span class="glyphicon glyphicon-hand-up"></span> Register</a></li>
                 <li ng-hide="currentusr" ng-class="{'active': $location.url()=='/login'}"><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li ng-show="currentusr" ng-class="{'active': $location.url()=='/profile'}"><a href="#/profile"><span class="glyphicon glyphicon-user"></span> Hi {{currentusr.username}}</a></li>
+                <li ng-show="currentusr" ng-class="{'active': $location.url()=='/profile'}"><a href="#/profile"><span class="glyphicon glyphicon-user"></span> Hi, {{currentusr.username}}</a></li>
                 <li ng-show="currentusr.roles.indexOf('admin') >= 0" ng-class="{'active': $location.url()=='/admin'}"><a href="#/admin"><span class="glyphicon glyphicon-king"></span> Admin</a></li>
+                <li ng-show="currentusr" ng-class="{'active': $location.url()=='/forms'}"><a href="#/forms"><span class="glyphicon glyphicon-list-alt"></span> Forms</a></li>
                 <li ng-show="currentusr"><a href="#" ng-click="reset()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
