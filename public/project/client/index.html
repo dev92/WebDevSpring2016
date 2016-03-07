@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CinephiliaApp" ng-cloak>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinephilia</title>
+
+    <!-- Material Design Icons -->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">-->
+
+    <!--Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <!-- MDB core CSS -->
+    <!--<link href="http://mdbootstrap.com/mdbcdn/mdb.min.css" rel="stylesheet">-->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    <link href="css/landing-page.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="services/user.services.js"></script>
+    <script src="views/home/register.controller.js"></script>
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/users/genres.controller.js"></script>
+    <script src="views/home/login.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/main/main.controller.js"></script>
+
+</head>
+<body ng-class="{'profile-bg': $location.url() != '/home'}" ng-controller="MainController">
+<div ng-include="'views/header/header.view.html'"></div>
+<!-- Carousel -->
+<div ng-show="$location.url() == '/home'" id="main-carousel" class="carousel slide carousel-fade carousel-bg" data-ride="carousel" data-interval="4000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#main-carousel" data-slide-to="1"></li>
+        <li data-target="#main-carousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <!-- First slide -->
+        <div class="item active">
+            <div class="carousel-caption">
+                <div class="verticalcenter">
+                    <div class="animated fadeInDown">
+                        <h4>Cinephilia</h4>
+                        <h5>Connecting Movie Buffs</h5>
+                        <a href="#id-example" target="_self" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down fa-2x animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.First slide -->
+
+        <!-- Second slide -->
+        <div class="item">
+            <div class="carousel-caption">
+                <div class="verticalcenter">
+                    <div class="animated fadeInDown">
+                        <h4>Cinephilia</h4>
+                        <h5>Connecting Movie Buffs</h5>
+                        <a href="#id-example" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down fa-2x animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Second slide -->
+
+        <!-- Third slide -->
+        <div class="item">
+            <div class="carousel-caption">
+                <div class="verticalcenter">
+                    <div class="animated fadeInDown">
+                        <h4>Cinephilia</h4>
+                        <h5>Connecting Movie Buffs</h5>
+                        <a href="#id-example" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down fa-2x animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.Third slide -->
+    </div>
+    <!-- /.carousel-inner -->
+
+    <!-- Controls -->
+    <!--<a class="left carousel-control new-control" href="#main-carousel" target="_self" role="button" data-slide="prev">-->
+        <!--<span class="fa fa fa-angle-left waves-effect waves-light"></span>-->
+        <!--<span class="sr-only">Previous</span>-->
+    <!--</a>-->
+    <!--<a class="right carousel-control new-control" href="#main-carousel" target="_self" role="button" data-slide="next">-->
+        <!--<span class="fa fa fa-angle-right waves-effect waves-light"></span>-->
+        <!--<span class="sr-only">Previous</span>-->
+    <!--</a>-->
+</div>
+<!-- /.Carousel -->
+
+    <div ng-view></div>
+
+<!-- SCRIPTS -->
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="http://mdbootstrap.com/mdbcdn/mdb.min.js"></script>
+<!--<script type="text/javascript" src="js/mdb.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+
+
+</body>
+
+</html>

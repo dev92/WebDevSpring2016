@@ -1,0 +1,115 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!--<div class="row">-->
+        <div class="col-md-10 col-md-offset-2 main">
+            <md-content style="opacity: 0.5">
+                <md-tabs md-selected="0" md-align-tabs="top">
+                    <md-tab>
+                        <a href="#/profile"><md-tab-label>Your Profile</md-tab-label></a>
+                    </md-tab>
+                    <md-tab >
+                        <a href="#/genres"><md-tab-label>Genres</md-tab-label></a>
+                    </md-tab>
+                    <md-tab>
+                        <a href="#"><md-tab-label>Friends</md-tab-label></a>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+        <div ng-controller="ProfileController" layout="column" ng-cloak class="md-inline-form" style="opacity: 0.9">
+            <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+                <form name="profileForm">
+                <div>
+                    <md-input-container>
+                        <label>User Name</label>
+                        <input ng-model="user.username" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Email</label>
+                        <input ng-model="user.email" type="email">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Contact Number</label>
+                        <input ng-model="user.contact" name="contact" maxlength="12" type="text" ng-pattern="/\d{3}-\d{3}-\d{4}/">
+                        <div ng-messages="profileForm.contact.$error">
+                            <div ng-message="pattern">
+                                You should match xxx-xxx-xxxx. (Don't miss the hyphens)
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+                    </form>
+            </md-content>
+            <md-content layout-padding>
+                <div>
+                    <form name="userForm">
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>First name</label>
+                                <input ng-model="user.firstName">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Last Name</label>
+                                <input ng-model="user.lastName">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Gender</label>
+                                <md-select ng-model="user.gender">
+                                    <md-option  value="male">
+                                        Male
+                                    </md-option>
+                                    <md-option  value="female">
+                                        Female
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Password</label>
+                                <input ng-model="user.password" type="password">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Verify Password</label>
+                                <input ng-model="user.vpassword" type="password">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                        <md-input-container class="md-block"flex-gt-sm>
+                            <label>Address</label>
+                            <input ng-model="user.address">
+                        </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>City</label>
+                                <input ng-model="user.city">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>State</label>
+                                <md-select ng-model="user.state">
+                                    <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                        {{state.abbrev}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Postal Code</label>
+                                <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
+                                        ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                    <!--<div ng-message="required" class="my-message">You must supply a postal code.</div>-->
+                                    <div ng-message="pattern || md-maxlength" class="my-message">That doesn't look like a valid postal
+                                        code.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </form>
+                </div>
+                <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="update(user)">Update</md-button>
+                </div>
+            </md-content>
+        </div>
+        <!--</div>-->
+    </div>
+</div>
+</div>

@@ -1,0 +1,34 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!--<div class="row">-->
+        <div class="col-md-10 col-md-offset-2 main">
+            <md-content style="opacity: 0.5">
+                <md-tabs  md-selected="1" md-align-tabs="top">
+                    <md-tab>
+                        <a href="#/profile"><md-tab-label>Your Profile</md-tab-label></a>
+                    </md-tab>
+                    <md-tab >
+                        <a href="#/genres"><md-tab-label>Genres</md-tab-label></a>
+                    </md-tab>
+                    <md-tab>
+                        <a href="#"><md-tab-label>Friends</md-tab-label></a>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+            <div class="card-panel">
+        <div ng-controller="GenreController" class="md-padding" ng-cloak>
+                        <fieldset class="standard" >
+                            <legend>Genres</legend>
+                            <div layout="row" layout-wrap flex>
+                                <div flex-gt-sm="50" ng-repeat="genre in genres">
+                                    <md-checkbox class="md-primary" md-no-ink ng-checked="exists(genre, selected)" ng-click="toggle(genre, selected)">
+                                        {{ genre }}
+                                    </md-checkbox>
+                                </div>
+                            </div>
+                        </fieldset>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>

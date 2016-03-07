@@ -1,0 +1,163 @@
+<!-- Page Content -->
+<section class="parallax container-fluid" id="id-example">
+    <div class="row">
+        <div class="divider-new">What is it?</div>
+        <div class="col-md-4 wow fadeIn">
+            <!--Image Card-->
+            <div class="card blue-grey darken-1 hoverable">
+                <div class="card-image">
+                    <div class="view overlay hm-white-slight z-depth-1">
+                        <img style="height: 302px" src="http://cdn.playbuzz.com/cdn/e45b4885-bf37-4ff9-9f14-cf169a267187/6de6e633-cb99-459a-8f9a-735142ce4bc8.jpg" class="img-responsive" alt="">
+                    </div>
+                </div>
+                <div class="card-content white-text">
+                    <h5>Card title</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id amet, quisquam modi nobis nostrum iusto incidunt dolore assumenda delectus officia quia, sequi eum perspiciatis architecto. Ullam voluptatum, facere nihil quidem.</p>
+                </div>
+            </div>
+            <!--Image Card-->
+        </div>
+        <div class="col-md-4">
+            <!--Image Card-->
+            <div class="card blue-grey darken-1 hoverable">
+                <div class="card-image">
+                    <div class="view overlay hm-white-slight z-depth-1">
+                        <img src="http://justinesoc.com/wp-content/uploads/2014/01/review.jpg" class="img-responsive img-rounded" alt="">
+                    </div>
+                </div>
+                <div class="card-content white-text">
+                    <h5>Card title</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id amet, quisquam modi nobis nostrum iusto incidunt dolore assumenda delectus officia quia, sequi eum perspiciatis architecto. Ullam voluptatum, facere nihil quidem.</p>
+                </div>
+            </div>
+            <!--Image Card-->
+        </div>
+        <div class="col-md-4">
+            <!--Image Card-->
+            <div class="card blue-grey darken-1 hoverable">
+                <div class="card-image">
+                    <div class="view overlay hm-white-slight z-depth-1">
+                        <img src="http://kreativportfolio.com/wp-content/uploads/2015/12/disney-movie-poster-collage-postercollage.jpg" class="img-responsive" alt="">
+                    </div>
+                </div>
+                <div class="card-content white-text">
+                    <h5>Card title</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id amet, quisquam modi nobis nostrum iusto incidunt dolore assumenda delectus officia quia, sequi eum perspiciatis architecto. Ullam voluptatum, facere nihil quidem.</p>
+                </div>
+                <!--Buttons-->
+            </div>
+            <!--Image Card-->
+        </div>
+    </div>
+</section>
+<!-- /Page Content -->
+<section class="parallax container-fluid" id="account">
+    <div class="container text-center">
+        <div class="divider-new">Interested?</div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5 card-panel">
+                <h2>Register</h2>
+                <div ng-controller="RegisterController" layout="column" layout-padding ng-cloak>
+                    <div ng-show = "message" class="alert alert-danger fade in">
+                        <button type = "button" ng-click="message=null" class = "close" data-dismiss = "alert" aria-hidden = "true">&times</button>
+                        {{message}}
+                    </div>
+                    <br/>
+                    <md-content class="md-no-momentum">
+                        <form name="registerForm">
+                        <md-input-container class="md-icon-float md-block">
+                            <!-- Use floating label instead of placeholder -->
+                            <label>User Name</label>
+                            <md-icon class="name"><i class="fa fa-user"></i> </md-icon>
+                            <input required name="username" ng-model="user.username" type="text">
+                            <div ng-messages="registerForm.username.$error">
+                                <div ng-message="required">This field is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container  class="md-block">
+                            <md-icon><i class="fa fa-lock"></i> </md-icon>
+                            <input required ng-model="user.password" type="password" placeholder="Password">
+                            <div ng-messages="regsiterForm.password.$error">
+                                <div ng-message="required">Password is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container  class="md-block">
+                            <md-icon><i class="fa fa-lock"></i> </md-icon>
+                            <input required ng-model="user.vpassword" name="password" type="password" placeholder=" Verify Password">
+                            <div ng-messages="regsiterForm.password.$error">
+                                <div ng-message="required">Confirm Password.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <!-- Use floating placeholder instead of label -->
+                            <md-icon class="email"><i class="fa fa-envelope"></i></md-icon>
+                            <input ng-model="user.email" name="email" type="email" placeholder="Email (required)" ng-required="true">
+                            <div ng-messages="regsiterForm.email.$error">
+                                <div ng-message="required">Email is required.</div>
+                            </div>
+                        </md-input-container>
+                            <md-button ng-disabled="registerForm.$invalid" class="md-raised md-primary" ng-click="register(user)">Register</md-button>
+                        </form>
+                    </md-content>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4 card-panel">
+                <h2>Login</h2>
+                <div ng-controller="LoginController" layout="column" layout-padding ng-cloak>
+                    <div ng-show = "message" class="alert alert-danger fade in">
+                        <button type = "button" class = "close" data-dismiss = "alert" aria-hidden = "true">&times</button>
+                        {{message}}
+                    </div>
+                    <br/>
+                    <md-content class="md-no-momentum">
+                        <form name="loginForm">
+                        <md-input-container class="md-icon-float md-block">
+                            <!-- Use floating label instead of placeholder -->
+                            <label>User Name</label>
+                            <md-icon class="name"><i class="fa fa-user"></i> </md-icon>
+                            <input required name="username" ng-model="user.username" type="text">
+                            <div ng-messages="loginForm.username.$error">
+                                <div ng-message="required">This field is required.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container  class="md-block">
+                            <md-icon><i class="fa fa-lock"></i> </md-icon>
+                            <input required name="password" ng-model="user.password" type="password" placeholder="Password">
+                            <div ng-messages="loginForm.password.$error">
+                                <div ng-message="required">This field is required.</div>
+                            </div>
+                        </md-input-container>
+                        <a href="#account">Forgot Username/Password</a>
+                            <md-button ng-disabled="loginForm.$invalid" class="md-raised md-primary" ng-click="login(user)">Log In</md-button>
+                        </form>
+                    </md-content>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Footer -->
+<footer class="page-footer">
+    <!--Footer Content-->
+    <div class="container-fluid">
+        <div class="row center-on-small-only" align="center">
+            <p class="column-title white-text">Connect</p>
+            <a target="_blank" href="https://www.facebook.com/mdbootstrap" class="btn-floating btn-large fb-bg waves-effect waves-light"><i class="fa fa-facebook"> </i></a>
+            <a target="_blank" href="https://twitter.com/MDBootstrap" class="btn-floating btn-large tw-bg waves-effect waves-light"><i class="fa fa-linkedin"> </i></a>
+            <a target="_blank" href="https://plus.google.com/u/0/b/107863090883699620484/107863090883699620484/posts" class="btn-floating btn-large gplus-bg waves-effect waves-light"><i class="fa fa-github"> </i></a>
+        </div>
+    </div>
+    <!--/.Footer Content-->
+
+    <!--Coprytights-->
+    <div class="footer-copyright text-center rgba-black-light">
+        <div class="container-fluid">
+            © 2016 Copyright: <a target="_blank" href="http://webdev2016-puchakayaladev.rhcloud.com"> Dev Pranav.P </a>
+        </div>
+    </div>
+    <!--/.Coprytights-->
+</footer>
+<!-- Footer -->

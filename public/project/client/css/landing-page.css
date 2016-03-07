@@ -1,0 +1,413 @@
+/*!
+ *
+ *
+ * Material Design for Bootstrap
+ * www.mdbootstrap.com
+ *
+ *
+ */
+/*********************
+  Mixins
+**********************/
+/*********************
+  VARIABLES
+**********************/
+/*********************
+  GENERAL
+**********************/
+html,
+body {
+  height: 100%;
+}
+
+/*********************
+  NAVIGATION
+**********************/
+.navbar {
+  background-color:transparent !important;
+          /*#546e7a !important;*/
+}
+
+.top-nav-collapse {
+  background-color: #546e7a !important;
+  /*#3F729B !important;*/
+          /*#1C2331 !important;*/
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #546e7a !important;
+            /*#3F729B !important;*/
+            /*#1C2331 !important;*/
+  }
+}
+
+/*********************
+  MAIN CAROUSEL
+**********************/
+.carousel,
+.item {
+  height: 100%;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.item:nth-child(1) {
+  background-image: url("http://images.fandango.com/images/fandangoblog/jasonbournesb5.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.item:nth-child(2) {
+  background-image: url("http://images.fandango.com/images/fandangoblog/deadpoolsb.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.item:nth-child(3) {
+  background-image: url("https://i.imgflip.com/1067dw.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+.carousel-caption {
+    padding-top: 80px;
+}
+
+#id-example {
+    background-image: url(http://brandflow.pl/wp-content/uploads/2015/09/slider3.jpg);
+    background-size: cover;
+}
+
+#account{
+    background-image: url(http://brandflow.pl/wp-content/uploads/2015/09/4.jpg);
+    background-size: cover;
+}
+
+section {
+    height: auto;
+}
+
+/*
+Bootstrap starter template
+*/
+
+
+
+/*********************
+  TEMPLATE COLORS
+**********************/
+.pt-color {
+  background-color: #1C2331 !important;
+}
+
+.st-color {
+  background-color: #4D5668 !important;
+}
+
+.et-color {
+  background-color: #3F729B !important;
+}
+
+.btn-ptc {
+  background-color: #1C2331 !important;
+}
+
+.btn-ptc:hover {
+  background-color: #2f3a51 !important;
+}
+
+.btn-ptc:focus {
+  background-color: #2f3a51 !important;
+}
+
+.btn-stc {
+  background-color: #4D5668 !important;
+}
+
+.btn-stc:hover {
+  background-color: #636e85 !important;
+}
+
+.btn-stc:focus {
+  background-color: #636e85 !important;
+}
+
+.btn-etc {
+  background-color: #3F729B !important;
+}
+
+.btn-etc:hover {
+  background-color: #548cb9 !important;
+}
+
+.btn-etc:focus {
+  background-color: #548cb9 !important;
+}
+
+.fb-bg {
+  background-color: #3B5998;
+}
+
+.tw-bg {
+  background-color: #55ACEE;
+}
+
+.gplus-bg {
+  background-color: #DD4B39;
+}
+
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid #fff;
+    border-radius: 100%!important;
+    font-size: 40px;
+    color: #fff;
+    background: 0 0;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+
+.btn-circle:hover,
+.btn-circle:focus {
+    outline: 0;
+    color: #fff;
+    background: rgba(255,255,255,.1);
+}
+
+.btn-circle i.animated {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+
+.btn-circle:hover i.animated {
+    -webkit-animation-name: pulse;
+    -moz-animation-name: pulse;
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+}
+
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 17px 16px;
+    border: 2px solid #fff;
+    border-radius: 100%!important;
+    font-size: 40px;
+    color: #fff;
+    background: 0 0;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+
+.btn-circle:hover,
+.btn-circle:focus {
+    outline: 0;
+    color: #fff;
+    background:#02110a;
+    opacity: 0.5;
+}
+
+.btn-circle i.animated {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+
+.btn-circle:hover i.animated {
+    -webkit-animation-name: pulse;
+    -moz-animation-name: pulse;
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@-moz-keyframes pulse {
+    0% {
+        -moz-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        -moz-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    100% {
+        -moz-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.fa-2x {
+    font-size: 1em !important;
+}
+
+.card-panel {
+    opacity: 0.8;
+}
+
+/*********************
+  Section contents
+**********************/
+
+.featurette-divider {
+    margin: 80px 0;
+}
+
+.featurette {
+    overflow: hidden;
+}
+
+.featurette-heading {
+    font-size: 50px;
+    color: white;
+    padding-left: 10px;
+}
+.lead {
+    color: white;
+    padding-left: 10px;
+}
+
+.col-md-6 {
+    margin-top: 50px;
+}
+.col-md-5 {
+    padding-bottom: 20px;
+}
+
+.fb-bg {
+    background-color: #3B5998;
+}
+.tw-bg {
+    background-color: #55ACEE;
+}
+.gplus-bg {
+    background-color: #DD4B39;
+}
+
+footer.page-footer a {
+    line-height: 10px;
+}
+
+footer.page-footer a {
+    color: #fff;
+    font-size: 15px;
+}
+
+@media(max-width:1200px) {
+
+    .featurette-divider {
+        margin: 50px 0;
+    }
+
+    .featurette-heading {
+        font-size: 35px;
+    }
+}
+
+@media(max-width:991px) {
+
+    .featurette-divider {
+        margin: 40px 0;
+    }
+
+    .featurette-image {
+        max-width: 50%;
+    }
+
+    .featurette-heading {
+        font-size: 30px;
+    }
+}
+
+@media(max-width:768px) {
+    .container {
+        margin: 0 15px;
+    }
+
+    .featurette-divider {
+        margin: 40px 0;
+    }
+
+    .featurette-heading {
+        font-size: 25px;
+    }
+}
+
+@media(max-width:668px) {
+
+    .featurette-divider {
+        margin: 30px 0;
+    }
+}
+
+@media(max-width:375px) {
+    .featurette-divider {
+        margin: 10px 0;
+    }
+
+    .featurette-image {
+        max-width: 100%;
+    }
+}
+
+/*********************
+  FOOTER
+**********************/
+footer.page-footer {
+    margin-top: 0;
+    background-color: #546e7a !important;
+  /*background-color: #1C2331;*/
+}
