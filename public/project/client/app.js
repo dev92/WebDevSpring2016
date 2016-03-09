@@ -1,4 +1,4 @@
 (function(){
     angular
-        .module('CinephiliaApp',['ngRoute','ngMaterial', 'ngMessages','ngAnimate']);
+        .module('CinephiliaApp',['ui.bootstrap','ngRoute','ngMaterial', 'ngMessages','ngAnimate']);
 })();

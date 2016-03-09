@@ -11,6 +11,7 @@
 .top-nav>li {
     display: inline-block;
     float: left;
+    color: #3949ab;
 }
 
 .top-nav>li>a {
@@ -55,7 +56,7 @@
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #9e9e9e !important ;
+        background-color: rgba(0, 150, 136, 0.7)  !important ;
         opacity: 0.5;
     }
 }
@@ -67,12 +68,12 @@
 .side-nav>li>ul>li>a {
     display: block;
     padding: 10px 15px 10px 38px;
-    text-decoration: none;
-    color: #4db6ac;
+    text-decoration: #2a45ff;
+    color: whitesmoke;
 }
 
 .side-nav>li>ul>li>a:hover {
-    color: #4db6ac;
+    color: whitesmoke;
 }
 
 
@@ -134,7 +135,8 @@
 }
 
 .profile-bg {
-    background: url('http://brandflow.pl/wp-content/uploads/2015/09/slider2.jpg')repeat-y center center;
+    background: url(https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png) repeat center center fixed;
+            /*url('http://brandflow.pl/wp-content/uploads/2015/09/slider2.jpg')repeat-y center center;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

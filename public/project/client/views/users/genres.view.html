@@ -20,7 +20,7 @@
                         <fieldset class="standard" >
                             <legend>Genres</legend>
                             <div layout="row" layout-wrap flex>
-                                <div flex-gt-sm="50" ng-repeat="genre in genres">
+                                <div flex="50" ng-repeat="genre in genres">
                                     <md-checkbox class="md-primary" md-no-ink ng-checked="exists(genre, selected)" ng-click="toggle(genre, selected)">
                                         {{ genre }}
                                     </md-checkbox>

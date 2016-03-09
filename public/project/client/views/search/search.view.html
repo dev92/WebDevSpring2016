@@ -1,0 +1,47 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!--<div class="row">-->
+        <div class="col-md-10 col-md-offset-2 main">
+            <md-content>
+                <md-tabs  md-selected="0" md-align-tabs="top">
+                    <md-tab>
+                        <a href="#/search"><md-tab-label>Search</md-tab-label></a>
+                    </md-tab>
+                    <md-tab >
+                        <a href="#/details/:imdbID"><md-tab-label>Details</md-tab-label></a>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+            <div class="well" ng-controller="SearchController">
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                    <md-input-container>
+                        <label>Search for a movie</label>
+                        <input ng-model="movietitle">
+                    </md-input-container>
+                    <md-button  ng-click="search(movietitle)">Search</md-button>
+                </section>
+                    <div class="md-padding" layout="row" layout-xs="column" layout-align="center center" flex="33" layout-wrap>
+                            <md-card ng-repeat="movie in movies.Search">
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-subhead">{{movie.Title}}</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.Poster == 'N/A' && 'http://180.149.243.216/beta/images/poster-not-available.png' || movie.Poster}}" class="md-card-image" alt="Washed Out">
+                                <md-card-actions layout="row" layout-align="center center">
+                                    <md-icon ng-click="movie.favorite = !movie.favorite" class="md-icon-button md-accent"><i ng-class="{'fa fa-heart-o fa-lg':!movie.favorite,'fa fa-heart fa-lg':movie.favorite}"></i></md-icon>
+                                    <md-icon class="md-icon-button"><a href="#/detail/{{movie.imdbID}}"><i class="fa fa-info-circle fa-lg"></i></a></md-icon>
+                                </md-card-actions>
+                                    <md-card-actions layout="row" layout-align="center center">
+                                    <div ng-init="movie.rating = 0">
+                                        <uib-rating ng-model="movie.rating" read-only="true" style="color: #827717" max="5" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
+                                        <b>(<i>Rating:</i> {{movie.rating}})</b>
+                                    </div>
+                                </md-card-actions>
+                        </md-card>
+                        </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>

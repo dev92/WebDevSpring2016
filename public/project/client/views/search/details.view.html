@@ -1,0 +1,48 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <!--<div class="row">-->
+        <div class="col-md-10 col-md-offset-2 main">
+            <md-content>
+                <md-tabs  md-selected="1" md-align-tabs="top">
+                    <md-tab>
+                        <a href="#/search"><md-tab-label>Search</md-tab-label></a>
+                    </md-tab>
+                    <md-tab >
+                        <a href="#/detail/:imdbID"><md-tab-label>Details</md-tab-label></a>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+            <div class="well">
+            <div class="row" ng-controller="DetailController">
+                <h2 style="text-align: center">{{movie.Title}}</h2>
+                <div class="col-md-6">
+                    <img ng-src="{{movie.Poster}}" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
+                    <br>
+                    <div ng-init="movie.rating = 0" layout="row" layout-align="center center">
+                        <uib-rating ng-model="movie.rating" style="color: gold" max="5" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
+                        <b>(<i>Rating:</i> {{movie.rating}}/5)</b>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Plot</h3>
+                    <p>
+                        {{movie.Plot}}
+                    </p>
+                    <h4>Director</h4>
+                    <p>
+                        {{movie.Director}}
+                    </p>
+
+                    <h4>Actors</h4>
+
+                    <ul>
+                        <li ng-repeat="actorName in movie.Actors.split(',')">
+                            {{actorName}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
