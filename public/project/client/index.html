@@ -43,7 +43,7 @@
     <script src="views/main/main.controller.js"></script>
 
 </head>
-<body ng-class="{'profile-bg': $location.url() != '/home'}" ng-controller="MainController">
+<body ng-controller="MainController">
 <div ng-include="'views/header/header.view.html'"></div>
 <!-- Carousel -->
 <div ng-show="$location.url() == '/home'" id="main-carousel" class="carousel slide carousel-fade carousel-bg" data-ride="carousel" data-interval="4000">
@@ -116,8 +116,9 @@
     </a>
 </div>
 <!-- /.Carousel -->
-
+<div ng-class="{'profile-bg': $location.url() != '/home'}">
     <div ng-view></div>
+</div>
 
 <!-- SCRIPTS -->
 

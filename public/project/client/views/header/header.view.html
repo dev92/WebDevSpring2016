@@ -2,7 +2,8 @@
 <nav class="navbar blue navbar-fixed-top z-depth-1" role="navigation" ng-controller="HeaderController">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <!--data-target="#bs-example-navbar-collapse-1">-->
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -10,15 +11,15 @@
             </button>
             <a class="navbar-brand waves-effect waves-light navbartitle" href="#/home">Cinephilia</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
             <form ng-hide="currentusr" class="navbar-form navbar-right" role="search">
                 <div class="form-group waves-effect waves-light">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right top-nav">
-                <li ng-hide="currentusr"><a href="#account" target="_self" class="waves-effect waves-light">Register <span class="sr-only">(current)</span></a></li>
-                <li ng-hide="currentusr"><a href="#account" target="_self" class="waves-effect waves-light">Login</a></li>
+                <li ng-hide="currentusr"><a href="#account" target="_self" class="waves-effect waves-light">Register/Login<span class="sr-only">(current)</span></a></li>
+                <!--<li ng-hide="currentusr"><a href="#account" target="_self" class="waves-effect waves-light">Login</a></li>-->
                 <li ng-show="currentusr" class="dropdown">
                     <a href="#" target="_self" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{currentusr.username}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -32,8 +33,8 @@
                     </ul>
                 </li>
             </ul>
-            <div ng-if="currentusr && $location.url()!='/home'" ng-include="'views/sidebar/sidebar.view.html'"></div>
         </div>
     </div>
+    <div ng-if="currentusr && $location.url()!='/home'" ng-include="'views/sidebar/sidebar.view.html'"></div>
 </nav>
 <!--/.Navigation-->

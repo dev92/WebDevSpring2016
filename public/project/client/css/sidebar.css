@@ -68,7 +68,7 @@
 .side-nav>li>ul>li>a {
     display: block;
     padding: 10px 15px 10px 38px;
-    text-decoration: #2a45ff;
+    text-decoration: none;
     color: whitesmoke;
 }
 
@@ -135,7 +135,13 @@
 }
 
 .profile-bg {
-    background: url(https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png) repeat center center fixed;
+    background: url('https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png') repeat-y center center fixed;
+    /*position: absolute;*/
+    /*min-width: 900px;*/
+    overflow-y: scroll;
+    min-height: 740px;
+    /*height: auto;*/
+    /*z-index:-1;*/
             /*url('http://brandflow.pl/wp-content/uploads/2015/09/slider2.jpg')repeat-y center center;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
