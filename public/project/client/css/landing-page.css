@@ -44,6 +44,12 @@ body {
   }
 }
 
+#AppTitle {
+    font: 6.2vmax 'Oleo Script', Helvetica, sans-serif;
+    color: white;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
 /*********************
   MAIN CAROUSEL
 **********************/
@@ -61,7 +67,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
+  /*background-attachment: fixed;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -72,7 +78,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
+  /*background-attachment: fixed;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -83,7 +89,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
+  /*background-attachment: fixed;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
