@@ -24,9 +24,9 @@
             </md-toolbar>
             <md-content>
                 <md-list flex>
-                    <md-list-item  ng-repeat="item in messages">
+                    <md-list-item class="md-3-line"  ng-repeat="item in messages">
                         <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" class="img-responsive" alt="{{item.who}}">
-                        <div class="md-list-item-text">
+                        <div class="md-list-item-text md-long-text">
                             <h4>{{item.who}}</h4>
                             <h6>{{item.status}}</h6>
                             <p>{{item.reviewed}}</p>

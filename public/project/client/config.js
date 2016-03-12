@@ -26,6 +26,21 @@
                     controller:"FriendsController"
                 })
 
+                .when("/currentEvents", {
+                    templateUrl: "views/events/events.view.html",
+                })
+
+                .when("/events/:eventID", {
+                    templateUrl: "views/events/eventdetails.view.html",
+                    controller:"EventsController"
+                })
+
+                .when("/eventDetails", {
+                    templateUrl: "views/events/eventdetails.view.html",
+                    controller:"EventsController"
+
+                })
+
                 .when("/search/:movietitle", {
                     templateUrl: "views/search/search.view.html",
                     controller:"SearchController"

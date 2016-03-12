@@ -1,0 +1,80 @@
+<div id="page-wrapper">
+    <!--<div class="container-fluid">-->
+    <!--<div class="row">-->
+    <div class="col-md-10 col-md-offset-2 main" ng-controller="EventsController as ctrl">
+        <md-content>
+            <md-tabs md-selected="1" md-align-tabs="top">
+                <md-tab>
+                    <a href="#/currentEvents"><md-tab-label>Current Events</md-tab-label></a>
+                </md-tab>
+                <md-tab >
+                    <a href="#/eventDetails"><md-tab-label>Event Details</md-tab-label></a>
+                </md-tab>
+                <md-tab>
+                    <a href="#/newEvent"><md-tab-label>New Event</md-tab-label></a>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+        <!--<div class="well" style="opacity: 0.9">-->
+            <md-content layout-padding>
+                <div>
+                    <form name="userForm">
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Movie name</label>
+                                <input ng-model="event.movie">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Hosted By</label>
+                                <input ng-model="event.host">
+                            </md-input-container>
+                            <md-datepicker ng-model="event.Date" md-placeholder="Enter date"></md-datepicker>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Event Location</label>
+                                <input ng-model="event.address">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>City</label>
+                                <input ng-model="event.city">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>State</label>
+                                <md-select ng-model="event.state">
+                                    <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                        {{state.abbrev}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Postal Code</label>
+                                <input name="postalCode" ng-model="event.postalCode" placeholder="12345"
+                                       ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                    <!--<div ng-message="required" class="my-message">You must supply a postal code.</div>-->
+                                    <div ng-message="pattern || md-maxlength" class="my-message">That doesn't look like a valid postal
+                                        code.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <label> Invitees</label>
+
+                        <md-chips
+                                ng-model="ctrl.tags"
+                                md-separator-keys="ctrl.keys"
+                                placeholder="Enter names comma seperated"
+                                secondary-placeholder="Comma separated names">
+                        </md-chips>
+                    </form>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-button class="md-raised md-primary" ng-click="createEvent(event)">Create</md-button>
+                </div>
+            </md-content>
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+    <!--</div>-->
+</div>
