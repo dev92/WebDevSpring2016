@@ -40,6 +40,10 @@
                     controller:"ReviewsController"
                 })
 
+                .when("/admin", {
+                    templateUrl: "views/admin/admin.view.html",
+                })
+
                 .when("/favorites", {
                     templateUrl: "views/myspace/favorites.view.html",
                     controller:"FavoritesController"
