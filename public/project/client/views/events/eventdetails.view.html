@@ -67,10 +67,15 @@
                                 placeholder="Enter names comma seperated"
                                 secondary-placeholder="Comma separated names">
                         </md-chips>
+                        <p>Going? : <span class="radioValue">{{ event.going }}</span> </p>
+                        <md-radio-group ng-model="event.going">
+                            <md-radio-button value="Yes"> Yes </md-radio-button>
+                            <md-radio-button value="No"> No </md-radio-button>
+                        </md-radio-group>
                     </form>
                 </div>
                 <div layout="row" layout-align="center center">
-                    <md-button class="md-raised md-primary" ng-click="createEvent(event)">Create</md-button>
+                    <md-button class="md-raised md-primary" ng-click="updateEvent(event)">Update</md-button>
                 </div>
             </md-content>
         <!--</div>-->

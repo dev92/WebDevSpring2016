@@ -30,6 +30,21 @@
                     templateUrl: "views/events/events.view.html",
                 })
 
+                .when("/newEvent", {
+                    templateUrl: "views/events/newevent.view.html",
+                    controller:"NewEventsController"
+                })
+
+                .when("/reviewed", {
+                    templateUrl: "views/myspace/reviews.view.html",
+                    controller:"ReviewsController"
+                })
+
+                .when("/favorites", {
+                    templateUrl: "views/myspace/favorites.view.html",
+                    controller:"FavoritesController"
+                })
+
                 .when("/events/:eventID", {
                     templateUrl: "views/events/eventdetails.view.html",
                     controller:"EventsController"

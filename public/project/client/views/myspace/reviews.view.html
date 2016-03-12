@@ -1,0 +1,33 @@
+<div id="page-wrapper">
+    <!--<div class="container-fluid">-->
+    <!--<div class="row">-->
+    <div class="col-md-10 col-md-offset-2 main">
+        <md-content>
+            <md-tabs md-selected="1" md-align-tabs="top">
+                <md-tab>
+                    <a href="#/favorites"><md-tab-label>Your Favorites</md-tab-label></a>
+                </md-tab>
+                <md-tab >
+                    <a href="#/reviewed"><md-tab-label>Reviewed Movies</md-tab-label></a>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+        <div class="well" style="background-color: rgba(96, 125, 139, 0.7)" ng-controller="ReviewsController">
+            <div class="row" ng-repeat="movie in movies">
+                <div class="col-md-4">
+                    <img style="height: 200px;width: 200px;display: block;margin: 0 auto" class="img-responsive" ng-src="{{movie.poster}}">
+                </div>
+                <div class="col-md-4">
+                    <p style="text-align: center">{{movie.review}}</p>
+                </div>
+                <div class="col-md-4">
+                    <md-button md-no-ink class="md-primary md-raised md-accent">Remove</md-button>
+                    <md-button md-no-ink class="md-primary md-raised">Edit</md-button>
+                </div>
+            </div>
+
+        </div>
+        <!--</div>-->
+    </div>
+    <!--</div>-->
+</div>

@@ -1,0 +1,38 @@
+<div id="page-wrapper">
+    <!--<div class="container-fluid">-->
+    <!--<div class="row">-->
+    <div class="col-md-10 col-md-offset-2 main">
+        <md-content>
+            <md-tabs md-selected="0" md-align-tabs="top">
+                <md-tab>
+                    <a href="#/favorites"><md-tab-label>Your Favorites</md-tab-label></a>
+                </md-tab>
+                <md-tab >
+                    <a href="#/reviewed"><md-tab-label>Reviewed Movies</md-tab-label></a>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+        <div class="well" style="background-color: rgba(96, 125, 139, 0.7)" ng-controller="FavoritesController">
+            <div class="md-padding" layout="row" layout-xs="column" layout-align="center center" flex="33" layout-wrap>
+                <md-card  ng-repeat="movie in movies">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-subhead">{{movie.Title}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster}}" onerror="this.src='http://www.filmfodder.com/reviews/images/poster-not-available.jpg'" class="md-card-image" alt="Washed Out">
+                    <md-card-actions layout="row" layout-align="center center">
+                        <md-button class="md-icon-button" aria-label="Favorite">
+                            <md-icon ng-click="movie.favorite = !movie.favorite" class="md-icon-button md-accent"><i ng-class="{'fa fa-heart-o fa-lg':!movie.favorite,'fa fa-heart fa-lg':movie.favorite}"></i></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="Details">
+                            <md-icon><a href="#/detail/{{movie.imdbID}}"><i class="fa fa-info-circle fa-lg"></i></a></md-icon>
+                        </md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+    <!--</div>-->
+</div>
