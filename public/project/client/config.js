@@ -21,6 +21,11 @@
                     controller:"SearchController"
                 })
 
+                .when("/friends", {
+                    templateUrl: "views/users/friends.view.html",
+                    controller:"FriendsController"
+                })
+
                 .when("/search/:movietitle", {
                     templateUrl: "views/search/search.view.html",
                     controller:"SearchController"

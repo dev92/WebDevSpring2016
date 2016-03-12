@@ -12,11 +12,11 @@
                     </md-tab>
                 </md-tabs>
             </md-content>
-            <div class="well">
-            <div class="row" ng-controller="DetailController">
+            <div class="well" ng-controller="DetailController">
+            <div class="row">
                 <h2 style="text-align: center">{{movie.Title}}</h2>
                 <div class="col-md-6">
-                    <img ng-src="{{movie.Poster}}" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
+                    <img ng-src="{{imgpath(movie.imdbID)}}" onerror="this.src='http://www.filmfodder.com/reviews/images/poster-not-available.jpg'" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
                     <br>
                     <div ng-init="movie.rating = 0" layout="row" layout-align="center center">
                         <uib-rating ng-model="movie.rating" style="color: gold" max="5" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
@@ -42,6 +42,15 @@
                     </ul>
                 </div>
             </div>
+                <div class="row" style="padding-left: 40px">
+                    <hr>
+                    <h5>Reviews: </h5>
+                    <md-input-container class="md-block" md-padding>
+                        <label>Review</label>
+                        <textarea ng-model="movie.review" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                        <md-icon  class="md-primary md-raised md-icon-button" ng-click="addReview(movietitle)" aria-label="review"><i class="fa fa-pencil-square-o fa-lg"></i></md-icon>
+                    </md-input-container>
+                </div>
             </div>
         </div>
     </div>
