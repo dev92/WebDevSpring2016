@@ -10,8 +10,8 @@
 
         if($rootScope.currentusr){
 
-            FormService.findAllFormsForUser($rootScope.currentusr._id,
-                function(response){
+            FormService.findAllFormsForUser($rootScope.currentusr._id)
+                .then(function(response){
                     $scope.forms = response;
                 });
         }
@@ -26,8 +26,8 @@
         $scope.addForm = function() {
             if($scope.formName!=null) {
                 currentForm.title = $scope.formName;
-                FormService.createFormForUser($rootScope.currentusr._id, currentForm,
-                    function(response){
+                FormService.createFormForUser($rootScope.currentusr._id, currentForm)
+                    .then(function(response){
                         $scope.forms.push(response);
                     });
                 $scope.formName = null;
@@ -39,8 +39,8 @@
             if($scope.formName!=null) {
                 currentForm = $scope.forms[$scope.selectedFormIndex];
                 currentForm.title = $scope.formName;
-                FormService.updateFormById(currentForm._id, currentForm,
-                    function (response){
+                FormService.updateFormById(currentForm._id, currentForm)
+                    .then(function (response){
                         $scope.forms[$scope.selectedFormIndex] = response;
                     });
 
@@ -53,8 +53,8 @@
 
         $scope.deleteForm = function(index){
             currentForm = $scope.forms[index];
-            FormService.deleteFormById(currentForm._id,
-                function(response){
+            FormService.deleteFormById(currentForm._id)
+                .then(function(response){
                     $scope.forms.splice(index,1);
                 });
             $scope.selectedFormIndex = null;

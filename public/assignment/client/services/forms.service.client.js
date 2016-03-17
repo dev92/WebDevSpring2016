@@ -3,14 +3,7 @@
         .module("FormBuilderApp")
         .factory("FormService", FormService);
 
-    function FormService() {
-        var forms = [];
-
-        forms = [
-            {"_id": "000", "title": "Contacts", "userId": 123},
-            {"_id": "010", "title": "ToDo",     "userId": 123},
-            {"_id": "020", "title": "CDs",      "userId": 234}
-        ];
+    function FormService($http,$q) {
 
 
         var service = {
@@ -22,43 +15,45 @@
 
         return service;
 
-        function createFormForUser(userId, form, callback){
-            form._id = (new Date).getTime();
-            form.userId = userId;
-            forms.push(form);
-            callback(form);
+        function createFormForUser(userId, form) {
+            var defer = $q.defer();
+            var url = "/api/assignment/user/" + userId + "/form";
+            $http.post(url, form)
+                .success(function (response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        function findAllFormsForUser(userId,callback){
-            var userforms = [];
-            for(i=0;i<forms.length;i++) {
-                if(forms[i].userId == userId){
-                    userforms.push(forms[i]);
-                }
-            }
-            callback(userforms);
+        function findAllFormsForUser(userId) {
+            var defer = $q.defer();
+            var url = "/api/assignment/user/" + userId + "/form";
+            $http.get(url)
+                .success(function (response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        function deleteFormById(formId,callback){
-            for(i=0;i<forms.length;i++) {
-                if(forms[i]._id == formId) {
-                    forms.splice(i, 1);
-                }
-            }
-            callback(forms);
+        function deleteFormById(formId) {
+            var defer = $q.defer();
+            var url = "/api/assignment/form/" + formId;
+            $http.delete(url)
+                .success(function (response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        function updateFormById(formId, newForm,callback){
-            temp = null;
-            for (i = 0; i < forms.length; i++) {
-                if (forms[i]._id == formId) {
-                    forms[i] = newForm;
-                    temp =  forms[i];
-                }
-            }
-            callback(temp);
-        }
+        function updateFormById(formId, newForm) {
+            var defer = $q.defer();
+            var url = "/api/assignment/form/" + formId;
+            $http.put(url, newForm).success(function (response) {
+                defer.resolve(response);
+            });
+            return defer.promise;
 
+        }
     }
 
 })();
