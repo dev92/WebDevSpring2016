@@ -18,22 +18,22 @@
                 $scope.message = "Please enter a username.";
                 return;
             }
-            if (user.password == null) {
+            if (user.password == null || !user.password) {
                 $scope.message = "Please enter a password.";
                 return;
             }
 
-            UserService.findUserByCredentials(user.username,user.password,
-                function(response){
+            UserService.findUserByCredentials(user.username,user.password)
+                .then(function(response){
                     if(response == null){
                         $scope.message = "Username/Password does not match!";
+                        return;
                     }else{
                         $rootScope.currentusr = response;
                         $location.path('/profile');
                     }
 
                 });
-
         }
     }
 

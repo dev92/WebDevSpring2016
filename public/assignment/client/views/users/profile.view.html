@@ -24,10 +24,10 @@
             <input type="password" ng-model = "currentuser.password" class="form-control" id="inputPassword" placeholder="Password">
         </div>
     </div>
-    <div ng-class="validate(currentuser)">
+    <div ng-class="validate(currentuser,vpassword)">
         <label for="verifypswd" class="col-sm-2 control-label">Verify Password:</label>
         <div class="col-sm-10">
-            <input type="password" ng-model = "currentuser.vpassword" class="form-control" id="verifypswd" placeholder="Password">
+            <input type="password" ng-model = "vpassword" class="form-control" id="verifypswd" placeholder="Password">
             <!--<span class="help-block">Password Does not Match!</span>-->
         </div>
     </div>
