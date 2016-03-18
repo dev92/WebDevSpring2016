@@ -1,5 +1,7 @@
 "use strict";
 
+var uuid = require('node-uuid');
+
 module.exports = function() {
     var forms = require("./form.mock.json");
 
@@ -24,7 +26,7 @@ module.exports = function() {
 
     function Create(form, userId){
         form.userId = userId;
-        form._id = (new Date).getTime();
+        form._id = uuid.v1();
         form.fields = [];
         forms.push(form);
         return form;
@@ -83,7 +85,7 @@ module.exports = function() {
     function AddFormField(formId,field){
         var requiredForm = FindFormById(formId);
         if(requiredForm!=null){
-            field._id = (new Date).getTime();
+            field._id = uuid.v1();
             requiredForm.fields.push(field);
             return Update(requiredForm._id,requiredForm).fields;
         }
