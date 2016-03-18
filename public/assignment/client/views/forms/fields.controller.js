@@ -14,6 +14,7 @@
 
         $scope.formFields = {};
 
+
         if($rootScope.currentusr){
             FieldService.getFieldsForForm($scope.formId)
                 .then(function(fields){
@@ -94,18 +95,37 @@
             FieldService.getFieldForForm($scope.formId,fieldId)
                 .then(function(response){
                     $scope.modalField = response;
-                    $scope.modalField.options = JSON.stringify($scope.modalField.options);
+                    if(response.hasOwnProperty("options")) {
+                        $scope.modalField.options = JSON.stringify($scope.modalField.options);
+                    }
                 });
         }
 
         $scope.parseField = function(newfield){
-            newfield.options = JSON.parse(newfield.options);
-            console.log(newfield);
+            if(newfield.hasOwnProperty("options")){
+                newfield.options = JSON.parse(newfield.options);
+            }
             FieldService.updateField($scope.formId,newfield._id,newfield)
                 .then(function(response){
                    $scope.formFields = response;
                 });
         }
+
+
+        $scope.$watch('formFields', function (newValue, oldValue) {
+
+            if(Object.keys(newValue).length !== 0 && Object.keys(oldValue).length !== 0 ){
+                //console.log("New Value:")
+                //console.log(newValue);
+                //console.log("Old Value:");
+                //console.log(oldValue);
+                FieldService.reorderFields($scope.formId,newValue)
+                    .then(function (response) {
+                        $scope.formFields = response;
+                    });
+            }
+
+        }, true);
 
 
 

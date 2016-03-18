@@ -17,7 +17,8 @@ module.exports = function() {
         AddFormField: AddFormField,
         FindField: FindField,
         UpdateFormField: UpdateFormField,
-        DeleteFormField: DeleteFormField
+        DeleteFormField: DeleteFormField,
+        ReorderFormFields:ReorderFormFields
     };
     return api;
 
@@ -133,6 +134,15 @@ module.exports = function() {
                 }
             }
             return null;
+        }
+        return null;
+    }
+
+    function ReorderFormFields(formId,fields){
+        var requiredForm = FindFormById(formId);
+        if(requiredForm!=null){
+            requiredForm.fields = fields;
+            return Update(requiredForm._id,requiredForm).fields;
         }
         return null;
     }
