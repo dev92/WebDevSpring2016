@@ -27,7 +27,7 @@
     "body-parser": "^1.14.1",
     "multer": "^1.1.0",
     "q": "^1.4.1",
-    "node-uuid": "^2.0.1"
+    "node-uuid": "^1.4.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
