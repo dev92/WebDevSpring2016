@@ -4,9 +4,11 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController($rootScope,$scope,FieldService,FormService,$routeParams) {
+    function FieldsController($rootScope,$scope,FieldService,$routeParams) {
 
         $scope.formId = $routeParams.formId;
+
+        $scope.formTitle = $rootScope.currentusr.formName;
 
         $scope.modalField = {};
 
