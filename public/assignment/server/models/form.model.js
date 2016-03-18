@@ -8,14 +8,16 @@ module.exports = function() {
         FindAll: FindAll,
         FindFormByTitle: FindFormByTitle,
         FindFormsByUserId: FindFormsByUserId,
-        FindById: FindById,
+        FindFormById: FindFormById,
         Update: Update,
-        Delete: Delete
+        Delete: Delete,
 
-        //AddFormField: AddFormField,
-        //FindField: FindField,
-        //UpdateFormField: UpdateFormField,
-        //DeleteFormField: DeleteFormField
+        //CRUD for fields in a form
+
+        AddFormField: AddFormField,
+        FindField: FindField,
+        UpdateFormField: UpdateFormField,
+        DeleteFormField: DeleteFormField
     };
     return api;
 
@@ -50,7 +52,7 @@ module.exports = function() {
         return userForms;
     }
 
-    function FindById(id){
+    function FindFormById(id){
         for(var f in forms){
             if(forms[f]._id == id){
                 return forms[f];
@@ -75,6 +77,64 @@ module.exports = function() {
                 return forms;
             }
         }
+    }
+
+    function AddFormField(formId,field){
+        var requiredForm = FindFormById(formId);
+        if(requiredForm!=null){
+            field._id = (new Date).getTime();
+            requiredForm.fields.push(field);
+            return Update(requiredForm._id,requiredForm).fields;
+        }
+        return null;
+    }
+
+    function FindField(formId,fieldId){
+        var requiredForm = FindFormById(formId);
+        if(requiredForm!=null){
+            var formFields = requiredForm.fields
+            for(var f in formFields){
+                if(formFields[f]._id == fieldId){
+                    return formFields[f];
+                }
+            }
+            return null;
+        }
+        return null;
+    }
+
+    function UpdateFormField(formId,fieldId,field){
+        var requiredForm = FindFormById(formId);
+        if(requiredForm!=null){
+            var formFields = requiredForm.fields;
+            for(var f in formFields){
+                if(formFields[f]._id == fieldId){
+                    formFields[f] = field;
+                    requiredForm.fields = formFields;
+                    return Update(requiredForm._id,requiredForm).fields;
+
+                }
+            }
+            return null;
+        }
+        return null;
+    }
+
+    function DeleteFormField(formId,fieldId){
+        var requiredForm = FindFormById(formId);
+        if(requiredForm!=null){
+            var formFields = requiredForm.fields;
+            for(var f in formFields){
+                if(formFields[f]._id == fieldId){
+                    formFields.splice(f,1);
+                    requiredForm.fields = formFields;
+                    return Update(requiredForm._id,requiredForm).fields;
+
+                }
+            }
+            return null;
+        }
+        return null;
     }
 
 }
