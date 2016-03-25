@@ -3,20 +3,19 @@
         .module("CinephiliaApp")
         .controller("SearchController", SearchController);
 
-    function SearchController($scope, $location, $routeParams, MovieApiService) {
+    function SearchController($scope, $rootScope, $location, $routeParams, MovieApiService) {
 
         $scope.search = search;
         $scope.movietitle = $routeParams.movietitle;
-        //$scope.basepath = null;
 
-        //$scope.init = function(){
-        //    MovieApiService.findBasePath(function(response){
-        //       $scope.basepath =  response.images.base_url
-        //    });
-        //}
+        function formImgPath (imgpath) {
+            if(imgpath == null){
+                return 'http://www.filmfodder.com/reviews/images/poster-not-available.jpg';
+            }else{
+                return $rootScope.basepath+"original"+imgpath;
+            }
 
-        $scope.imgpath = function (imdbID) {
-            return "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID",imdbID);
+            //return "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID",imdbID);
         }
 
 
@@ -30,8 +29,12 @@
             MovieApiService.findMovieByTitle(
                 title,
                 function(response){
-                    //console.log(response);
-                    $scope.movies = response.Search;
+                    //console.log(response.results);
+                    for(result in response.results){
+                        response.results[result].poster_path = formImgPath(response.results[result].poster_path);
+                    }
+                    $scope.movies = response.results;
+
                 });
         }
     }

@@ -12,18 +12,23 @@
                     </md-tab>
                 </md-tabs>
             </md-content>
-            <div class="well" ng-controller="DetailController">
+            <div class="well">
             <div class="row">
                 <h2 style="text-align: center">{{movie.Title}}</h2>
                 <div class="col-md-6">
-                    <img ng-src="{{imgpath(movie.imdbID)}}" onerror="this.src='http://www.filmfodder.com/reviews/images/poster-not-available.jpg'" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
+                    <img ng-src="{{movie.Poster}}" onerror="this.src='http://www.filmfodder.com/reviews/images/poster-not-available.jpg'" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
                     <br>
+                    <div layout = "row" layout-align="center center">
+                        <md-button class="md-icon-button" aria-label="Favorite" ng-disabled="!currentusr">
+                            <md-icon  ng-click="addFavorite(movie)" class="md-icon-button md-accent"><i ng-class="{'fa fa-heart-o fa-lg':!movie.favorite,'fa fa-heart fa-lg':movie.favorite}"></i></md-icon>
+                        </md-button>
+                    </div>
                     <div ng-init="movie.rating = 0" layout="row" layout-align="center center">
-                        <uib-rating ng-model="movie.rating" style="color: gold" max="5" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
-                        <b>(<i>Rating:</i> {{movie.rating}}/5)</b>
+                        <uib-rating ng-model="movie.rating" style="color: gold" max="10" read-only="currentusr==null" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
+                        <b>(<i>Rating:</i> {{movie.rating}}/10)</b>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h3>Plot</h3>
                     <p>
                         {{movie.Plot}}
@@ -40,6 +45,20 @@
                             {{actorName}}
                         </li>
                     </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4>Awards</h4>
+                    <p>
+                        {{movie.Awards}}
+                    </p>
+                    <h4>Genre:</h4>
+                    <ul>
+                        <li ng-repeat="genre in movie.Genre.split(',')">
+                            {{genre}}
+                        </li>
+                    </ul>
+                    <h4>Release Year:<p>{{movie.Released}}</p></h4>
+                    <h4>Rated:<p>{{movie.Rated}}</p></h4>
                 </div>
             </div>
                 <div class="row" style="padding-left: 40px">

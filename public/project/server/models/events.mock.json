@@ -1,0 +1,48 @@
+[
+  {
+    "_id": "000",
+    "title": "Avatar",
+    "userId": 123,
+    "location": "1600 Amphitheatre Pkwy",
+    "date": "03/25/2016",
+    "City": "Mountain View",
+    "State": "CA",
+    "postal": "91950",
+    "invitees": [
+      234,
+      345
+    ]
+  },
+
+  {
+    "_id": "001",
+    "title": "Martian",
+    "userId": 123,
+    "location": "67 Harvard Ave",
+    "date": "02/25/2016",
+    "City": "Allston",
+    "State": "MA",
+    "postal": "02134",
+    "invitees": [
+      234,
+      345,
+      567
+    ]
+  },
+  {
+    "_id": "001",
+    "title": "Harry Potter part 1",
+    "userId": 234,
+    "location": "360 Huntington Ave",
+    "date": "04/24/2016",
+    "City": "Boston",
+    "State": "MA",
+    "postal": "02115",
+    "invitees": [
+      123,
+      345,
+      456
+    ]
+  }
+]
+

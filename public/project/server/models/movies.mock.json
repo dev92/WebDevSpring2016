@@ -1,0 +1,5 @@
+[
+  {"imdbID": "tt0050083", "tmdbID":389,"title": "12 Angry men", "userLikes":["234"]},
+  {"imdbID": 234, "tmdbID":268,"firstName": "Bob",	"lastName": "Hope", "username": "bob", 	"password": "bob","favorites":["tt0372784","tt0241527","tt0050083"]},
+  {"imdbID": 345, "tmdbID":,"firstName": "Charlie","lastName": "Brown", "username": "charlie", "password": "charlie","favorites":["tt0372784","tt0241527","tt0295297"]}
+]

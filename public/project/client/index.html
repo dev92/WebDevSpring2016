@@ -50,7 +50,7 @@
     <script src="views/main/main.controller.js"></script>
 
 </head>
-<body ng-controller="MainController">
+<body ng-controller="MainController" ng-init="init()">
 <div ng-include="'views/header/header.view.html'"></div>
 <!-- Carousel -->
 <div ng-show="$location.url() == '/home'" id="main-carousel" class="carousel slide carousel-fade carousel-bg" data-ride="carousel" data-interval="4000">
