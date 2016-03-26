@@ -10,27 +10,24 @@
             $scope.message = null;
 
 
-            $scope.register = function(user) {
+            $scope.register = function(user,vpassword) {
 
-                if (user.password !== user.vpassword) {
+                if (user.password !== vpassword) {
                     $scope.message = "Passwords must match";
                     return;
                 }
 
-                UserService.checkExistingUser(user,
-                    function(response){
-                        $scope.message = response;
-                    });
 
-                console.log($scope.message);
-
-                if($scope.message == null){
-                    UserService.createUser(user,
-                        function(response){
+                UserService.createUser(user)
+                    .then(function(response){
+                        if(typeof response == 'string'){
+                            $scope.message = response;
+                            return;
+                        }else {
                             $rootScope.currentusr = response;
-                        });
-                    $location.path('/profile');
-                }
+                            $location.path('/profile');
+                        }
+                    });
             }
 
         }

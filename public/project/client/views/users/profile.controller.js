@@ -23,18 +23,20 @@
         });
 
 
+        $scope.update = function(user,vpassword) {
 
-        $scope.update = function(user) {
+            if (user.password != vpassword) {
+                console.log("Password dont match!");
+                $scope.message = "Passwords must match";
+                return;
+            }
 
-            $scope.update = function(user) {
-                UserService.updateUser(user._id,user,
-                    function(response){
-                        $rootScope.currentusr = response;
-                    });
-                $location.path('/profile');
+            UserService.updateUser(user._id,user)
+                .then(function(response){
+                    $rootScope.currentusr = response;
+                    $location.path('/profile');
+                });
             }
         }
-
-    }
 
 })();

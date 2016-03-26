@@ -42,6 +42,10 @@
             <md-content layout-padding>
                 <div>
                     <form name="userForm">
+                        <div ng-show = "message" class="alert alert-danger fade in">
+                            <button type = "button" ng-click="message=null" class = "close" data-dismiss = "alert" aria-hidden = "true">&times</button>
+                            {{message}}
+                        </div>
                         <div layout-gt-sm="row">
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>First name</label>
@@ -70,7 +74,7 @@
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>Verify Password</label>
-                                <input ng-model="user.vpassword" type="password">
+                                <input required ng-model="vpassword" type="password">
                             </md-input-container>
                         </div>
                         <div layout-gt-sm="row">
@@ -105,7 +109,7 @@
                     </form>
                 </div>
                 <div layout="row" layout-align="center center">
-                <md-button class="md-raised md-primary" ng-click="update(user)">Update</md-button>
+                <md-button ng-disabled="profileForm.$invalid || userForm.$invalid"class="md-raised md-primary" ng-click="update(user,vpassword)">Update</md-button>
                 </div>
             </md-content>
         </div>
