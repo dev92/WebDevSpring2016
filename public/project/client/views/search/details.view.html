@@ -23,9 +23,9 @@
                             <md-icon  ng-click="addFavorite(movie)" class="md-icon-button md-accent"><i ng-class="{'fa fa-heart-o fa-lg':!movie.favorite,'fa fa-heart fa-lg':movie.favorite}"></i></md-icon>
                         </md-button>
                     </div>
-                    <div ng-init="movie.rating = 0" layout="row" layout-align="center center">
-                        <uib-rating ng-model="movie.rating" style="color: gold" max="10" read-only="currentusr==null" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
-                        <b>(<i>Rating:</i> {{movie.rating}}/10)</b>
+                    <div layout="row" layout-align="center center">
+                        <uib-rating ng-model="rating" style="color: gold" max="10" ng-change="rateMovie(movie.imdbID,rating)"read-only="currentusr==null" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
+                        <b>(<i>Rating:</i> {{rating}}/10)</b>
                     </div>
                 </div>
                 <div class="col-md-3">
