@@ -3,7 +3,7 @@
         .module("CinephiliaApp")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $rootScope, $routeParams, MovieApiService,MovieService) {
+    function DetailController($scope, $rootScope, $routeParams, MovieApiService,MovieService,$sce) {
 
         $scope.imdbID = $routeParams.imdbID;
         $scope.users = [];
@@ -26,6 +26,14 @@
                 //console.log(response.imdbID);
                 $scope.rating = Number(response.imdbRating).toFixed();
                 $scope.movie = response;
+                MovieApiService.findTrailers($scope.imdbID,function(response){
+                    for(var r in response.results){
+                        if(response.results[r].type == "Trailer"){
+                            $scope.movie.trailer = $sce.trustAsResourceUrl("http://www.youtube.com/v/"+response.results[r].key);
+                        }
+                    }
+                });
+
                 MovieService.findUserLikes($scope.movie.imdbID)
                     .then(function(response){
                         $scope.users = response;

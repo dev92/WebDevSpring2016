@@ -18,6 +18,7 @@ module.exports = function() {
         findFriendsById: findFriendsById,
         findUsersByIds: findUsersByIds,
         userLikesMovie: userLikesMovie,
+        userDislikesMovie:userDislikesMovie,
         deleteUserFriend:deleteUserFriend,
         checkExistingUser:checkExistingUser
     };
@@ -121,7 +122,7 @@ module.exports = function() {
                 for (var u in users[i].friends) {
                     if (users[i].friends[u] == friendId) {
                         users[i].friends.splice(u, 1);
-                        return findUsersByIds(Update(userId, users[i])._id)
+                        return findFriendsById(Update(userId, users[i])._id)
                     }
                 }
             }
@@ -142,6 +143,19 @@ module.exports = function() {
         if(user){
             user.favorites.push(movie.imdbID);
             return Update(userId,user);
+        }
+    }
+
+    function userDislikesMovie(userId,imdbId){
+        var user = FindById(userId);
+        if(user){
+            for(var m in user.favorites){
+                if(user.favorites[m] == imdbId){
+                    user.favorites.splice(m,1);
+                    return Update(userId,user);
+                }
+            }
+
         }
     }
 

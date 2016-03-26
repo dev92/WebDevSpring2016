@@ -1,5 +1,5 @@
 [
-  {"imdbID": "tt0050083", "tmdbID":389,"title": "12 Angry men", "userFavorites":[234]},
-  {"imdbID": "tt0096895", "tmdbID":268,"title":"Batman", "userFavorites":[123,345]},
-  {"imdbID": "tt0295297", "tmdbID":672,"title":"Harry Potter and the Chamber of Secrets","userFavorites":[234,456]}
+  {"imdbID": "tt0050083", "tmdbID":389,"title": "12 Angry men", "userFavorites":[234],"poster":"http://img.omdbapi.com/?i=tt0050083&apikey=2bf5ee9"},
+  {"imdbID": "tt0096895", "tmdbID":268,"title":"Batman", "userFavorites":[123,345],"poster":"http://img.omdbapi.com/?i=tt0096895&apikey=2bf5ee9"},
+  {"imdbID": "tt0295297", "tmdbID":672,"title":"Harry Potter and the Chamber of Secrets","userFavorites":[234,456],"poster":"http://img.omdbapi.com/?i=tt0295297&apikey=2bf5ee9"}
 ]

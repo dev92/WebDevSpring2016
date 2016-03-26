@@ -4,7 +4,7 @@ module.exports = function(app, model) {
 
     app.get("/api/project/user",FindUser);
     app.get("/api/project/user/:id",FindById);
-    app.get("/api/project/user/:id/friends",findUsersByIds);
+    app.get("/api/project/user/:id/friends",FindFriendsById);
     app.delete("/api/project/user/:id/friend/:friendId",DeleteUserFriend);
     app.put("/api/project/user/:id",UpdateUser);
     app.delete("/api/project/user/:id", DeleteUser);
@@ -59,9 +59,9 @@ module.exports = function(app, model) {
 
     }
 
-    function findUsersByIds(req, res){
+    function FindFriendsById(req, res){
 
-        res.json(model.findUsersByIds(req.params.id));
+        res.json(model.findFriendsById(req.params.id));
     }
 
     function DeleteUserFriend(req, res){

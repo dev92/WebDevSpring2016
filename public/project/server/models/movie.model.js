@@ -8,7 +8,8 @@ module.exports = function() {
         findMovieByImdbID: findMovieByImdbID,
         findMoviesByImdbIDs: findMoviesByImdbIDs,
         createMovie: createMovie,
-        userLikesMovie: userLikesMovie
+        userLikesMovie: userLikesMovie,
+        userDislikesMovie:userDislikesMovie
     };
     return api;
 
@@ -45,6 +46,17 @@ module.exports = function() {
         for(var i in movies){
             if(movies[i].imdbID == imdbID){
                 return movies[i];
+            }
+        }
+        return null;
+    }
+
+    function userDislikesMovie(userId,imdbId){
+        var movie = findMovieByImdbID(imdbId);
+        for(var i in movie.userFavorites){
+            if(movie.userFavorites[i] == userId){
+                movie.userFavorites.splice(i,1)
+                return movie;
             }
         }
     }

@@ -11,14 +11,16 @@
         var searchUrl = "http://api.themoviedb.org/3/search/movie?query=QUERY&api_key=c8fee912d3f3866df68026f0ebadc6f6";
         var genreMovies = "http://api.themoviedb.org/3/genre/GENRE/movies?api_key=c8fee912d3f3866df68026f0ebadc6f6";
         var detailsUrl = "http://api.themoviedb.org/3/movie/ID?api_key=c8fee912d3f3866df68026f0ebadc6f6";
-        var imdbdetailsUrl = "https://api.themoviedb.org/3/find/IMDBID?external_source=imdb_id&api_key=c8fee912d3f3866df68026f0ebadc6f6"
+        var imdbdetailsUrl = "https://api.themoviedb.org/3/find/IMDBID?external_source=imdb_id&api_key=c8fee912d3f3866df68026f0ebadc6f6";
+        var trailerUrl = "http://api.themoviedb.org/3/movie/ID/videos?api_key=c8fee912d3f3866df68026f0ebadc6f6";
 
 
 
         var api = {
             findMovieByTitle : findMovieByTitle,
             findMovieByImdbID:findMovieByImdbID,
-            findBasePath:findBasePath
+            findBasePath:findBasePath,
+            findTrailers:findTrailers
         };
 
         return api;
@@ -40,6 +42,11 @@
 
         function findBasePath(callback){
             $http.get(config)
+                .success(callback);
+        }
+
+        function findTrailers(tmdbId,callback){
+            $http.get(trailerUrl.replace("ID",tmdbId))
                 .success(callback);
         }
 
