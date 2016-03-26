@@ -13,19 +13,12 @@
         var detailsUrl = "http://api.themoviedb.org/3/movie/ID?api_key=c8fee912d3f3866df68026f0ebadc6f6";
         var imdbdetailsUrl = "https://api.themoviedb.org/3/find/IMDBID?external_source=imdb_id&api_key=c8fee912d3f3866df68026f0ebadc6f6"
 
-        //$http.get(config).success(function (response) {
-        //    var path = response;
-        //    //console.log(path);
-        //});
-
-        //string.replace(/\\\//g, "/");
 
 
         var api = {
             findMovieByTitle : findMovieByTitle,
             findMovieByImdbID:findMovieByImdbID,
             findBasePath:findBasePath
-            //findImgbyImdbID:findImgbyImdbID
         };
 
         return api;
@@ -43,9 +36,6 @@
                     $http.get("http://www.omdbapi.com/?i="+response.imdb_id)
                         .success(callback)
                 });
-
-            //$http.get("http://www.omdbapi.com/?i="+imdbID)
-            //    .success(callback);
         }
 
         function findBasePath(callback){

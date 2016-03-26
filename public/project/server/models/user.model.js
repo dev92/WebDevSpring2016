@@ -15,7 +15,9 @@ module.exports = function() {
         Delete: Delete,
         FindUserByUsername: FindUserByUsername,
         FindUserByCredentials: FindUserByCredentials,
+        findFriendsById: findFriendsById,
         findUsersByIds: findUsersByIds,
+        userLikesMovie: userLikesMovie,
         deleteUserFriend:deleteUserFriend,
         checkExistingUser:checkExistingUser
     };
@@ -97,7 +99,7 @@ module.exports = function() {
         return msg;
     }
 
-    function findUsersByIds(userId){
+    function findFriendsById(userId){
         var friends = [];
         for(var i in users){
             if(users[i]._id == userId){
@@ -114,12 +116,33 @@ module.exports = function() {
     function deleteUserFriend(userId,friendId) {
         var friends = [];
         console.log(friendId);
-        //for (var i in users) {
-        //    if (users[i]._id == userId) {
-        //        for (var u in users[i].friends) {
-        //        }
-        //    }
-        //}
+        for (var i in users) {
+            if (users[i]._id == userId) {
+                for (var u in users[i].friends) {
+                    if (users[i].friends[u] == friendId) {
+                        users[i].friends.splice(u, 1);
+                        return findUsersByIds(Update(userId, users[i])._id)
+                    }
+                }
+            }
+        }
+    }
+
+    function findUsersByIds(userIds){
+        var matchedUsers = []
+        for(var u in userIds){
+            matchedUsers.push(FindById(userIds[u]));
+        }
+        return matchedUsers;
+    }
+
+
+    function userLikesMovie(userId,movie){
+        var user = FindById(userId);
+        if(user){
+            user.favorites.push(movie.imdbID);
+            return Update(userId,user);
+        }
     }
 
 }

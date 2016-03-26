@@ -5,7 +5,7 @@ module.exports = function(app, model) {
     app.get("/api/project/user",FindUser);
     app.get("/api/project/user/:id",FindById);
     app.get("/api/project/user/:id/friends",findUsersByIds);
-    app.delete("/api/project/user/:id/friends",DeleteUserFriend);
+    app.delete("/api/project/user/:id/friend/:friendId",DeleteUserFriend);
     app.put("/api/project/user/:id",UpdateUser);
     app.delete("/api/project/user/:id", DeleteUser);
     app.post("/api/project/user",CreateUser);
@@ -65,9 +65,7 @@ module.exports = function(app, model) {
     }
 
     function DeleteUserFriend(req, res){
-        console.log("In delete service for friend");
-        console.log(req.body);
-        res.json(model.deleteUserFriend(req.params.id,req.body));
+        res.json(model.deleteUserFriend(req.params.id,req.params.friendId));
     }
 
 

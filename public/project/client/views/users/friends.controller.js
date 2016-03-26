@@ -17,7 +17,7 @@
 
         $scope.removeFriend = function(userId,friend){
             console.log(friend._id);
-            UserService.deleteUserFriend(userId,friend)
+            UserService.deleteUserFriend(userId,friend._id)
                 .then(function(response){
                     $scope.friends = response;
                 })

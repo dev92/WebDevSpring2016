@@ -5,6 +5,7 @@
         .controller('MainController',MainController);
 
     function MainController($scope,$location,$rootScope,MovieApiService) {
+
         $scope.$location = $location;
 
         $scope.init = function(){

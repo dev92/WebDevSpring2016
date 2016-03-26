@@ -96,10 +96,10 @@
             return defer.promise;
         }
 
-        function deleteUserFriend(userId,friend){
+        function deleteUserFriend(userId,friendId){
             var defer = $q.defer();
-            var url = '/api/project/user/'+ userId+"/friends";
-            $http.delete(url,friend)
+            var url = '/api/project/user/'+ userId+'/friend/'+friendId;
+            $http.delete(url)
                 .success(function(response){
                     defer.resolve(response);
                 });

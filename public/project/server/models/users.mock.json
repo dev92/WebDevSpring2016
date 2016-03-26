@@ -1,8 +1,8 @@
 [
-  {"_id": 123, "firstName": "Alice", 	"lastName": "Wonderland",	"username": "alice", "password": "alice", "favorites":["tt0372784","tt1201607"],"friends":[456,567,345]},
-  {"_id": 234, "firstName": "Bob",	"lastName": "Hope", "username": "bob", 	"password": "bob","favorites":["tt0372784","tt0241527","tt0050083"],"friends":[123,567]},
-  {"_id": 345, "firstName": "Charlie","lastName": "Brown", "username": "charlie", "password": "charlie","favorites":["tt0372784","tt0241527","tt0295297"],"friends":[456,234]},
-  {"_id": 456, "firstName": "Dan",	"lastName": "Craig", "username": "dan", "password": "dan","favorites":["tt0372784","tt0241527","tt0103776"],"friends":[123,345]},
+  {"_id": 123, "firstName": "Alice", 	"lastName": "Wonderland",	"username": "alice", "password": "alice", "favorites":["tt0096895"],"friends":[456,567,345]},
+  {"_id": 234, "firstName": "Bob",	"lastName": "Hope", "username": "bob", 	"password": "bob","favorites":["tt0295297","tt0050083"],"friends":[123,567]},
+  {"_id": 345, "firstName": "Charlie","lastName": "Brown", "username": "charlie", "password": "charlie","favorites":["tt0096895"],"friends":[456,234]},
+  {"_id": 456, "firstName": "Dan",	"lastName": "Craig", "username": "dan", "password": "dan","favorites":["tt0295297"],"friends":[123,345]},
   {"_id": 567, "firstName": "Edward","lastName": "Norton", "username": "ed", "password": "ed","favorites":[],"friends":[345,234]}
 
 ]
