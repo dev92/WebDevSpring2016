@@ -101,12 +101,24 @@ body {
 
 #id-example {
     background-image: url(http://brandflow.pl/wp-content/uploads/2015/09/slider3.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
+    /*background-attachment: fixed;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 #account{
     background-image: url(http://brandflow.pl/wp-content/uploads/2015/09/4.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
+    /*background-attachment: fixed;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 section {
