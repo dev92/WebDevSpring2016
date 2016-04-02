@@ -1,9 +1,12 @@
 "use strict";
 
-var uuid = require('node-uuid');
+//var uuid = require('node-uuid');
+var q = require("q");
 
 module.exports = function() {
-    var forms = require("./form.mock.json");
+    //var forms = require("./form.mock.json");
+    var FormSchema = require('./form.schema.server.js')(mongoose);
+    var FormModel  = mongoose.model("FormModel", FormSchema);
 
     var api = {
         Create: Create,
@@ -26,7 +29,6 @@ module.exports = function() {
 
     function Create(form, userId){
         form.userId = userId;
-        form._id = uuid.v1();
         form.fields = [];
         forms.push(form);
         return form;

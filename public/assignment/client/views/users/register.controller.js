@@ -8,6 +8,7 @@
 
         $scope.message = null;
         $scope.vpassword = null;
+        $scope.regex = /^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$/;
 
         $scope.validate = function(user,vpassword){
 
@@ -50,6 +51,7 @@
 
             UserService.createUser(user)
                 .then(function(response){
+                    console.log(response);
                     if(typeof response == 'string'){
                         $scope.message = response;
                         return;

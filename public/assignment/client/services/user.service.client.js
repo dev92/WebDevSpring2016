@@ -77,7 +77,6 @@
             var url = '/api/assignment/user/'+ userId;
             $http.put(url, user)
                 .success(function(response){
-                    console.log(response);
                     defer.resolve(response);
                 });
             return defer.promise;

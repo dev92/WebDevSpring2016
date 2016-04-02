@@ -10,7 +10,11 @@ module.exports = function(app, model) {
 
 
     function CreateUser(req,res){
-        res.send(model.Create(req.body));
+        model.Create(req.body)
+            .then(function(response){
+                res.json(response);
+            })
+
 
     }
 
@@ -22,7 +26,10 @@ module.exports = function(app, model) {
 
         if(typeof username === 'undefined' && typeof password === 'undefined'){
 
-            res.json(model.FindAll())
+            model.FindAll()
+                .then(function(response){
+                   res.json(response);
+                });
 
         }
         else if(username != null && password != null){
@@ -30,31 +37,47 @@ module.exports = function(app, model) {
                 username : username,
                 password : password
             };
-            var user = model.FindUserByCredentials(credentials);
-            res.json(user);
+
+            model.FindUserByCredentials(credentials)
+                .then(function (response) {
+                    res.json(response);
+                });
+
         }
         else if(username != null){
-            var user = model.FindUserByUsername(username);
-            res.json(user);
+
+            model.FindUserByUsername(username)
+                .then(function (response) {
+                    res.json(response);
+                });
+
         }
     }
 
     function FindById(req,res){
 
-        res.json(model.FindById(req.params.id));
+        model.FindById(req.params.id)
+            .then(function(response){
+                res.json(response);
+            })
 
     }
 
     function UpdateUser(req,res){
 
-        res.json(model.Update(req.params.id, req.body));
+        model.Update(req.params.id, req.body)
+            .then(function(response){
+                res.json(response);
+            })
 
     }
 
     function DeleteUser(req, res){
 
-        res.json(model.Delete(req.params.id));
-
+        model.Delete(req.params.id)
+            .then(function(response){
+               res.json(response);
+            });
     }
 
 

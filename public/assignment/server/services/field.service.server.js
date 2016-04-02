@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(app,model) {
+module.exports = function(app,FormModel,FieldModel) {
 
     app.post("/api/assignment/form/:formId/field", CreateFormField);
     app.put("/api/assignment/form/:formId/field", ReorderFormFields);
@@ -15,7 +15,8 @@ module.exports = function(app,model) {
     }
 
     function FindFormFields(req,res){
-        var form = model.FindFormById(req.params.formId);
+        var form = FormModel.FindFormById(req.params.formId);
+        FieldModel
         res.json(form.fields);
 
     }
