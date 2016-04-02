@@ -112,20 +112,20 @@
         }
 
 
-        //$scope.$watch('formFields', function (newValue, oldValue) {
-        //
-        //    if(Object.keys(newValue).length !== 0 && Object.keys(oldValue).length !== 0 ){
-        //        //console.log("New Value:")
-        //        //console.log(newValue);
-        //        //console.log("Old Value:");
-        //        //console.log(oldValue);
-        //        FieldService.reorderFields($scope.formId,newValue)
-        //            .then(function (response) {
-        //                $scope.formFields = response;
-        //            });
-        //    }
-        //
-        //}, true);
+        $scope.$watch('formFields', function (newValue, oldValue) {
+
+            if(Object.keys(newValue).length !== 0 && Object.keys(oldValue).length !== 0 ){
+                //console.log("New Value:")
+                //console.log(newValue);
+                //console.log("Old Value:");
+                //console.log(oldValue);
+                FieldService.reorderFields($scope.formId,newValue)
+                    .then(function (response) {
+                        $scope.formFields = response;
+                    });
+            }
+
+        }, true);
 
 
 

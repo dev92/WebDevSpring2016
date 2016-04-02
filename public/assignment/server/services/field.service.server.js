@@ -59,7 +59,7 @@ module.exports = function(app,FieldModel) {
     function ReorderFormFields(req,res){
         FieldModel.ReorderFormFields(req.params["formId"],req.body)
             .then(function(response){
-                res.json(response);
+                res.json(response.fields);
             });
     }
 

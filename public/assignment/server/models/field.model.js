@@ -203,6 +203,7 @@ module.exports = function(mongoose) {
                 });
             }
         });
+        return deferred.promise;
     }
     //var requiredForm = FindFormById(formId);
     //if(requiredForm!=null){
