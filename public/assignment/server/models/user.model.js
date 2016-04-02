@@ -81,7 +81,7 @@ module.exports = function(mongoose,db) {
 
     function Update(id,user){
         var deferred = q.defer();
-        UserModel.update({_id:id},user,function(err,response){
+        UserModel.update({_id:id},{$set: user},function(err,response){
             if(err){
                 deferred.reject(err);
             }else{
