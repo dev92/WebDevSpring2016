@@ -8,7 +8,8 @@
 
         $scope.hide = true;
         $scope.vpassword = null;
-        $scope.regex = /^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$/;
+        $scope.emregex = /^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$/;
+        $scope.phregex = /^\s?\d{10}(,\s?\d{10})*$/;
 
 
         if($rootScope.currentusr!=null) {
