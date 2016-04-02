@@ -12,35 +12,53 @@ module.exports = function(app, model) {
 
     function CreateForm(req,res){
 
-        res.json(model.Create(req.body, req.params.userId));
+        model.Create(req.body, req.params.userId)
+            .then(function(response){
+               res.json(response);
+            });
     }
 
     function GetForms(req, res){
 
-        res.json(model.FindFormsByUserId(req.params.userId));
+        model.FindFormsByUserId(req.params.userId)
+            .then(function(response){
+                res.json(response);
+            });
     }
 
     function GetForm(req, res){
 
-        res.json(model.FindById(req.params.formId));
+        model.FindFormById(req.params.formId)
+            .then(function(response){
+                res.json(response);
+            });
 
     }
 
     function GetFormByTitle(req, res){
 
         var formTitle = req.param("formTitle");
-        res.json(model.FindFormByTitle(formTitle));
+        model.FindFormByTitle(formTitle)
+            .then(function(response){
+                res.json(response);
+            });
     }
 
     function UpdateForm(req, res){
 
-        res.json(model.Update(req.params.formId, req.body));
+        model.Update(req.params.formId, req.body)
+            .then(function(response){
+                res.json(response);
+        });
 
     }
 
     function DeleteForm(req, res){
 
-        res.json(model.Delete(req.params.formId));
+        model.Delete(req.params.formId)
+            .then(function(response){
+                res.json(response);
+            });
     }
 
 

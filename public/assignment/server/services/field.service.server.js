@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(app,FormModel,FieldModel) {
+module.exports = function(app,FieldModel) {
 
     app.post("/api/assignment/form/:formId/field", CreateFormField);
     app.put("/api/assignment/form/:formId/field", ReorderFormFields);
@@ -9,15 +9,23 @@ module.exports = function(app,FormModel,FieldModel) {
     app.put("/api/assignment/form/:formId/field/:fieldId", UpdateFormField);
     app.delete("/api/assignment/form/:formId/field/:fieldId", DeleteFormField);
 
+
     function CreateFormField(req,res){
+
         var formId = req.params.formId;
-        res.json(model.AddFormField(formId,req.body));
+
+        FieldModel.AddFormField(formId,req.body)
+            .then(function (response) {
+               res.json(response.fields);
+            });
     }
 
     function FindFormFields(req,res){
-        var form = FormModel.FindFormById(req.params.formId);
-        FieldModel
-        res.json(form.fields);
+        FieldModel.FindAllFields(req.params.formId)
+            .then(function(response){
+                res.json(response.fields);
+            });
+
 
     }
 
@@ -25,22 +33,34 @@ module.exports = function(app,FormModel,FieldModel) {
         var formId = req.params["formId"];
         var fieldId = req.params["fieldId"];
 
-        res.json(model.FindField(formId,fieldId));
+        FieldModel.FindFieldById(formId,fieldId)
+            .then(function(response){
+                res.json(response);
+            });
     }
 
     function UpdateFormField(req, res){
 
-        res.json(model.UpdateFormField(req.params["formId"], req.params["fieldId"], req.body));
+        FieldModel.UpdateFormField(req.params["formId"], req.params["fieldId"], req.body)
+            .then(function(response){
+                res.json(response.fields);
+            });
 
     }
 
     function DeleteFormField(req, res){
-        res.json(model.DeleteFormField(req.params["formId"], req.params["fieldId"]))
+        FieldModel.DeleteFormField(req.params["formId"], req.params["fieldId"])
+            .then(function(response){
+                res.json(response.fields);
+            });
 
     }
 
     function ReorderFormFields(req,res){
-        res.json(model.ReorderFormFields(req.params["formId"],req.body));
+        FieldModel.ReorderFormFields(req.params["formId"],req.body)
+            .then(function(response){
+                res.json(response);
+            });
     }
 
 
