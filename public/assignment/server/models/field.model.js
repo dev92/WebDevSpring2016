@@ -27,7 +27,11 @@ module.exports = function(mongoose) {
            if(err){
                deferred.reject(err);
            }else{
-               var fields = form.fields
+
+               if(field._id){
+                delete field._id;
+               }
+               var fields = form.fields;
                fields.push(field);
                form.fields = fields;
                form.save(function(err,updatedForm){
