@@ -51,7 +51,6 @@
 
             UserService.createUser(user)
                 .then(function(response){
-                    console.log(response);
                     if(typeof response == 'string'){
                         $scope.message = response;
                         return;
