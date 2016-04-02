@@ -24,6 +24,7 @@ module.exports = function(mongoose) {
         var deferred = q.defer();
         form.userId = userId;
         form.fields = [];
+        form.created = Date.now();
         FormModel.create(form, function(err, createdForm) {
             if(err) {
                 deferred.reject(err);
@@ -121,6 +122,8 @@ module.exports = function(mongoose) {
                 deferred.reject(err);
             } else {
                 formToUpdate.title = form.title;
+                formToUpdate.updated = Date.now();
+                console.log(formToUpdate);
                 formToUpdate.save(function(err, updatedForm) {
                     deferred.resolve(updatedForm);
                 });
