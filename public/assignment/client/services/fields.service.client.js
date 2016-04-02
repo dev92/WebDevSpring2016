@@ -60,7 +60,6 @@
         function updateField(formId, fieldId, field) {
             var defer = $q.defer();
             var url = "/api/assignment/form/" + formId + "/field/" + fieldId;
-            console.log(url);
             $http.put(url, field).success(function (response) {
                 defer.resolve(response);
             });
