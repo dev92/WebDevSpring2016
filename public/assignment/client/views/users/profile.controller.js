@@ -40,10 +40,8 @@
         $scope.update = function(user) {
             UserService.updateUser(user._id,user)
                 .then(function(response){
-                    if(response == 1){
-                        $rootScope.currentusr = user;
+                        $rootScope.currentusr = response;
                         $location.path('/profile');
-                    }
                 });
         }
     }

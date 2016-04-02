@@ -80,12 +80,23 @@ module.exports = function(mongoose,db) {
     }
 
     function Update(id,user){
+
         var deferred = q.defer();
-        UserModel.update({_id:id},{$set: user},function(err,response){
+
+        UserModel.findById(id,function(err,response){
             if(err){
                 deferred.reject(err);
             }else{
-                deferred.resolve(response)
+                response.firstName = user.firstName;
+                response.lastName = user.lastName;
+                response.username = user.username;
+                response.password = user.password;
+                response.emails = user.emails;
+                response.phones = user.phones;
+
+                response.save(function(err, document) {
+                    deferred.resolve(document);
+                });
             }
         });
         return deferred.promise;

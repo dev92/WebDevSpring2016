@@ -67,7 +67,7 @@ module.exports = function(app, model) {
 
         model.Update(req.params.id, req.body)
             .then(function(response){
-                res.json(response.ok);
+                res.json(response);
             })
 
     }
