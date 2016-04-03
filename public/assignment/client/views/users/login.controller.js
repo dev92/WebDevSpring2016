@@ -23,12 +23,13 @@
                 return;
             }
 
-            UserService.findUserByCredentials(user.username,user.password)
+            UserService.login(user)
                 .then(function(response){
                     if(response == null){
                         $scope.message = "Username/Password does not match!";
                         return;
                     }else{
+                        console.log(response);
                         $rootScope.currentusr = response;
                         $location.path('/profile');
                     }

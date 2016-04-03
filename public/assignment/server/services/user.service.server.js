@@ -4,7 +4,7 @@ var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
 
 
-module.exports = function(app, model) {
+module.exports = function(app, userModel) {
 
     var auth = authorized;
 
@@ -14,8 +14,8 @@ module.exports = function(app, model) {
     app.get   ('/api/assignment/loggedin',  loggedin);
 
 
-    app.get("/api/assignment/user", auth ,FindUser);
-    app.get("/api/assignment/user/:id",auth ,FindById);
+    app.get("/api/assignment/user", auth ,FindAllUsers);
+    //app.get("/api/assignment/user/:id",auth ,FindById);
     app.put("/api/assignment/user/:id",auth,UpdateUser);
     app.delete("/api/assignment/user/:id",auth, DeleteUser);
     app.post("/api/assignment/user", auth, CreateUser);
@@ -31,11 +31,16 @@ module.exports = function(app, model) {
             .findUserByCredentials({username: username, password: password})
             .then(
                 function(user) {
-                    if (!user) { return done(null, false); }
+                    if (!user) {
+
+                        return done(null, false);
+                    }
                     return done(null, user);
                 },
                 function(err) {
-                    if (err) { return done(err); }
+                    if (err) {
+                        return done(err);
+                    }
                 }
             );
     }
@@ -46,7 +51,7 @@ module.exports = function(app, model) {
 
     function deserializeUser(user, done) {
         userModel
-            .findUserById(user._id)
+            .FindById(user._id)
             .then(
                 function(user){
                     done(null, user);
@@ -74,7 +79,7 @@ module.exports = function(app, model) {
     function register(req, res) {
 
         var newUser = req.body;
-        newUser.roles = ['student'];
+        newUser.roles.push('student');
 
         userModel
             .findUserByUsername(newUser.username)
@@ -83,7 +88,7 @@ module.exports = function(app, model) {
                     if(user) {
                         res.json(null);
                     } else {
-                        return userModel.createUser(newUser);
+                        return userModel.Create(newUser);
                     }
                 },
                 function(err){
@@ -110,75 +115,138 @@ module.exports = function(app, model) {
 
 
 
-    function CreateUser(req,res){
-        model.Create(req.body)
-            .then(function(response){
-                res.json(response);
-            })
+    //function CreateUser(req,res){
+    //    model.Create(req.body)
+    //        .then(function(response){
+    //            res.json(response);
+    //        })
+    //
+    //
+    //}
 
-
-    }
-
-    function FindUser(req,res){
-
-
-        var username = req.param("username");
-        var password = req.param("password");
-
-        if(typeof username === 'undefined' && typeof password === 'undefined'){
-
-            model.FindAll()
-                .then(function(response){
-                   res.json(response);
-                });
-
-        }
-        else if(username != null && password != null){
-            var credentials = {
-                username : username,
-                password : password
-            };
-
-            model.FindUserByCredentials(credentials)
-                .then(function (response) {
-                    res.json(response);
-                });
-
-        }
-        else if(username != null){
-
-            model.FindUserByUsername(username)
-                .then(function (response) {
-                    res.json(response);
-                });
-
+    function FindAllUsers(req,res){
+        if(isAdmin(req.user)) {
+            userModel
+                .FindAll()
+                .then(
+                    function (users) {
+                        res.json(users);
+                    },
+                    function () {
+                        res.status(400).send(err);
+                    }
+                );
+        } else {
+            res.status(403);
         }
     }
 
-    function FindById(req,res){
+    //function FindById(req,res){
+    //
+    //    model.FindById(req.params.id)
+    //        .then(function(response){
+    //            res.json(response);
+    //        })
+    //
+    //}
 
-        model.FindById(req.params.id)
-            .then(function(response){
-                res.json(response);
-            })
+    function DeleteUser(req, res) {
 
+        if(isAdmin(req.user)) {
+
+            userModel
+                .Delete(req.params.id)
+                .then(
+                    function(user){
+                        return userModel.FindAll();
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                )
+                .then(function(users){
+                        res.json(users);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    });
+            } else {
+                res.status(403);
+            }
     }
 
-    function UpdateUser(req,res){
+    function UpdateUser(req, res) {
 
-        model.Update(req.params.id, req.body)
-            .then(function(response){
-                res.json(response);
-            })
+        var newUser = req.body;
 
+        //if(!isAdmin(req.user)) {
+        //    delete newUser.roles;
+        //}
+        //if(typeof newUser.roles == "string") {
+        //    newUser.roles = newUser.roles.split(",");
+        //}
+
+        userModel
+            .Update(req.params.id, newUser)
+            .then(
+                function(user){
+                    return userModel.FindAll();
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(function(users){
+                    res.json(users);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
-    function DeleteUser(req, res){
+    function CreateUser(req, res) {
 
-        model.Delete(req.params.id)
-            .then(function(response){
-               res.json(response);
-            });
+        var newUser = req.body;
+
+        if(newUser.roles == null || newUser.roles.length < 1) {
+            newUser.roles.push("student");
+        }
+
+        // first check if a user already exists with the username
+        userModel
+            .findUserByUsername(newUser.username)
+            .then(
+                function(user){
+                    // if the user does not already exist
+                    if(user == null) {
+                        // create a new user
+                        return userModel.Create(newUser)
+                            .then(
+                                // fetch all the users
+                                function(){
+                                    return userModel.FindAll();
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+                        // if the user already exists, then just fetch all the users
+                    } else {
+                        return userModel.FindAll();
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(){
+                    res.status(400).send(err);
+                }
+            )
     }
 
 

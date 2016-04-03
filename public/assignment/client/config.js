@@ -1,30 +1,41 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .config(function($routeProvider){
+        .config(function($routeProvider, $httpProvider){
             $routeProvider
                 .when("/home", {
                     templateUrl: "views/home/home.view.html"
                 })
                 .when("/register", {
                     templateUrl: "views/users/register.view.html",
-                    controller:  "RegisterController"
+                    controller:  "RegisterController",
+                    controllerAs: 'model'
                 })
                 .when("/login", {
                     templateUrl: "views/users/login.view.html",
-                    controller:"LoginController"
+                    controller:"LoginController",
+                    controllerAs: 'model'
                 })
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
-                    controller:"ProfileController"
+                    controller:"ProfileController",
+                    resolve: {
+                        loggedin: checkLoggedin
+                    }
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
-                    controller:"AdminController"
+                    controller:"AdminController",
+                    resolve: {
+                        loggedin: checkAdmin
+                    }
                 })
                 .when("/forms", {
                     templateUrl: "views/forms/forms.view.html",
-                    controller:"FormController"
+                    controller:"FormController",
+                    resolve: {
+                        loggedin: checkCurrentUser
+                    }
                 })
                 .when("/form/:formId/fields",{
                     templateUrl:"views/forms/form-fields.view.html",
@@ -34,4 +45,68 @@
                     redirectTo: "/home"
                 });
         });
+
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/assignment/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.currentusr = user;
+                deferred.resolve();
+            }
+        });
+
+        return deferred.promise;
+    };
+
+
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/assignment/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentusr = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
+
+        return deferred.promise;
+    };
+
+    var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/assignment/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentusr = user;
+            }
+            deferred.resolve();
+        });
+
+        return deferred.promise;
+    };
+
+
 })();

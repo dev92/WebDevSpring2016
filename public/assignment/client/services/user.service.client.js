@@ -11,9 +11,12 @@
 
 
         var service = {
+            login: login,
+            logout: logout,
+            register: register,
             findAllUsers : findAllUsers,
-            findUserByCredentials:findUserByCredentials,
-            findUserByUsername : findUserByUsername,
+            //findUserByCredentials:findUserByCredentials,
+            //findUserByUsername : findUserByUsername,
             createUser : createUser,
             deleteUserById : deleteUserById,
             updateUser : updateUser
@@ -22,15 +25,46 @@
         return service;
 
 
-        function findUserByUsername(username) {
+        function logout() {
             var defer = $q.defer();
-            var url = "/api/assignment/user?username=" + username;
-            $http.get(url)
+            var url = "/api/assignment/logout";
+            $http.post(url)
                 .success(function(response){
                     defer.resolve(response);
                 });
             return defer.promise;
         }
+
+        function login(user) {
+            var defer = $q.defer();
+            var url = "/api/assignment/login";
+            $http.post(url,user)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function register(user) {
+            var defer = $q.defer();
+            var url = "/api/assignment/register";
+            $http.post(url,user)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+
+        //function findUserByUsername(username) {
+        //    var defer = $q.defer();
+        //    var url = "/api/assignment/user?username=" + username;
+        //    $http.get(url)
+        //        .success(function(response){
+        //            defer.resolve(response);
+        //        });
+        //    return defer.promise;
+        //}
 
         function findAllUsers() {
             var defer = $q.defer();
@@ -43,15 +77,15 @@
         }
 
 
-        function findUserByCredentials(username, password) {
-            var defer = $q.defer();
-            var url = "/api/assignment/user?username=" + username + "&password=" + password;
-            $http.get(url)
-                .success(function(response){
-                    defer.resolve(response);
-                });
-            return defer.promise;
-        }
+        //function findUserByCredentials(username, password) {
+        //    var defer = $q.defer();
+        //    var url = "/api/assignment/user?username=" + username + "&password=" + password;
+        //    $http.get(url)
+        //        .success(function(response){
+        //            defer.resolve(response);
+        //        });
+        //    return defer.promise;
+        //}
 
         function createUser(user){
             var defer = $q.defer();
