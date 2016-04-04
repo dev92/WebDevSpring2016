@@ -5,7 +5,7 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($location, $scope, $rootScope) {
+    function HeaderController($location, $scope, $rootScope,UserService) {
 
         $scope.reset = function() {
             UserService

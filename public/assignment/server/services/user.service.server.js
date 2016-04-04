@@ -28,7 +28,7 @@ module.exports = function(app, userModel) {
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials({username: username, password: password})
+            .FindUserByCredentials({username: username, password: password})
             .then(
                 function(user) {
                     if (!user) {
@@ -79,10 +79,15 @@ module.exports = function(app, userModel) {
     function register(req, res) {
 
         var newUser = req.body;
-        newUser.roles.push('student');
+        if(newUser.hasOwnProperty("roles")){
+            newUser.roles.push('student');
+        }else{
+            newUser.roles = ['student'];
+        }
+
 
         userModel
-            .findUserByUsername(newUser.username)
+            .FindUserByUsername(newUser.username)
             .then(
                 function(user){
                     if(user) {
@@ -125,7 +130,9 @@ module.exports = function(app, userModel) {
     //}
 
     function FindAllUsers(req,res){
+
         if(isAdmin(req.user)) {
+
             userModel
                 .FindAll()
                 .then(
@@ -137,7 +144,7 @@ module.exports = function(app, userModel) {
                     }
                 );
         } else {
-            res.status(403);
+            res.status(403).send("Unautorized access!");
         }
     }
 
@@ -178,6 +185,7 @@ module.exports = function(app, userModel) {
     function UpdateUser(req, res) {
 
         var newUser = req.body;
+        //console.log(req.user);
 
         //if(!isAdmin(req.user)) {
         //    delete newUser.roles;
@@ -190,7 +198,12 @@ module.exports = function(app, userModel) {
             .Update(req.params.id, newUser)
             .then(
                 function(user){
-                    return userModel.FindAll();
+                    if(!isAdmin(req.user)){
+                        return user;
+                    }else{
+                        return userModel.FindAll();
+                    }
+
                 },
                 function(err){
                     res.status(400).send(err);
@@ -214,7 +227,7 @@ module.exports = function(app, userModel) {
 
         // first check if a user already exists with the username
         userModel
-            .findUserByUsername(newUser.username)
+            .FindUserByUsername(newUser.username)
             .then(
                 function(user){
                     // if the user does not already exist
@@ -252,7 +265,7 @@ module.exports = function(app, userModel) {
 
     function isAdmin(user) {
 
-        if(user.roles.indexOf("admin") > 0) {
+        if(user.roles.indexOf("admin") > -1) {
             return true
         }
         return false;

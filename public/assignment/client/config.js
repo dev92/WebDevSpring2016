@@ -4,7 +4,10 @@
         .config(function($routeProvider, $httpProvider){
             $routeProvider
                 .when("/home", {
-                    templateUrl: "views/home/home.view.html"
+                    templateUrl: "views/home/home.view.html",
+                    resolve: {
+                        loggedin: checkCurrentUser
+                    }
                 })
                 .when("/register", {
                     templateUrl: "views/users/register.view.html",
@@ -34,12 +37,15 @@
                     templateUrl: "views/forms/forms.view.html",
                     controller:"FormController",
                     resolve: {
-                        loggedin: checkCurrentUser
+                        loggedin: checkLoggedin
                     }
                 })
                 .when("/form/:formId/fields",{
                     templateUrl:"views/forms/form-fields.view.html",
-                    controller:"FieldsController"
+                    controller:"FieldsController",
+                    resolve: {
+                        loggedin: checkLoggedin
+                    }
                 })
                 .otherwise({
                     redirectTo: "/home"
@@ -101,8 +107,10 @@
             if (user !== '0')
             {
                 $rootScope.currentusr = user;
+
             }
             deferred.resolve();
+
         });
 
         return deferred.promise;

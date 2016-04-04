@@ -25,16 +25,17 @@
 
             UserService.login(user)
                 .then(function(response){
-                    if(response == null){
-                        $scope.message = "Username/Password does not match!";
-                        return;
-                    }else{
-                        console.log(response);
-                        $rootScope.currentusr = response;
-                        $location.path('/profile');
-                    }
 
-                });
+                        var user = response;
+
+                        if(user != null) {
+                            $rootScope.currentusr = user;
+                            $location.url("/profile");
+                        }
+                    },
+                    function(err) {
+                        $scope.message = err;
+                    });
         }
     }
 
