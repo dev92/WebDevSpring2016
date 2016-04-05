@@ -64,6 +64,11 @@
             {
                 $rootScope.currentusr = user;
                 deferred.resolve();
+            }else{
+                $rootScope.errorMessage = "You do not have admin rights!";
+                deferred.reject();
+                $location.url('/home');
+
             }
         });
 

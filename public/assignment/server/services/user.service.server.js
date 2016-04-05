@@ -120,15 +120,6 @@ module.exports = function(app, userModel) {
 
 
 
-    //function CreateUser(req,res){
-    //    model.Create(req.body)
-    //        .then(function(response){
-    //            res.json(response);
-    //        })
-    //
-    //
-    //}
-
     function FindAllUsers(req,res){
 
         if(isAdmin(req.user)) {
@@ -148,14 +139,6 @@ module.exports = function(app, userModel) {
         }
     }
 
-    //function FindById(req,res){
-    //
-    //    model.FindById(req.params.id)
-    //        .then(function(response){
-    //            res.json(response);
-    //        })
-    //
-    //}
 
     function DeleteUser(req, res) {
 
@@ -185,14 +168,6 @@ module.exports = function(app, userModel) {
     function UpdateUser(req, res) {
 
         var newUser = req.body;
-        //console.log(req.user);
-
-        //if(!isAdmin(req.user)) {
-        //    delete newUser.roles;
-        //}
-        //if(typeof newUser.roles == "string") {
-        //    newUser.roles = newUser.roles.split(",");
-        //}
 
         userModel
             .Update(req.params.id, newUser)
@@ -274,7 +249,7 @@ module.exports = function(app, userModel) {
 
     function authorized (req, res, next) {
         if (!req.isAuthenticated()) {
-            res.send(401);
+            res.status(401).send("Authentication failed!");
         } else {
             next();
         }

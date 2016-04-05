@@ -13,46 +13,46 @@
         </tr>
         <tr>
             <td>
-                <div class="input-group">
+                <div class="input-group col-xs-12">
                     <input ng-model="newuser.username" type="text" class="form-control"  placeholder="Username">
                 </div>
             </td>
             <td>
-                <div class="input-group">
+                <div class="input-group col-xs-12">
                     <input ng-model="newuser.password" type="password" class="form-control" placeholder="Password">
                 </div>
             </td>
             <td>
-                <div class="input-group">
+                <div class="input-group col-xs-12">
                     <input ng-model="newuser.firstName" type="text" class="form-control"  placeholder="First Name">
                 </div>
             </td>
             <td>
-                <div class="input-group">
+                <div class="input-group col-xs-12">
                     <input ng-model="newuser.lastName" type="text" class="form-control"  placeholder="Last Name">
                 </div>
             </td>
             <td>
-                <div class="input-group">
+                <div class="input-group col-xs-12">
                     <input ng-model="newuser.roles" ng-list type="text" class="form-control" placeholder="role1, role2">
                 </div>
             </td>
             <td>
-                <span ng-click="add(newuser)" class="glyphicon glyphicon-plus glybutton glyplus"></span>
-                <span ng-click="update(newuser)" class="glyphicon glyphicon-ok glybutton glycheck"></span>
+                <span ng-class="disable ? 'glyphicon glyphicon-plus glybutton glyplus' : 'glyphicon glyphicon-plus glyplus link-disable'" ng-click="disable && add(newuser)"></span>
+                <span ng-class="!disable ? 'glyphicon glyphicon-ok glybutton glycheck' : 'glyphicon glyphicon-ok glycheck link-disable'" ng-click="!disable && update(newuser)"></span>
             </td>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in users | orderBy:predicate:reverse">
+        <tr ng-repeat="user in users | orderBy:predicate:reverse" ng-class="{'success' : $index == selectedUserIndex}">
             <td class="table-text-center">{{user.username}}</td>
             <td>&nbsp;</td>
             <td class="table-text-center">{{user.firstName}}</td>
             <td class="table-text-center">{{user.lastName}}</td>
-            <td class="table-text-center">{{user.roles}}</td>
+            <td class="table-text-center"><span ng-repeat="role in user.roles">{{role}}<span ng-if="!$last">, </span></span></td>
             <td>
-                <span ng-click="remove(user)" class="glyphicon glyphicon-remove glybutton glyremove"></span>
-                <span ng-click="select(user)" class="glyphicon glyphicon-cog glybutton glypencil"></span>
+                <span ng-click="remove(user._id)" class="glyphicon glyphicon-remove glybutton glyremove"></span>
+                <span ng-click="selectUser(user,$index)" class="glyphicon glyphicon-cog glybutton glypencil"></span>
             </td>
         </tr>
         </tbody>

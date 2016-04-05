@@ -93,6 +93,7 @@ module.exports = function(mongoose,db) {
                 response.password = user.password;
                 response.emails = user.emails;
                 response.phones = user.phones;
+                response.roles = user.roles;
 
                 response.save(function(err, document) {
                     deferred.resolve(document);

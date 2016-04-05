@@ -8,7 +8,7 @@
 
         $scope.formId = $routeParams.formId;
 
-        $scope.formTitle = $rootScope.currentusr.formName;
+        $scope.formTitle = $rootScope.formTitle;
 
         $scope.modalField = {};
 

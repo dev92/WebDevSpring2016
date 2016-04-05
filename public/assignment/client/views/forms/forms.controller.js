@@ -8,6 +8,8 @@
 
         $scope.forms = [];
 
+        $rootScope.formTitle = null;
+
         if($rootScope.currentusr){
 
             FormService.findAllFormsForUser($rootScope.currentusr._id)
@@ -67,6 +69,11 @@
             $scope.formName = $scope.forms[index].title;
             $scope.disable = false;
         }
+
+        $scope.setFormTitle = function(title){
+            $rootScope.formTitle = title;
+        }
+
     }
 
 })();
