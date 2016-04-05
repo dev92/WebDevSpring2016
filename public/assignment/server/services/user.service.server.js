@@ -14,11 +14,11 @@ module.exports = function(app, userModel) {
     app.get   ('/api/assignment/loggedin',  loggedin);
 
 
-    app.get("/api/assignment/user", auth ,FindAllUsers);
+    app.get("/api/assignment/admin/user", auth ,FindAllUsers);
     //app.get("/api/assignment/user/:id",auth ,FindById);
     app.put("/api/assignment/user/:id",auth,UpdateUser);
-    app.delete("/api/assignment/user/:id",auth, DeleteUser);
-    app.post("/api/assignment/user", auth, CreateUser);
+    app.delete("/api/assignment/admin/user/:id",auth, DeleteUser);
+    app.post("/api/assignment/admin/user", auth, CreateUser);
 
 
     passport.use(new LocalStrategy(localStrategy));
@@ -173,7 +173,7 @@ module.exports = function(app, userModel) {
             .Update(req.params.id, newUser)
             .then(
                 function(user){
-                    if(!isAdmin(req.user)){
+                    if(!isAdmin(req.user) || req.session.passport.user._id == req.params.id){
                         return user;
                     }else{
                         return userModel.FindAll();

@@ -68,7 +68,7 @@
 
         function findAllUsers() {
             var defer = $q.defer();
-            var url = '/api/assignment/user';
+            var url = '/api/assignment/admin/user';
             $http.get(url)
                 .success(function(response){
                     defer.resolve(response);
@@ -89,7 +89,7 @@
 
         function createUser(user){
             var defer = $q.defer();
-            var url = '/api/assignment/user';
+            var url = '/api/assignment/admin/user';
             $http.post(url, user)
                 .success(function(response){
                     defer.resolve(response);
@@ -100,7 +100,7 @@
 
         function deleteUserById(userId) {
             var defer = $q.defer();
-            var url = '/api/assignment/user/'+ userId;
+            var url = '/api/assignment/admin/user/'+ userId;
             $http.delete(url)
                 .success(function(response){
                     defer.resolve(response);

@@ -25,7 +25,7 @@
                 return "form-group";
             }
 
-            else if(user.password!==vpassword && vpassword!=null
+            else if(user.password!= vpassword && vpassword!=null
                 && vpassword!='' && user.password!=''){
                 $scope.hide = true;
                 return "form-group has-error";
@@ -42,6 +42,8 @@
             UserService.updateUser(user._id,user)
                 .then(function(response){
                         $rootScope.currentusr = response;
+                        $scope.vpassword = null;
+                        $scope.hide = true;
                         $location.path('/profile');
                 });
         }
