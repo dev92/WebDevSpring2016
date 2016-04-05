@@ -71,6 +71,7 @@
                     $scope.users = response;
                     $scope.newuser = {};
                     $scope.selectedUserIndex = null;
+                    $scope.disable = true;
 
                 }, function(err){
                     $scope.error = err;
