@@ -29,7 +29,7 @@
                 MovieApiService.findTrailers($scope.imdbID,function(response){
                     for(var r in response.results){
                         if(response.results[r].type == "Trailer"){
-                            $scope.movie.trailer = $sce.trustAsResourceUrl("http://www.youtube.com/v/"+response.results[r].key);
+                            $scope.movie.trailer = $sce.trustAsResourceUrl("http://www.youtube.com/embed/"+response.results[r].key);
                         }
                     }
                 });
@@ -37,6 +37,8 @@
                 MovieService.findUserLikes($scope.movie.imdbID)
                     .then(function(response){
                         $scope.users = response;
+                    },function(err){
+                        $scope.users = [];
                     });
             }
         )
