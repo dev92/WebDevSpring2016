@@ -30,6 +30,7 @@
                     for(var r in response.results){
                         if(response.results[r].type == "Trailer"){
                             $scope.movie.trailer = $sce.trustAsResourceUrl("http://www.youtube.com/embed/"+response.results[r].key);
+                            break;
                         }
                     }
                 });

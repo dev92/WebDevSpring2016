@@ -16,33 +16,30 @@
             </md-tabs>
         </md-content>
         <div class="well" style="opacity: 0.9">
-            <table class="table table-hover table-striped table-condensed">
+            <table class="table table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>Movie Name</th>
-                    <th>Hosted By</th>
-                    <th>Going?</th>
+                    <th class="text-center">Movie Name</th>
+                    <th class="text-center">Hosted By</th>
+                    <th class="text-center">Going?</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td><a href="#/eventDetails">Avatar</a></td>
-                    <td>Bob</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><a href="#/eventDetails">Martian</a></td>
-                    <td>Moe</td>
-                    <td>No</td>
-                </tr>
-                <tr>
-                    <td><a href="#/eventDetails">Harry Potter</a></td>
-                    <td>Dooley</td>
-                    <td>Yes</td>
+                    <td class="text-center"><a href="#/eventDetails/{{eventId}}">Avatar</a></td>
+                    <td class="text-center">Bob</td>
+                    <td>
+                        <md-radio-group ng-model="event.going" layout="row" layout-align="center center">
+                            <md-radio-button value="Yes"> Yes </md-radio-button>
+                            <md-radio-button value="No"> No </md-radio-button>
+                        </md-radio-group>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" ng-click="updateEvent(event)">SUBMIT</md-button>
+            </div>
         </div>
         <!--</div>-->
     </div>
