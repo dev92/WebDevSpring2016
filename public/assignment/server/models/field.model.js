@@ -2,10 +2,10 @@
 
 var q = require("q");
 
-module.exports = function(mongoose) {
+module.exports = function(mongoose,db) {
     //var forms = require("./form.mock.json");
     var FormSchema = require('./form.schema.server.js')(mongoose);
-    var FormModel = mongoose.model("FormModelForField", FormSchema);
+    var FormModel = db.model("FormModelForField", FormSchema);
 
     var api = {
         //CRUD for fields in a form

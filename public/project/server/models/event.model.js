@@ -1,9 +1,9 @@
 var q = require("q");
 
-module.exports = function(mongoose) {
+module.exports = function(mongoose,db) {
 
     var EventSchema = require('./event.schema.server.js')(mongoose);
-    var EventModel  = mongoose.model("EventModel", EventSchema);
+    var EventModel  = db.model("EventModel", EventSchema);
 
     var api = {
         findEventByID: findEventByID,
