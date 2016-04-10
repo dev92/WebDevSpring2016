@@ -23,7 +23,7 @@ module.exports = function(app, movieModel, userModel) {
     }
 
     function userLikesMovie(req, res) {
-        userModel.userLikesMovie(req.params.userId,req.params.imdbID)
+        userModel.userLikesMovie(req.params.userId,req.params.imdbID);
         res.json(movieModel.userLikesMovie(req.params.userId,req.params.imdbID))
     }
 
