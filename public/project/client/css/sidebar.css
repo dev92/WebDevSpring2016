@@ -33,48 +33,96 @@
 
 /* Side Navigation */
 
-@media(min-width:768px) {
-    .side-nav {
+.sidebar {
+    display: none;
+}
+
+.sidebar-contents{
+    text-align: center;
+    font-size: x-large;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
         position: fixed;
         top: 80px;
-        left: 225px;
-        width: 225px;
-        margin-left: -225px;
-        border: none;
-        border-radius: 0;
-        overflow-y: auto;
-        background-color: transparent;
         bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
         overflow-x: hidden;
-        padding-bottom: 40px;
-    }
-
-    .side-nav>li>a {
-        width: 225px;
-    }
-
-    .side-nav li a:hover,
-    .side-nav li a:focus {
-        outline: none;
-        background-color: rgba(0, 150, 136, 0.7)  !important ;
-        opacity: 0.5;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: transparent;
+        border: none;
+        /*border-right: 1px solid #eee;*/
     }
 }
 
-.side-nav>li>ul {
-    padding: 0;
+/* Sidebar navigation */
+.nav-sidebar {
+    margin-right: -20px; /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px;
 }
-
-.side-nav>li>ul>li>a {
-    display: block;
-    padding: 10px 15px 10px 38px;
-    text-decoration: none;
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
     color: whitesmoke;
+
 }
 
-.side-nav>li>ul>li>a:hover {
-    color: whitesmoke;
+
+.nav-sidebar li a:hover,
+.nav-sidebar li  a:focus {
+    outline: none;
+    background-color: rgba(0, 150, 136, 0.7)  !important ;
+    opacity: 0.8;
 }
+
+
+/*@media(min-width:768px) {*/
+    /*.side-nav {*/
+        /*position: fixed;*/
+        /*top: 80px;*/
+        /*left: 225px;*/
+        /*width: 225px;*/
+        /*margin-left: -225px;*/
+        /*border: none;*/
+        /*border-radius: 0;*/
+        /*overflow-y: auto;*/
+        /*background-color: transparent;*/
+        /*bottom: 0;*/
+        /*overflow-x: hidden;*/
+        /*padding-bottom: 40px;*/
+    /*}*/
+
+    /*.side-nav>li>a {*/
+        /*width: 225px;*/
+    /*}*/
+
+    /*.side-nav li a:hover,*/
+    /*.side-nav li a:focus {*/
+        /*outline: none;*/
+        /*background-color: rgba(0, 150, 136, 0.7)  !important ;*/
+        /*opacity: 0.5;*/
+    /*}*/
+/*}*/
+
+/*.side-nav>li>ul {*/
+    /*padding: 0;*/
+/*}*/
+
+/*.side-nav>li>ul>li>a {*/
+    /*display: block;*/
+    /*padding: 10px 15px 10px 38px;*/
+    /*text-decoration: none;*/
+    /*color: whitesmoke;*/
+/*}*/
+
+/*.side-nav>li>ul>li>a:hover {*/
+    /*color: whitesmoke;*/
+/*}*/
 
 
 #wrapper {
@@ -135,9 +183,9 @@
 }
 
 .profile-bg {
-    background: url('https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png') center center;
+    background: url('https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png') no-repeat center center;
     background-attachment: fixed;
-    min-height: 740px;
+    min-height: 100%;
             /*url('http://brandflow.pl/wp-content/uploads/2015/09/slider2.jpg')repeat-y center center;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;

@@ -2,6 +2,9 @@
 
 module.exports = function(app, model) {
 
+    var multer  = require('multer');
+    var upload = multer({ dest: __dirname+'/../../uploads' });
+
     app.get("/api/project/user",FindUser);
     app.get("/api/project/user/:id",FindById);
     app.get("/api/project/user/:id/friends",FindFriendsById);
@@ -9,6 +12,29 @@ module.exports = function(app, model) {
     app.put("/api/project/user/:id",UpdateUser);
     app.delete("/api/project/user/:id", DeleteUser);
     app.post("/api/project/user",CreateUser);
+    app.post("/api/project/upload", upload.single('myAvatar'), uploadImage);
+
+
+    function uploadImage(req, res){
+
+
+        var userId = req.body.userId;
+        var myAvatar = req.file;
+
+        //console.log(myAvatar);
+
+        var destination   = myAvatar.destination;
+        var path          = myAvatar.path;
+        var originalname  = myAvatar.originalname;
+        var size          = myAvatar.size;
+        var mimetype      = myAvatar.mimetype;
+        var filename      = myAvatar.filename;
+
+        var user = model.FindById(userId);
+        user.avatar = "/project/uploads/"+filename;
+        model.Update(userId,user);
+        res.redirect("/project/client/#/profile");
+    }
 
 
     function CreateUser(req,res){

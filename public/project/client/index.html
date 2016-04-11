@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="CinephiliaApp" ng-cloak>
+<html lang="en" ng-app="CinephiliaApp" ng-cloak style="min-height: 100%">
 
 <head>
     <meta charset="utf-8">
@@ -53,6 +53,7 @@
 </head>
 <body ng-controller="MainController" ng-init="init()">
 <div ng-include="'views/header/header.view.html'"></div>
+<div ng-if="$location.url()!='/home'" ng-include="'views/sidebar/sidebar.view.html'"></div>
 <!-- Carousel -->
 <div ng-show="$location.url() == '/home'" id="main-carousel" class="carousel slide carousel-fade carousel-bg" data-ride="carousel" data-interval="4000">
     <!-- Indicators -->
