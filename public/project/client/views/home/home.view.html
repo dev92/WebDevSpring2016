@@ -2,7 +2,7 @@
 <section class="parallax container-fluid img-responsive" id="id-example">
     <div class="row">
         <div class="divider-new">What is it?</div>
-        <div class="col-md-4 wow fadeIn">
+        <div class="col-sm-4 wow fadeIn">
             <!--Image Card-->
             <div class="card blue-grey darken-1 hoverable">
                 <div class="card-image">
@@ -17,7 +17,7 @@
             </div>
             <!--Image Card-->
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
             <!--Image Card-->
             <div class="card blue-grey darken-1 hoverable">
                 <div class="card-image">
@@ -27,13 +27,13 @@
                 </div>
                 <div class="card-content white-text">
                     <h5>Review/Rate</h5>
-                    <p>You can give your opnion on movies by giving a rating on 5 stars and also you can express it through a review
+                    <p>You can give your opinion on movies by giving a rating on 5 stars and also you can express it through a review
                         which would help other users to decide on the movie.</p>
                 </div>
             </div>
             <!--Image Card-->
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
             <!--Image Card-->
             <div class="card blue-grey darken-1 hoverable">
                 <div class="card-image">
@@ -56,8 +56,8 @@
     <div class="container text-center">
         <div class="divider-new">Interested?</div>
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-5 card-panel">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5 card-panel">
                 <h2>Register</h2>
                 <div ng-controller="RegisterController" layout="column" layout-padding ng-cloak>
                     <div ng-show = "message" class="alert alert-danger fade in">
@@ -103,8 +103,8 @@
                     </md-content>
                 </div>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-4 card-panel">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4 card-panel">
                 <h2>Login</h2>
                 <div ng-controller="LoginController" layout="column" layout-padding ng-cloak>
                     <div ng-show = "message" class="alert alert-danger fade in">
@@ -130,7 +130,7 @@
                                 <div ng-message="required">This field is required.</div>
                             </div>
                         </md-input-container>
-                        <a href="#account">Forgot Username/Password</a>
+                        <!--<a href="#account">Forgot Username/Password</a>-->
                             <md-button ng-disabled="loginForm.$invalid" class="md-raised md-primary" ng-click="login(user)">Log In</md-button>
                         </form>
                     </md-content>

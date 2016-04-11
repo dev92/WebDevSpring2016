@@ -132,6 +132,7 @@
 #page-wrapper {
     width: 100%;
     padding: 20px;
+
 }
 
 .huge {
@@ -148,7 +149,6 @@
     #page-wrapper {
         padding: 0px;
         padding-top: 40px;
-
     }
 }
 
@@ -185,12 +185,13 @@
 .profile-bg {
     background: url('https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png') no-repeat center center;
     background-attachment: fixed;
-    /*min-height: 741px;*/
-    /*max-height: 100%!important;*/
+    margin: 0px;
+    height: 100%;
+    /*url('https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png')*/
     /*url('http://brandflow.pl/wp-content/uploads/2015/09/slider2.jpg')repeat-y center center;*/
+    background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
 
 }

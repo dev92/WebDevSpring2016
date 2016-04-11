@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row" style="padding-left: 40px">
+                <div class="row" md-padding>
                     <div class="col-md-6">
                         <h5>Users who like it:</h5>
                         <ul>
@@ -79,10 +79,10 @@
                     </div>
                     <div class="col-md-6">
                     <h5>Reviews: </h5>
-                    <md-input-container class="md-block" md-padding>
-                        <label>Review</label>
+                    <md-input-container class="md-block md-icon-right">
+                        <label>New Review</label>
                         <textarea ng-model="movie.review" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-                        <md-icon  class="md-primary md-raised md-icon-button" ng-click="addReview(movietitle)" aria-label="review"><i class="fa fa-pencil-square-o fa-lg"></i></md-icon>
+                        <md-icon style="display: inline-block" class="md-icon-button md-primary" ng-click="addReview(movietitle)" aria-label="review"><i class="fa fa-pencil-square-o fa-lg"></i></md-icon>
                     </md-input-container>
                     </div>
                 </div>
