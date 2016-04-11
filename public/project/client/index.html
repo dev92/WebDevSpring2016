@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="CinephiliaApp" ng-cloak style="min-height: 100%">
+<html lang="en" ng-app="CinephiliaApp" ng-cloak class="profile-bg">
 
 <head>
     <meta charset="utf-8">
@@ -51,7 +51,7 @@
     <script src="views/main/main.controller.js"></script>
 
 </head>
-<body ng-controller="MainController" ng-init="init()">
+<body ng-controller="MainController" ng-init="init()" ng-class="{'profile-bg': $location.url() != '/home'}">
 <div ng-include="'views/header/header.view.html'"></div>
 <div ng-if="currentusr && $location.url()!='/home'" ng-include="'views/sidebar/sidebar.view.html'"></div>
 <!-- Carousel -->
@@ -125,9 +125,9 @@
     </a>
 </div>
 <!-- /.Carousel -->
-<div ng-class="{'profile-bg': $location.url() != '/home'}">
+<!--<div ng-class="{'profile-bg': $location.url() != '/home'}">-->
     <div ng-view></div>
-</div>
+<!--</div>-->
 
 <!-- SCRIPTS -->
 

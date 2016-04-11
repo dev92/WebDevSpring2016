@@ -185,8 +185,9 @@
 .profile-bg {
     background: url('https://s-media-cache-ak0.pinimg.com/originals/39/2f/38/392f38884a695299b0b0a295f5edb1a2.png') no-repeat center center;
     background-attachment: fixed;
-    min-height: 100%;
-            /*url('http://brandflow.pl/wp-content/uploads/2015/09/slider2.jpg')repeat-y center center;*/
+    /*min-height: 741px;*/
+    /*max-height: 100%!important;*/
+    /*url('http://brandflow.pl/wp-content/uploads/2015/09/slider2.jpg')repeat-y center center;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
