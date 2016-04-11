@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no">
     <title>Cinephilia</title>
 
     <!-- Material Design Icons -->
@@ -53,7 +53,7 @@
 </head>
 <body ng-controller="MainController" ng-init="init()">
 <div ng-include="'views/header/header.view.html'"></div>
-<div ng-if="$location.url()!='/home'" ng-include="'views/sidebar/sidebar.view.html'"></div>
+<div ng-if="currentusr && $location.url()!='/home'" ng-include="'views/sidebar/sidebar.view.html'"></div>
 <!-- Carousel -->
 <div ng-show="$location.url() == '/home'" id="main-carousel" class="carousel slide carousel-fade carousel-bg" data-ride="carousel" data-interval="4000">
     <!-- Indicators -->
