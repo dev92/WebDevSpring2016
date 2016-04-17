@@ -8,13 +8,13 @@
                         <a href="#/search"><md-tab-label>Search</md-tab-label></a>
                     </md-tab>
                     <md-tab >
-                        <a href="#/details/:imdbID"><md-tab-label>Details</md-tab-label></a>
+                        <md-tab-label>Details</md-tab-label>
                     </md-tab>
                 </md-tabs>
             </md-content>
             <div class="well" style="background-color: rgba(96, 125, 139, 0.7)">
-                <h5>I would like to search for...</h5>
-                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="md-inline-form">
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="md-inline-form" ng-if="searchType == 'movie'">
+                    <h5>I would like to search for </h5>
                     <md-input-container md-no-float class="md-block">
                         <label>Movie name</label>
                         <input ng-model="movietitle">
@@ -22,6 +22,7 @@
                     <a class="btn-floating btn-large waves-effect waves-light blue" ng-click="search(movietitle)"><i class="fa fa-search fa-lg"></i></a>
                     <!--<md-button  class="md-primary md-raised md-icon-button" ng-click="search(movietitle)" aria-label="Search"><i class="fa fa-search fa-lg"></i></md-button>-->
                 </section>
+                <h5 class="text-center" ng-if="searchType == 'similar'">Showing movies similar to <b>{{similarTitle}}</b></h5>
                     <div class="md-padding" layout="row" layout-xs="column" layout-align="center center" flex="33" layout-wrap>
                             <md-card ng-repeat="movie in movies.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))" class="blue-grey darken-1">
                                 <md-card-title>

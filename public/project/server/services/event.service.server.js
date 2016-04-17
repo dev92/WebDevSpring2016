@@ -1,7 +1,7 @@
-"use strict"
+"use strict";
 
 
-module.exports = function(app, eventModel, userModel) {
+module.exports = function(app, eventModel) {
 
 
     app.post("/api/project/event", userCreatesEvent);
@@ -9,24 +9,10 @@ module.exports = function(app, eventModel, userModel) {
     app.delete("/api/project/user/:userId/event/:eventId", userCannotAttend);
     app.put("/api/project/event/:eventId", updateEvent);
     app.get("/api/project/user/:userId/event", findUserEvents);
-    //app.get("/api/project/user/:userId/movies", findUserFavorites);
-    //app.get("/api/project/movie/:tmdbID/review", findMovieReviews);
-    //app.get("/api/project/user/:userId/review", findUserReviews);
-
-    //function findUserLikes (req, res) {
 
 
 
-    //var imdbID = req.params.imdbID;
-    //var movie = movieModel.findMovieByImdbID(imdbID);
-    //if(movie){
-    //    res.json(userModel.findUsersByIds(movie.userFavorites));
-    //}else{
-    //    res.status(404).send(null);
-    //}
 
-
-    //}
 
     function userCreatesEvent(req,res){
 
@@ -92,12 +78,15 @@ module.exports = function(app, eventModel, userModel) {
     }
 
 
-    function findUserReviews(req,res){
-        userModel.FindById(req.params.userId)
+    function updateEvent(req,res){
+
+        var eventId = req.params.eventId;
+
+        eventModel.UpdateEvent(eventId,req.body)
             .then(
                 function (response) {
 
-                    res.json(response.moviesReviewed);
+                    res.json(response);
                 },
                 function (err) {
                     res.status(400).send(err);
@@ -105,77 +94,14 @@ module.exports = function(app, eventModel, userModel) {
             );
     }
 
-    function userDislikesMovie(req, res){
+    function findUserEvents(req, res) {
 
-        userModel.userDislikesMovie(req.params.userId,req.params.tmdbID)
-            .then(function(user){
-                return  movieModel.userDislikesMovie(req.params.tmdbID,req.params.userId)
-            },function(err){
-                res.status(400).send(err);
-            })
-            .then(
-                function (response) {
-                    return userModel.FindUsersByIds(response.userLikes)
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )
-            .then(function(users){
-                res.json(users);
-            },function(err){
+        eventModel.FindEventsByUserId(req.params.userId)
+            .then(function (events) {
+                res.json(events);
+            }, function (err) {
                 res.status(400).send(err);
             });
-        //var user = userModel.userDislikesMovie(req.params.userId,req.params.imdbID)
-        //res.json(movieModel.findMoviesByImdbIDs(user.favorites));
-    }
-
-
-    function deleteMovieReview(req,res){
-
-        movieModel.deleteMovieReview(req.params.tmdbID,req.params.userId)
-            .then(function(movie){
-                return userModel.deleteUserReview(req.params.userId,req.params.tmdbID);
-
-            },function(err){
-                res.status(400).send(err);
-            })
-            .then(function(user){
-                res.json(user.moviesReviewed);
-            },function(err){
-                res.status(400).send(err);
-            });
-
-    }
-
-    function UserReviewsMovie(req,res){
-
-        userModel.userReviewsMovie(req.params.userId,req.body)
-            .then(function(user){
-                return movieModel.userReviewsMovie(req.params.tmdbID,req.body)
-            },function(err){
-                res.status(400).send(err);
-            })
-            .then(function(movie){
-                res.json(movie.userReviews);
-            },function(err){
-                res.status(400).send(err);
-            });
-    }
-
-    function findUserFavorites(req,res){
-        userModel.FindById(req.params.userId)
-            .then(function(user){
-                return movieModel.findMoviesByTmdbIDs(user.moviesLiked)
-            },function(err){
-                res.status(400).send(err);
-            })
-            .then(function(movies){
-                res.json(movies);
-            },function(err){
-                res.status(400).send(err);
-            });
-
     }
 
 

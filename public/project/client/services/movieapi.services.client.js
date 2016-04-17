@@ -4,7 +4,7 @@
         .module("CinephiliaApp")
         .factory("MovieApiService", MovieApiService);
 
-    function MovieApiService($http) {
+    function MovieApiService($http,$q) {
 
         var config = "http://api.themoviedb.org/3/configuration?api_key=c8fee912d3f3866df68026f0ebadc6f6";
 
@@ -13,6 +13,7 @@
         var detailsUrl = "http://api.themoviedb.org/3/movie/ID?api_key=c8fee912d3f3866df68026f0ebadc6f6";
         var imdbdetailsUrl = "https://api.themoviedb.org/3/find/IMDBID?external_source=imdb_id&api_key=c8fee912d3f3866df68026f0ebadc6f6";
         var trailerUrl = "http://api.themoviedb.org/3/movie/ID/videos?api_key=c8fee912d3f3866df68026f0ebadc6f6";
+        var similarMoviesUrl = "http://api.themoviedb.org/3/movie/ID/similar?api_key=c8fee912d3f3866df68026f0ebadc6f6";
 
 
 
@@ -20,7 +21,8 @@
             findMovieByTitle : findMovieByTitle,
             findMovieByTmdbID:findMovieByTmdbID,
             findBasePath:findBasePath,
-            findTrailers:findTrailers
+            findTrailers:findTrailers,
+            findSimilarMovies:findSimilarMovies
         };
 
         return api;
@@ -47,6 +49,11 @@
 
         function findTrailers(tmdbId,callback){
             $http.get(trailerUrl.replace("ID",tmdbId))
+                .success(callback);
+        }
+
+        function findSimilarMovies(tmdbId,callback){
+            $http.get(similarMoviesUrl.replace("ID",tmdbId))
                 .success(callback);
         }
 

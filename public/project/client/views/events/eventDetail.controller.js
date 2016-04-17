@@ -2,10 +2,10 @@
     'use strict';
     angular
         .module('CinephiliaApp')
-        .controller('EventsController', EventsController);
+        .controller('EventDetailController', EventDetailController);
 
 
-    function EventsController ($mdConstant,$scope) {
+    function EventDetailController ($mdConstant,$scope) {
         // Use common key codes found in $mdConstant.KEY_CODE...
         this.keys = [$mdConstant.KEY_CODE.ENTER, $mdConstant.KEY_CODE.COMMA];
         this.tags = ["Alice","Carter","John"];

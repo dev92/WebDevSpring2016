@@ -69,6 +69,7 @@ module.exports = function(mongoose,db) {
                 deferred.reject(err);
             } else {
                 eventToUpdate.hostId = event.hostId;
+                eventToUpdate.host = event.host;
                 eventToUpdate.movieName = event.movieName;
                 eventToUpdate.address = event.address;
                 eventToUpdate.city = event.city;

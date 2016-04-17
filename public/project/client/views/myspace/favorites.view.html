@@ -17,16 +17,23 @@
                 <md-card  ng-repeat="movie in movies">
                     <md-card-title>
                         <md-card-title-text>
-                            <span class="md-subhead">{{movie.Title}}</span>
+                            <span class="md-subhead">{{movie.title}}</span>
                         </md-card-title-text>
                     </md-card-title>
-                    <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster}}" onerror="this.src='http://www.filmfodder.com/reviews/images/poster-not-available.jpg'" class="md-card-image" alt="Washed Out">
+                    <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster}}" class="md-card-image" alt="Washed Out">
                     <md-card-actions layout="row" layout-align="center center">
                         <md-button class="md-icon-button" aria-label="Favorite">
                             <md-icon ng-click="removeFavorite(movie.tmdbId)" class="md-icon-button md-accent"><i class="fa fa-heart fa-lg"></i></md-icon>
                         </md-button>
                         <md-button class="md-icon-button" aria-label="Details">
                             <md-icon><a href="#/detail/{{movie.tmdbId}}"><i class="fa fa-info-circle fa-lg"></i></a></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" aria-label="Similar">
+                            <md-icon><a href="#/search/{{movie.tmdbId}}" ng-click="setSimilarTitle(movie.title)"><i class="fa fa-film" aria-hidden="true"></i></a>
+                                <md-tooltip md-direction="right">
+                                    Similar movies
+                                </md-tooltip>
+                            </md-icon>
                         </md-button>
                     </md-card-actions>
                 </md-card>

@@ -2,7 +2,7 @@
 {
     angular
         .module("CinephiliaApp")
-        .factory("UserService", UserService);
+        .factory("EventService", EventService);
 
     function EventService($http,$q)
     {
@@ -12,7 +12,8 @@
             findAllEventsForUser : findAllEventsForUser,
             deleteEventForUser : deleteEventForUser,
             updateEvent : updateEvent,
-            createEvent : createEvent
+            createEvent : createEvent,
+            deleteEvent : deleteEvent
         };
 
         return service;
@@ -58,6 +59,16 @@
             $http.put(url, newevent)
                 .success(function(response){
                     console.log(response);
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function deleteEvent(eventId,hostId){
+            var defer = $q.defer();
+            var url = "/api/project/host/"+hostId+"/event/"+eventId;
+            $http.delete(url)
+                .success(function(response){
                     defer.resolve(response);
                 });
             return defer.promise;

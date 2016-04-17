@@ -6,7 +6,10 @@
     function SearchController($scope, $rootScope, $location, $routeParams, MovieApiService) {
 
         $scope.search = search;
+        $scope.searchType = "movie";
         $scope.movietitle = $routeParams.movietitle;
+
+        console.log($scope.movietitle);
 
 
         $scope.currentPage = 1;
@@ -24,15 +27,39 @@
         }
 
 
-        if($scope.movietitle) {
+        if(isNaN($scope.movietitle) && $scope.movietitle) {
             search($scope.movietitle);
+        }else if($scope.movietitle){
+            $scope.searchType = "similar";
+            similar($scope.movietitle);
         }
 
+
+
         function search(title) {
-            $location.url("/search/"+$scope.movietitle);
+            $location.url("/search/"+title);
             //console.log(title);
             MovieApiService.findMovieByTitle(
                 title,
+                function(response){
+                    //console.log(response.results);
+                    for(result in response.results){
+                        response.results[result].poster_path = formImgPath(response.results[result].poster_path);
+                    }
+                    $scope.movies = response.results;
+                    $scope.totalItems = $scope.movies.length;
+
+                    if($scope.totalItems > 3){
+                        $scope.available = false;
+                    }
+
+
+                });
+        }
+
+        function similar(tmdbId){
+            MovieApiService.findSimilarMovies(
+                tmdbId,
                 function(response){
                     //console.log(response.results);
                     for(result in response.results){

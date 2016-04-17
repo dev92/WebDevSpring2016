@@ -5,6 +5,7 @@ module.exports = function(mongoose) {
 
     var EventSchema = mongoose.Schema({
         "hostId": String,
+        "host":String,
         "movieName": String,
         "address": String,
         "city":String,

@@ -25,6 +25,7 @@
             if($scope.favorite){
 
                 var newMovie = {
+                    "title":movie.Title,
                     "imdbId": movie.imdbID,
                     "tmdbId": $scope.tmdbID,
                     "poster": movie.poster,

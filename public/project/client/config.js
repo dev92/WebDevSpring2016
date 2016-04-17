@@ -43,6 +43,7 @@
 
                 .when("/currentEvents", {
                     templateUrl: "views/events/events.view.html",
+                    controller:"EventsController",
                     resolve: {
                         loggedin: checkLoggedin
                     }
@@ -50,7 +51,7 @@
 
                 .when("/newEvent", {
                     templateUrl: "views/events/newevent.view.html",
-                    controller:"NewEventsController",
+                    controller:"NewEventController",
                     resolve: {
                         loggedin: checkLoggedin
                     }
@@ -79,17 +80,9 @@
                     }
                 })
 
-                .when("/events/:eventID", {
+                .when("/eventDetails/:eventId", {
                     templateUrl: "views/events/eventdetails.view.html",
-                    controller:"EventsController",
-                    resolve: {
-                        loggedin: checkLoggedin
-                    }
-                })
-
-                .when("/eventDetails", {
-                    templateUrl: "views/events/eventdetails.view.html",
-                    controller:"EventsController",
+                    controller:"EventDetailController",
                     resolve: {
                         loggedin: checkLoggedin
                     }

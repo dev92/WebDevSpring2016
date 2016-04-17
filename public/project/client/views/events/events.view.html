@@ -8,7 +8,7 @@
                     <a href="#/currentEvents"><md-tab-label>Current Events</md-tab-label></a>
                 </md-tab>
                 <md-tab >
-                    <a href="#/eventDetails"><md-tab-label>Event Details</md-tab-label></a>
+                    <md-tab-label>Event Details</md-tab-label>
                 </md-tab>
                 <md-tab>
                     <a href="#/newEvent"><md-tab-label>New Event</md-tab-label></a>
@@ -21,25 +21,29 @@
                 <tr>
                     <th class="text-center">Movie Name</th>
                     <th class="text-center">Hosted By</th>
-                    <th class="text-center">Going?</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="text-center"><a href="#/eventDetails/{{eventId}}">Avatar</a></td>
-                    <td class="text-center">Bob</td>
+                <tr ng-repeat="event in events">
+                    <td class="text-center"><a href="#/eventDetails/{{eventId}}">{{event.movieName}}</a></td>
+                    <td class="text-center">{{event.host}}</td>
                     <td>
-                        <md-radio-group ng-model="event.going" layout="row" layout-align="center center">
-                            <md-radio-button value="Yes"> Yes </md-radio-button>
-                            <md-radio-button value="No"> No </md-radio-button>
-                        </md-radio-group>
+                        <a ng-click="deleteEvent(event)" ng-if="currentusr._id == 'event.hostId'"
+                           class="btn-floating btn-small waves-effect waves-light red pull-right">
+                            <i class="fa fa-times fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <a ng-click="notAttending(event)" ng-if="currentusr._id != 'event.hostId'"
+                           class="btn-floating btn-small waves-effect waves-light red pull-right">
+                            <i class="fa fa-thumbs-o-down fa-3x" aria-hidden="true"></i>
+                            <md-tooltip md-direction="right">
+                                Not Attending?
+                            </md-tooltip>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <div layout="row" layout-align="center center">
-                <md-button class="md-raised md-primary" ng-click="updateEvent(event)">SUBMIT</md-button>
-            </div>
         </div>
         <!--</div>-->
     </div>
