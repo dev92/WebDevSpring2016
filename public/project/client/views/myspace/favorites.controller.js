@@ -14,8 +14,8 @@
                 });
         }
 
-        $scope.removeFavorite = function(imdbId){
-            MovieService.userDislikesMovie($rootScope.currentusr._id,imdbId)
+        $scope.removeFavorite = function(tmdbId){
+            MovieService.userDislikesMovie($rootScope.currentusr._id,tmdbId)
                 .then(function(response){
                     $scope.movies = response;
                 })

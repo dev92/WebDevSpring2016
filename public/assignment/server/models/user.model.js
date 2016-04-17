@@ -95,6 +95,7 @@ module.exports = function(mongoose,db) {
                 response.phones = user.phones;
                 response.roles = user.roles;
 
+
                 response.save(function(err, document) {
                     deferred.resolve(document);
                 });

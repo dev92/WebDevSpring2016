@@ -1,112 +1,94 @@
 "use strict"
 
 
-module.exports = function(app, movieModel, userModel) {
+module.exports = function(app, eventModel, userModel) {
 
 
-    app.post("/api/project/user/:userId/movie/:tmdbID", userLikesMovie);
-    app.delete("/api/project/user/:userId/movie/:tmdbID", userDislikesMovie);
-    app.delete("/api/project/user/:userId/review/:tmdbID", deleteMovieReview);
-    app.post("/api/project/user/:userId/review/:tmdbID", UserReviewsMovie);
-    app.get("/api/project/movie/:tmdbID/user", findUserLikes);
-    app.get("/api/project/user/:userId/movies", findUserFavorites);
-    app.get("/api/project/movie/:tmdbID/review", findMovieReviews);
-    app.get("/api/project/user/:userId/review", findUserReviews);
+    app.post("/api/project/event", userCreatesEvent);
+    app.delete("/api/project/host/:hostId/event/:eventId", deleteEvent);
+    app.delete("/api/project/user/:userId/event/:eventId", userCannotAttend);
+    app.put("/api/project/event/:eventId", updateEvent);
+    app.get("/api/project/user/:userId/event", findUserEvents);
+    //app.get("/api/project/user/:userId/movies", findUserFavorites);
+    //app.get("/api/project/movie/:tmdbID/review", findMovieReviews);
+    //app.get("/api/project/user/:userId/review", findUserReviews);
 
     //function findUserLikes (req, res) {
 
 
 
-        //var imdbID = req.params.imdbID;
-        //var movie = movieModel.findMovieByImdbID(imdbID);
-        //if(movie){
-        //    res.json(userModel.findUsersByIds(movie.userFavorites));
-        //}else{
-        //    res.status(404).send(null);
-        //}
+    //var imdbID = req.params.imdbID;
+    //var movie = movieModel.findMovieByImdbID(imdbID);
+    //if(movie){
+    //    res.json(userModel.findUsersByIds(movie.userFavorites));
+    //}else{
+    //    res.status(404).send(null);
+    //}
 
 
     //}
 
-    function userLikesMovie(req,res){
+    function userCreatesEvent(req,res){
 
-        var userId = req.params.userId;
-        var tmdbID = req.params.tmdbID;
-        var movie = req.body;
+        var event = req.body;
 
-        userModel
-            .userLikesMovie(userId,tmdbID)
-            // add user to movie likes
-            .then(function (user) {
-                    return movieModel.userLikesMovie(tmdbID, userId)
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )
-            .then(function (response) {
-                    return userModel.FindUsersByIds(response.userLikes)
-                },
-                function (err) {
-                    movie.userLikes = [userId];
-                    return movieModel.createMovie(movie);
-                    //res.status(400).send(err);
-                }
-            )
-            .then(function(response){
-                if(response.constructor == Array){
-                    return response;
-                }else{
-                    return userModel.FindUsersByIds(response.userLikes)
-                }
-            },
-                function(err){
-                res.status(400).send(err);
-            })
-            .then(function(users){
+        eventModel
+            .CreateEvent(event)
+            .then(function(newevent){
                 //console.log(users);
-                res.json(users)
-
+                res.json(newevent);
             },function(err){
 
                 res.status(400).send(err);
             });
     }
 
-    function findUserLikes(req, res){
+    function deleteEvent(req, res){
 
-        movieModel.findMovieByTmdbID(req.params.tmdbID)
+        var eventId = req.params.eventId;
+        var hostId = req.params.hostId;
+
+        eventModel.DeleteEvent(eventId)
             .then(
                 function (response) {
-                    return userModel.FindUsersByIds(response.userLikes)
+                    return eventModel.FindEventsByUserId(hostId);
                 },
                 function (err) {
                     res.status(400).send(err);
                 }
             )
-            .then(function(users){
+            .then(function(events){
 
-                res.json(users)
+                res.json(events)
 
             },function(err){
 
                 res.status(400).send(err);
             });
-        //var user = userModel.FindById(req.params.userId);
-        //res.json(movieModel.findMoviesByImdbIDs(user.favorites));
     }
 
-    function findMovieReviews(req,res){
-        movieModel.findMovieByTmdbID(req.params.tmdbID)
+    function userCannotAttend(req,res){
+
+        var eventId = req.params.eventId;
+        var userId = req.params.userId;
+
+        eventModel.RemoveUser(eventId,userId)
             .then(
                 function (response) {
-
-                    res.json(response.userReviews);
+                    return eventModel.FindEventsByUserId(userId);
                 },
                 function (err) {
                     res.status(400).send(err);
                 }
-            );
+            )
+            .then(function(events){
+
+                res.json(events)
+
+            },function(err){
+
+                res.status(400).send(err);
+            });
     }
 
 
@@ -128,9 +110,9 @@ module.exports = function(app, movieModel, userModel) {
         userModel.userDislikesMovie(req.params.userId,req.params.tmdbID)
             .then(function(user){
                 return  movieModel.userDislikesMovie(req.params.tmdbID,req.params.userId)
-        },function(err){
-            res.status(400).send(err);
-        })
+            },function(err){
+                res.status(400).send(err);
+            })
             .then(
                 function (response) {
                     return userModel.FindUsersByIds(response.userLikes)
@@ -170,7 +152,7 @@ module.exports = function(app, movieModel, userModel) {
 
         userModel.userReviewsMovie(req.params.userId,req.body)
             .then(function(user){
-            return movieModel.userReviewsMovie(req.params.tmdbID,req.body)
+                return movieModel.userReviewsMovie(req.params.tmdbID,req.body)
             },function(err){
                 res.status(400).send(err);
             })

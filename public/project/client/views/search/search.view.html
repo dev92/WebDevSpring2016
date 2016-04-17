@@ -19,16 +19,17 @@
                         <label>Movie name</label>
                         <input ng-model="movietitle">
                     </md-input-container>
-                    <md-button  class="md-primary md-raised md-icon-button" ng-click="search(movietitle)" aria-label="Search"><i class="fa fa-search fa-lg"></i></md-button>
+                    <a class="btn-floating btn-large waves-effect waves-light blue" ng-click="search(movietitle)"><i class="fa fa-search fa-lg"></i></a>
+                    <!--<md-button  class="md-primary md-raised md-icon-button" ng-click="search(movietitle)" aria-label="Search"><i class="fa fa-search fa-lg"></i></md-button>-->
                 </section>
                     <div class="md-padding" layout="row" layout-xs="column" layout-align="center center" flex="33" layout-wrap>
-                            <md-card  ng-repeat="movie in movies" class="blue-grey darken-1">
+                            <md-card ng-repeat="movie in movies.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))" class="blue-grey darken-1">
                                 <md-card-title>
                                     <md-card-title-text>
                                         <span class="md-subhead white-text" flex>{{movie.original_title}}</span>
                                     </md-card-title-text>
                                 </md-card-title>
-                                <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster_path}}" onerror="this.src='http://www.filmfodder.com/reviews/images/poster-not-available.jpg'" class="md-card-image" alt="Washed Out">
+                                <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster_path}}" class="md-card-image" alt="Washed Out">
                                 <md-card-actions layout="row" layout-align="center center">
                                     <md-button class="md-icon-button" aria-label="Details">
                                     <md-icon><a href="#/detail/{{movie.id}}"><i class="fa fa-info-circle fa-lg"></i></a></md-icon>
@@ -42,6 +43,14 @@
                                 </md-card-actions>
                         </md-card>
                         </div>
+                <div layout="row" layout-align="center center">
+                    <uib-pagination ng-hide="available" total-items="totalItems"
+                                    ng-model="currentPage"
+                                    max-size="5"
+                                    boundary-links="true"
+                                    items-per-page="itemsPerPage">
+                    </uib-pagination>
+                </div>
                 </div>
             </div>
             <!--</div>-->

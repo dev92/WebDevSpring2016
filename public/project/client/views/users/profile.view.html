@@ -5,7 +5,7 @@
             <md-content>
                 <md-tabs md-selected="0" md-align-tabs="top">
                     <md-tab>
-                        <a href="#/profile"><md-tab-label>Your Profile</md-tab-label></a>
+                        <a href="#/profile/{{currentusr._id}}"><md-tab-label>Your Profile</md-tab-label></a>
                     </md-tab>
                     <md-tab >
                         <a href="#/genres"><md-tab-label>Genres</md-tab-label></a>
@@ -26,11 +26,11 @@
                             click to change profile picture
                         </md-tooltip>
                     </label>
-                    <input class="ng-hide" id="input-file-id" name="myAvatar" type="file" onchange="this.form.submit()" ng-disabled="false"/>
+                    <input class="ng-hide" id="input-file-id" name="myAvatar" type="file" onchange="this.form.submit()" ng-disabled="disableFields"/>
                     <input name="userId" value="{{user._id}}" class="ng-hide"/>
                 </form>
                 <form name="profileForm">
-                    <fieldset style="border: 0" ng-disabled="false">
+                    <fieldset style="border: 0" ng-disabled="disableFields">
                     <div>
                         <md-input-container>
                             <label>User Name</label>
@@ -42,7 +42,7 @@
                         </md-input-container>
                         <md-input-container>
                             <label>Contact Number</label>
-                            <input ng-model="user.contact" name="contact" maxlength="12" type="text" ng-pattern="/\d{3}-\d{3}-\d{4}/">
+                            <input ng-model="user.phone" name="contact" maxlength="12" type="text" ng-pattern="/\d{3}-\d{3}-\d{4}/">
                             <div ng-messages="profileForm.contact.$error">
                                 <div ng-message="pattern">
                                     You should match xxx-xxx-xxxx. (Don't miss the hyphens)
@@ -56,7 +56,7 @@
             <md-content layout-padding>
                 <div>
                     <form name="userForm">
-                        <fieldset style="border: 0" ng-disabled="true">
+                        <fieldset style="border: 0" ng-disabled="disableFields">
                         <div ng-show = "message" class="alert alert-danger fade in">
                             <button type = "button" ng-click="message=null" class = "close" data-dismiss = "alert" aria-hidden = "true">&times</button>
                             {{message}}
@@ -72,7 +72,7 @@
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>Gender</label>
-                                <md-select ng-model="user.gender" ng-disabled="true">
+                                <md-select ng-model="user.gender" ng-disabled="disableFields">
                                     <md-option  value="male">
                                         Male
                                     </md-option>
@@ -103,7 +103,7 @@
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>State</label>
-                                <md-select ng-model="user.state" ng-disabled="true">
+                                <md-select ng-model="user.state" ng-disabled="disableFields">
                                     <md-option ng-repeat="state in states" value="{{state.abbrev}}">
                                         {{state.abbrev}}
                                     </md-option>
@@ -125,7 +125,9 @@
                     </form>
                 </div>
                 <div layout="row" layout-align="center center">
-                    <md-button ng-disabled="profileForm.$invalid || userForm.$invalid" class="md-raised md-primary" ng-click="update(user,vpassword)">Update</md-button>
+                    <md-button ng-if="buttonType == 'update'" ng-disabled="profileForm.$invalid || userForm.$invalid" class="md-raised md-primary" ng-click="update(user,vpassword)">Update</md-button>
+                    <md-button ng-if="buttonType == 'friend'" class="md-raised md-primary" ng-click="addFriend(user)">Send Friend Request</md-button>
+                    <md-button ng-disabled="true" ng-if="buttonType == 'pending'" class="md-raised md-primary">Friend Request Sent!</md-button>
                 </div>
             </md-content>
         </div>

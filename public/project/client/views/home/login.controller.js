@@ -10,16 +10,19 @@
 
         $scope.login = function(user) {
 
-            UserService.findUserByCredentials(user.username,user.password)
+            UserService.login(user)
                 .then(function(response){
-                    if(response == null){
-                        $scope.message = "Username/Password does not match!";
-                    }else{
-                        $rootScope.currentusr = response;
-                        $location.path('/profile');
-                    }
 
-                });
+                        var user = response;
+
+                        if(user != null) {
+                            $rootScope.currentusr = user;
+                            $location.url("/profile/"+user._id);
+                        }
+                    },
+                    function(err) {
+                        $scope.message = err;
+                    });
         }
     }
 

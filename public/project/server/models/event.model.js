@@ -9,7 +9,9 @@ module.exports = function(mongoose,db) {
         findEventByID: findEventByID,
         FindEventsByUserId: FindEventsByUserId,
         CreateEvent: CreateEvent,
-        UpdateEvent: UpdateEvent
+        UpdateEvent: UpdateEvent,
+        DeleteEvent: DeleteEvent,
+        RemoveUser: RemoveUser
     };
     return api;
 
@@ -78,6 +80,38 @@ module.exports = function(mongoose,db) {
                 eventToUpdate.invitees = event.invitees;
 
                 eventToUpdate.save(function (err, updatedEvent) {
+                    deferred.resolve(updatedEvent);
+                });
+            }
+        });
+        return deferred.promise;
+    }
+
+    function DeleteEvent(id){
+        var deferred = q.defer();
+        EventModel.remove({_id:id}, function(err, status) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(status);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function RemoveUser(eventId,userId){
+        var deferred = q.defer();
+
+        EventModel.findById(eventId, function(err, event) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                var users = event.invitees;
+                var index = users.indexOf(userId);
+                users.splice(index,1);
+                event.invitees = users;
+
+                event.save(function (err, updatedEvent) {
                     deferred.resolve(updatedEvent);
                 });
             }

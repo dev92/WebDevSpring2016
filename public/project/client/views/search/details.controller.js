@@ -3,43 +3,121 @@
         .module("CinephiliaApp")
         .controller("DetailController", DetailController);
 
-    function DetailController($scope, $rootScope, $routeParams, MovieApiService,MovieService,$sce) {
+    function DetailController($scope, $rootScope, $routeParams, $location, MovieApiService,MovieService,$sce) {
 
-        $scope.imdbID = $routeParams.imdbID;
+        $scope.tmdbID = $routeParams.tmdbID;
         $scope.users = [];
+        $scope.reviews = [];
         $scope.movie = null;
+        $scope.favorite = false;
+        $scope.user = $rootScope.currentusr;
 
-        $scope.addFavorite = function(movie){
-            if($rootScope.currentusr){
-                movie.favorite = !movie.favorite;
-            }
+        //console.log($scope.user);
+
+        if($scope.user.moviesLiked.indexOf($scope.tmdbID) !=-1){
+            $scope.favorite = true
         }
+
+
+        $scope.toggleFavorite = function(movie){
+            $scope.favorite = !$scope.favorite;
+
+            if($scope.favorite){
+
+                var newMovie = {
+                    "imdbId": movie.imdbID,
+                    "tmdbId": $scope.tmdbID,
+                    "poster": movie.poster,
+                    "trailer": movie.trailer
+                };
+
+                //console.log(movie);
+                MovieService.userLikesMovie($scope.user._id,newMovie)
+                    .then(function (response) {
+                        //console.log(response);
+                        $scope.users = response;
+                    });
+            }else{
+                MovieService.userDislikesMovie($scope.user._id,movie.tmdbId)
+                    .then(function (response) {
+                        //console.log(response);
+                        $scope.users = response;
+                    });
+            }
+
+
+        };
 
         $scope.rateMovie = function(id,rating){
            //console.log(id+" "+rating);
+        };
+
+        $scope.goToProfile = function(userId){
+            $location.url("/profile/"+userId)
         }
 
-        MovieApiService.findMovieByImdbID(
-            $scope.imdbID,
+
+        $scope.addReview = function(review){
+            var newReview = {
+                "tmdbId":$scope.tmdbID,
+                "userId":$scope.user._id,
+                "username":$scope.user.username,
+                "avatar":$scope.user.avatar,
+                "review":review,
+                "poster":$scope.movie.poster,
+                "movieTitle":$scope.movie.Title
+            };
+
+            MovieService.userReviewsMovie(newReview)
+                .then(function(response){
+                    $scope.reviews = response;
+                    $scope.newreview = null;
+                })
+        };
+
+        $scope.editReview = function(review){
+            $scope.newreview = review;
+        };
+
+        $scope.removeReview = function(review){
+            MovieService.userDeletesReview(review.userId,review.tmdbId)
+                .then(function(response){
+                    $scope.reviews = response;
+                });
+        }
+
+        MovieApiService.findMovieByTmdbID(
+            $scope.tmdbID,
             function(response) {
-                response.Poster = "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID",response.imdbID)
+                response.poster = "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID",response.imdbID)
                 //console.log(response.imdbID);
                 $scope.rating = Number(response.imdbRating).toFixed();
+
                 $scope.movie = response;
-                MovieApiService.findTrailers($scope.imdbID,function(response){
+                $scope.movie.tmdbId = $scope.tmdbID;
+
+                MovieApiService.findTrailers($scope.tmdbID,function(response){
                     for(var r in response.results){
                         if(response.results[r].type == "Trailer"){
-                            $scope.movie.trailer = $sce.trustAsResourceUrl("http://www.youtube.com/embed/"+response.results[r].key);
+                            $scope.movie.trailer = "http://www.youtube.com/embed/"+response.results[r].key;
+                            $scope.trailer = $sce.trustAsResourceUrl($scope.movie.trailer);
                             break;
                         }
                     }
                 });
 
-                MovieService.findUserLikes($scope.movie.imdbID)
+                MovieService.findUserLikes($scope.tmdbID)
                     .then(function(response){
                         $scope.users = response;
                     },function(err){
                         $scope.users = [];
+                    });
+
+                MovieService.findMovieReviews($scope.tmdbID)
+                    .then(function(response){
+                        $scope.reviews = response;
+                    },function(err){
+                        $scope.reviews = [];
                     });
             }
         )

@@ -5,13 +5,13 @@
         <md-content>
             <md-tabs md-selected="2" md-align-tabs="top">
                 <md-tab>
-                    <a href="#/profile"><md-tab-label>Your Profile</md-tab-label></a>
+                    <a href="#/profile/{{currentusr._id}}"><md-tab-label>Your Profile</md-tab-label></a>
                 </md-tab>
                 <md-tab >
                     <a href="#/genres"><md-tab-label>Genres</md-tab-label></a>
                 </md-tab>
                 <md-tab>
-                    <a href="#/friends"><md-tab-label>Friends</md-tab-label></a>
+                    <a href="#/friends"><md-tab-label>Friends <span class="badge danger-color">5</span></md-tab-label></a>
                 </md-tab>
             </md-tabs>
         </md-content>
@@ -31,6 +31,23 @@
                             <p>Has {{friend.favorites.length}} favorite movies</p>
                         </div>
                         <md-button class="md-secondary md-accent md-raised md-icon-button" ng-click="removeFriend(currentusr._id,friend)" aria-label="removeFriend"><i class="fa fa-user-times fa-lg"></i></md-button>
+                        <md-divider md-inset ng-if="!$last"></md-divider>
+                    </md-list-item>
+                </md-list>
+                <md-toolbar class="md-theme-light" layout="row">
+                    <h2 class="md-toolbar-tools">
+                        <span>Friend Requests</span>
+                    </h2>
+                </md-toolbar>
+                <md-list flex>
+                    <md-list-item class="md-3-line"  ng-repeat="friend in friends">
+                        <img ng-src={{imagePath}} class="md-avatar" class="img-responsive" alt="{{friend.username}}">
+                        <!--<div class="md-list-item-text md-long-text">-->
+                            <h4>{{friend.username}}</h4>
+                            <h6>{{friend.lastName}},{{friend.firstName}}</h6>
+                            <md-button class="md-secondary md-primary md-raised md-icon-button" ng-click="removeFriend(currentusr._id,friend)" aria-label="addFriend"><i class="fa fa-user-plus fa-lg"></i></md-button>
+                            <md-button class="md-secondary md-accent md-raised md-icon-button" ng-click="removeFriend(currentusr._id,friend)" aria-label="removeFriend"><i class="fa fa-user-times fa-lg"></i></md-button>
+                        <!--</div>-->
                         <md-divider md-inset ng-if="!$last"></md-divider>
                     </md-list-item>
                 </md-list>

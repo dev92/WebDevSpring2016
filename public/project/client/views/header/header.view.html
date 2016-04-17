@@ -18,12 +18,12 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right top-nav">
-                <li ng-hide="currentusr"><a href="#account" target="_self" class="waves-effect waves-light">Register/Login<span class="sr-only">(current)</span></a></li>
+                <li ng-hide="currentusr"><a href="" ng-click="linkTo('#account')" class="waves-effect waves-light">Register/Login<span class="sr-only">(current)</span></a></li>
                 <li ng-show="currentusr" class="dropdown">
                     <a href="#" target="_self" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{currentusr.username}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="#/profile/{{currentusr._id}}"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -37,7 +37,7 @@
                 <li ng-show="currentusr" class="visible-xs-block">
                     <a href="#/currentEvents"><i class="fa fa-fw fa-edit"></i> Events</a>
                 </li>
-                <li ng-show="currentusr" class="visible-xs-block">
+                <li ng-show="currentusr.role == 'admin'" class="visible-xs-block">
                     <a href="#/admin"><i class="fa fa-fw fa-user-secret"></i> Admin Dashboard</a>
                 </li>
                 <li ng-show="currentusr" class="visible-xs-block">

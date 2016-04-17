@@ -18,16 +18,25 @@
                 }
 
 
-                UserService.createUser(user)
-                    .then(function(response){
-                        if(typeof response == 'string'){
-                            $scope.message = response;
-                            return;
-                        }else {
-                            $rootScope.currentusr = response;
-                            $location.path('/profile');
+                UserService.register(user)
+
+                    .then(function(response) {
+
+                            var user = response;
+
+                            if(user != null) {
+                                $rootScope.currentusr = user;
+                                $location.url("/profile/"+user._id);
+
+                            }else{
+                                $scope.message = "Username already exists!";
+                            }
+                        },
+                        function(err) {
+                            $scope.message = err;
                         }
-                    });
+                    );
+
             }
 
         }

@@ -18,10 +18,13 @@ module.exports = function(mongoose) {
         "email": String,
         "phone":String,
         "role":String,
+        "genres":[String],
         "friends":[String],
+        "requests":[String],
         "moviesLiked":[String],
         "moviesRated":[ratingSchema],
-        "moviesReviewed":[reviewSchema]
+        "moviesReviewed":[reviewSchema],
+        "avatar": String,
         //"eventsInvited":[String]
     }, {collection: "project.cinePhilia.user"});
 

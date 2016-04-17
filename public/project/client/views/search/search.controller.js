@@ -8,9 +8,14 @@
         $scope.search = search;
         $scope.movietitle = $routeParams.movietitle;
 
+
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 3;
+        $scope.available = true;
+
         function formImgPath (imgpath) {
             if(imgpath == null){
-                return 'http://www.filmfodder.com/reviews/images/poster-not-available.jpg';
+                return '/project/client/media/poster-not-found.jpg';
             }else{
                 return $rootScope.basepath+"original"+imgpath;
             }
@@ -34,6 +39,12 @@
                         response.results[result].poster_path = formImgPath(response.results[result].poster_path);
                     }
                     $scope.movies = response.results;
+                    $scope.totalItems = $scope.movies.length;
+
+                    if($scope.totalItems > 3){
+                        $scope.available = false;
+                    }
+
 
                 });
         }

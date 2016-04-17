@@ -1,3 +1,31 @@
 .glyphicon {
     font-size: 20px;
 }
+
+.progressbar{
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+md-toast.md-success-toast-theme .md-toast-content {
+    background-color: #00C851;
+    text-align:center;
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+    background-color: maroon;
+}
+
+md-toast {
+    left: calc(50vw - 200px);
+}
+
+.rect-img {
+    padding-top: 10px;
+    padding-right: 10px;
+    width: 60px;
+    height: 80px;
+}

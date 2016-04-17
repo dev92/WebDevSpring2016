@@ -18,7 +18,7 @@
 
         var api = {
             findMovieByTitle : findMovieByTitle,
-            findMovieByImdbID:findMovieByImdbID,
+            findMovieByTmdbID:findMovieByTmdbID,
             findBasePath:findBasePath,
             findTrailers:findTrailers
         };
@@ -32,8 +32,8 @@
             //    .success(callback);
         }
 
-        function findMovieByImdbID(imdbID, callback) {
-            $http.get(detailsUrl.replace("ID",imdbID))
+        function findMovieByTmdbID(tmdbID, callback) {
+            $http.get(detailsUrl.replace("ID",tmdbID))
                 .success(function (response){
                     $http.get("http://www.omdbapi.com/?i="+response.imdb_id)
                         .success(callback)

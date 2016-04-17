@@ -22,8 +22,8 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
         'cinephilia';
 }
-var dbAssignment = mongoose.createConnection(connectionStringAssignment);
-var dbProject = mongoose.createConnection(connectionStringProject);
+var dbAssignment = mongoose.createConnection(connectionStringAssignment, {server:{poolSize:3}});
+var dbProject = mongoose.createConnection(connectionStringProject, {server:{poolSize:3}});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,7 +44,7 @@ app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
 
-require("./public/assignment/server/app.js")(app,mongoose,dbAssignment);
+//require("./public/assignment/server/app.js")(app,mongoose,dbAssignment);
 require("./public/project/server/app.js")(app,mongoose,dbProject);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

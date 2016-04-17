@@ -4,7 +4,7 @@
 <div class="col-sm-3 col-md-2 sidebar sidebar-contents">
     <ul class="nav nav-sidebar">
         <li>
-            <a href="#/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+            <a href="#/profile/{{currentusr._id}}"><i class="fa fa-fw fa-user"></i> Profile</a>
         </li>
         <li>
             <a href="#/search"><i class="fa fa-fw fa-film"></i> Search</a>
@@ -12,7 +12,7 @@
         <li>
             <a href="#/currentEvents"><i class="fa fa-fw fa-edit"></i> Events</a>
         </li>
-        <li>
+        <li ng-show="currentusr.role == 'admin'">
             <a href="#/admin"><i class="fa fa-fw fa-user-secret"></i> Admin Dashboard</a>
         </li>
         <li>
