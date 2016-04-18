@@ -9,7 +9,6 @@
         $scope.searchType = "movie";
         $scope.movietitle = $routeParams.movietitle;
 
-        console.log($scope.movietitle);
 
 
         $scope.currentPage = 1;

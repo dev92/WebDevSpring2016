@@ -50,10 +50,12 @@
             <!--Image Card-->
         </div>
         <div class="col-xs-offset-3 col-xs-3 col-sm-offset-5 col-sm-2">
-            <button class="btn btn-warning">Search for Movies</button>
+            <button class="btn btn-warning" data-toggle="collapse" data-target="#publicSearch">Search for Movies</button>
         </div>
     </div>
 </section>
+<div ng-if="sectionType == 'search'" ng-include="'views/guest/guest.search.view.html'"></div>
+<div ng-if="sectionType == 'detail'" ng-include="'views/guest/guest.detail.view.html'"></div>
 <!-- /Page Content -->
 <section ng-hide="currentusr" class="parallax container-fluid img-responsive" id="account">
     <div class="container text-center">

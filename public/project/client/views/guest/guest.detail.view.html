@@ -1,0 +1,42 @@
+<section class="parallax container-fluid img-responsive" id="publicSearch">
+    <div class="col-md-6">
+        <img ng-src="{{movie.poster}}" onerror="this.src='/project/client/media/poster-not-found.jpg'" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
+        <br>
+        <div layout="row" layout-align="center center">
+            <uib-rating ng-model="rating" style="color: gold" max="10" read-only="true" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
+            <b>(<i>IMDB Rating:</i> {{rating}}/10)</b>
+        </div>
+    </div>
+    <div class="col-md-3 text-darken-4">
+        <h3>Plot</h3>
+        <p>
+            {{movie.Plot}}
+        </p>
+        <h4>Director</h4>
+        <p>
+            {{movie.Director}}
+        </p>
+
+        <h4>Actors</h4>
+
+        <ul>
+            <li ng-repeat="actorName in movie.Actors.split(',')">
+                {{actorName}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h4>Awards</h4>
+        <p>
+            {{movie.Awards}}
+        </p>
+        <h4>Genre:</h4>
+        <ul>
+            <li ng-repeat="genre in movie.Genre.split(',')">
+                {{genre}}
+            </li>
+        </ul>
+        <h4>Release Year:<p>{{movie.Released}}</p></h4>
+        <h4>Rated:<p>{{movie.Rated}}</p></h4>
+    </div>
+</section>

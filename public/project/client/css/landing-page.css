@@ -110,6 +110,17 @@ body {
     -o-background-size: cover;
 }
 
+#publicSearch {
+    background-image: url(https://erinnfeltes.files.wordpress.com/2015/05/cropped-grunge-sky-background1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    /*background-attachment: fixed;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
 #account{
     background-image: url(http://brandflow.pl/wp-content/uploads/2015/09/4.jpg);
     background-repeat: no-repeat;
