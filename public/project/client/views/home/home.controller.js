@@ -3,7 +3,7 @@
         .module("CinephiliaApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope,$rootScope,MovieApiService) {
+    function HomeController($scope,$location,$rootScope,MovieApiService) {
 
 
         $scope.currentPage = 1;
@@ -57,8 +57,10 @@
         }
 
         $scope.linkTo = function(url) {
+            $scope.movies = [];
+            $scope.available = true;
             $scope.sectionType = "search";
-            $location.url(url);
+            //$location.url(url);
         };
     }
 })();

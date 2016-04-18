@@ -58,7 +58,7 @@
 <div ng-include="'views/header/header.view.html'"></div>
 <div ng-if="currentusr && $location.url()!='/home'" ng-include="'views/sidebar/sidebar.view.html'"></div>
 <!-- Carousel -->
-<div ng-show="$location.url() == '/home'" id="main-carousel" class="carousel slide carousel-fade carousel-bg" data-ride="carousel" data-interval="4000">
+<div ng-show="$location.url().indexOf('/home') > -1" id="main-carousel" class="carousel slide carousel-fade carousel-bg" data-ride="carousel" data-interval="4000">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
