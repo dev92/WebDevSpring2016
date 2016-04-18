@@ -58,7 +58,8 @@
 
 
         if(!$scope.user.hasOwnProperty("avatar")){
-            $scope.user.avatar = '../project/client/media/765-default-avatar.png';
+            $scope.user.avatar = 'http://all4ed.org/wp-content/themes/all4ed/assets/images/avatar-placeholder-generic.png';
+                //'../project/client/media/765-default-avatar.png';
 
         }
 
