@@ -30,7 +30,7 @@
                                         <span class="md-subhead white-text" flex>{{movie.original_title}}</span>
                                     </md-card-title-text>
                                 </md-card-title>
-                                <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster_path}}" class="md-card-image" alt="Washed Out">
+                                <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster_path}}" class="md-card-image" alt="{{movie.original_title}}">
                                 <md-card-actions layout="row" layout-align="center center">
                                     <md-button class="md-icon-button" aria-label="Details">
                                     <md-icon><a href="#/detail/{{movie.id}}"><i class="fa fa-info-circle fa-lg"></i></a></md-icon>

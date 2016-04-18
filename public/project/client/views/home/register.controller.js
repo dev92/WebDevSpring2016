@@ -17,6 +17,8 @@
                     return;
                 }
 
+                user.avatar ='http://all4ed.org/wp-content/themes/all4ed/assets/images/avatar-placeholder-generic.png';
+
 
                 UserService.register(user)
 
