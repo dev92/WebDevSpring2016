@@ -58,7 +58,7 @@
 
 
         if(!$scope.user.hasOwnProperty("avatar")){
-            $scope.user.avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+            $scope.user.avatar = '/project/client/media/765-default-avatar.png';
 
         }
 

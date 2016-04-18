@@ -18,6 +18,13 @@
             $scope.favorite = true
         }
 
+        var elementPos = $scope.user.moviesRated.map(function(x) {return x.tmdbId; }).indexOf($scope.tmdbID);
+
+        if(elementPos != -1){
+            $scope.rating = $scope.user.moviesRated[elementPos].rating;
+        }
+
+
 
         $scope.toggleFavorite = function(movie){
             $scope.favorite = !$scope.favorite;
@@ -49,8 +56,23 @@
 
         };
 
+        $scope.hoveringOver = function(value) {
+            $scope.overStar = value;
+            //$scope.percent = 100 * (value / 5);
+        };
+
         $scope.rateMovie = function(id,rating){
-           //console.log(id+" "+rating);
+            var ratingObj = {
+                "tmdbId":id,
+                "userId":$scope.user._id,
+                "rating":rating
+            };
+           //console.log(ratingObj);
+            MovieService.userRatesMovie($scope.user._id,ratingObj)
+                .then(function(ratings){
+                    //console.log(ratings);
+                    $scope.rating = rating;
+                });
         };
 
         $scope.goToProfile = function(userId){
@@ -92,7 +114,7 @@
             function(response) {
                 response.poster = "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID",response.imdbID)
                 //console.log(response.imdbID);
-                $scope.rating = Number(response.imdbRating).toFixed();
+                //$scope.rating = Number(response.imdbRating).toFixed();
 
                 $scope.movie = response;
                 $scope.movie.tmdbId = $scope.tmdbID;

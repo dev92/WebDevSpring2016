@@ -3,10 +3,10 @@
 module.exports = function(mongoose) {
 
     var RatingSchema = mongoose.Schema({
-        "imdbId":String,
+        "tmdbId":String,
         "userId":String,
         "rating":Number
-    }, {collection: "project.cinePhilia.rating"});
+    });
 
     return RatingSchema;
 };

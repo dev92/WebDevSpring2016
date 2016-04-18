@@ -437,7 +437,7 @@ module.exports = function(mongoose,db) {
                 var ratedMovies = doc.moviesRated;
                 var found = false;
                 for(var m in ratedMovies){
-                    if(ratedMovies[m].imdbId == ratedMovie.imdbId){
+                    if(ratedMovies[m].tmdbId == ratedMovie.tmdbId){
                         ratedMovies[m].rating = ratedMovie.rating;
                         found = true;
                         break;

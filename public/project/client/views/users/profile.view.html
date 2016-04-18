@@ -11,7 +11,20 @@
                         <a href="#/genres"><md-tab-label>Genres</md-tab-label></a>
                     </md-tab>
                     <md-tab>
-                        <a href="#/friends"><md-tab-label >Friends</md-tab-label></a>
+                        <a href="#/friends/{{currentusr._id}}"><md-tab-label >Friends</md-tab-label></a>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+            <md-content ng-if="currentusr._id != user._id">
+                <md-tabs md-selected="0" md-align-tabs="top">
+                    <md-tab>
+                        <a href="#/profile/{{user._id}}"><md-tab-label>Profile</md-tab-label></a>
+                    </md-tab>
+                    <md-tab >
+                        <a href="#/favorites/{{user._id}}"><md-tab-label>Favorites</md-tab-label></a>
+                    </md-tab>
+                    <md-tab>
+                        <a href="#/friends/{{user._id}}"><md-tab-label >Friends</md-tab-label></a>
                     </md-tab>
                 </md-tabs>
             </md-content>

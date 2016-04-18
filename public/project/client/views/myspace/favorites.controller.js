@@ -3,16 +3,21 @@
         .module("CinephiliaApp")
         .controller("FavoritesController", FavoritesController);
 
-    function FavoritesController($scope,$rootScope,$location,MovieService) {
+    function FavoritesController($scope,$routeParams,$rootScope,$location,MovieService) {
 
         $scope.movies = [];
 
-        if($rootScope.currentusr){
-            MovieService.findUserLikedMovies($rootScope.currentusr._id)
-                .then(function(response){
-                   $scope.movies = response;
-                });
-        }
+        var profileId = $routeParams.userId;
+        $scope.otherUser = profileId;
+
+        //if($rootScope.currentusr._id != profileId) {
+        //    $scope.otherUser = "true";
+        //}
+
+        MovieService.findUserLikedMovies(profileId)
+            .then(function(response){
+                $scope.movies = response;
+            });
 
         $scope.removeFavorite = function(tmdbId){
             MovieService.userDislikesMovie($rootScope.currentusr._id,tmdbId)

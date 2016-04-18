@@ -3,17 +3,22 @@
         .module("CinephiliaApp")
         .controller("FriendsController", FriendsController);
 
-    function FriendsController($scope, $rootScope,UserService) {
+    function FriendsController($scope, $routeParams, $rootScope, UserService) {
 
 
+        var profileId = $routeParams.userId;
         $scope.friends = [];
         $scope.requests = [];
+        $scope.otherUser = profileId;
 
-        if($rootScope.currentusr){
-            UserService.findUserFriends($rootScope.currentusr._id)
-                .then(function (response) {
-                   $scope.friends = response;
-                });
+
+        UserService.findUserFriends(profileId)
+            .then(function (response) {
+                $scope.friends = response;
+            });
+
+
+        if($rootScope.currentusr._id == profileId){
 
             UserService.FindUserRequests($rootScope.currentusr._id)
                 .then(function (response) {
@@ -21,14 +26,14 @@
                 });
         }
 
+
         $scope.removeFriend = function(userId,friend){
-            console.log(friend._id);
             UserService.deleteUserFriend(userId,friend._id)
                 .then(function(response){
                     $scope.friends = response;
                 });
 
-        }
+        };
 
         $scope.removeRequest = function(userId,friend){
             UserService.DeleteUserRequest(userId,friend._id)
@@ -36,7 +41,7 @@
                     $scope.requests = response;
                 });
 
-        }
+        };
 
         $scope.addRequest = function(userId,friend) {
             UserService.UserAddsFriend(userId, friend._id)
@@ -48,7 +53,7 @@
                 .then(function (response) {
                     $scope.requests = response;
                 });
-        }
+        };
 
     }
 })();

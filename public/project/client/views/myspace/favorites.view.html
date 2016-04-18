@@ -2,13 +2,26 @@
     <!--<div class="container-fluid">-->
     <!--<div class="row">-->
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <md-content>
+        <md-content ng-if="currentusr._id == otherUser">
             <md-tabs md-selected="0" md-align-tabs="top">
                 <md-tab>
-                    <a href="#/favorites"><md-tab-label>Your Favorites</md-tab-label></a>
+                    <a href="#/favorites/{{currentusr._id}}"><md-tab-label>Your Favorites</md-tab-label></a>
                 </md-tab>
                 <md-tab >
                     <a href="#/reviewed"><md-tab-label>Reviewed Movies</md-tab-label></a>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+        <md-content ng-if="currentusr._id != otherUser">
+            <md-tabs md-selected="1" md-align-tabs="top">
+                <md-tab>
+                    <a href="#/profile/{{otherUser}}"><md-tab-label>Profile</md-tab-label></a>
+                </md-tab>
+                <md-tab >
+                    <a href="#/favorites/{{otherUser}}"><md-tab-label>Favorites</md-tab-label></a>
+                </md-tab>
+                <md-tab>
+                    <a href="#/friends/{{otherUser}}"><md-tab-label >Friends</md-tab-label></a>
                 </md-tab>
             </md-tabs>
         </md-content>
@@ -22,13 +35,13 @@
                     </md-card-title>
                     <img class = "img-responsive"  style="height: 300px;width: 300px;display: block;margin: 0 auto" ng-src="{{movie.poster}}" class="md-card-image" alt="Washed Out">
                     <md-card-actions layout="row" layout-align="center center">
-                        <md-button class="md-icon-button" aria-label="Favorite">
+                        <md-button class="md-icon-button" aria-label="Favorite" ng-if="currentusr._id == otherUser">
                             <md-icon ng-click="removeFavorite(movie.tmdbId)" class="md-icon-button md-accent"><i class="fa fa-heart fa-lg"></i></md-icon>
                         </md-button>
                         <md-button class="md-icon-button" aria-label="Details">
                             <md-icon><a href="#/detail/{{movie.tmdbId}}"><i class="fa fa-info-circle fa-lg"></i></a></md-icon>
                         </md-button>
-                        <md-button class="md-icon-button" aria-label="Similar">
+                        <md-button class="md-icon-button" aria-label="Similar" ng-if="currentusr._id == otherUser">
                             <md-icon><a href="#/search/{{movie.tmdbId}}" ng-click="setSimilarTitle(movie.title)"><i class="fa fa-film" aria-hidden="true"></i></a>
                                 <md-tooltip md-direction="right">
                                     Similar movies

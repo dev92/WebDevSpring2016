@@ -34,7 +34,7 @@
                     }
                 })
 
-                .when("/friends", {
+                .when("/friends/:userId", {
                     templateUrl: "views/users/friends.view.html",
                     controller:"FriendsController",
                     resolve: {
@@ -73,7 +73,7 @@
                     }
                 })
 
-                .when("/favorites", {
+                .when("/favorites/:userId", {
                     templateUrl: "views/myspace/favorites.view.html",
                     controller:"FavoritesController",
                     resolve: {

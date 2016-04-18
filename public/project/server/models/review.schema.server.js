@@ -10,7 +10,7 @@ module.exports = function(mongoose) {
         "movieTitle":String,
         "poster":String,
         "review":String
-    }, {collection: "project.cinePhilia.review"});
+    });
 
     return ReviewSchema;
 };

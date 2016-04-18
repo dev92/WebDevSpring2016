@@ -309,8 +309,15 @@ module.exports = function(app, userModel, movieModel) {
 
     function FindFriendsByIds(req, res){
 
-        var user = req.user;
-        userModel.FindUsersByIds(user.friends)
+        var userId = req.params.id;
+
+        userModel.FindById(userId)
+            .then(function(user){
+                return userModel.FindUsersByIds(user.friends);
+            },
+            function(err){
+                res.status(400).send(err);
+            })
             .then(function (response) {
                 res.json(response);
             },function (err){
@@ -320,8 +327,15 @@ module.exports = function(app, userModel, movieModel) {
 
     function FindRequestsByIds(req, res){
 
-        var user = req.user;
-        userModel.FindUsersByIds(user.requests)
+        var userId = req.params.id;
+
+        userModel.FindById(userId)
+            .then(function(user){
+                    return userModel.FindUsersByIds(user.requests);
+                },
+                function(err){
+                    res.status(400).send(err);
+                })
             .then(function (response) {
                 res.json(response);
             },function (err){
@@ -435,7 +449,7 @@ module.exports = function(app, userModel, movieModel) {
 
         userModel.userRatesMovie(req.params.id,req.body)
             .then(function(user){
-                res.json(user);
+                res.json(user.moviesRated);
             },function(err){
                 res.status(400).send(err);
             });

@@ -1,4 +1,4 @@
-<div id="page-wrapper">
+<div id="page-wrapper" xmlns="http://www.w3.org/1999/html">
     <!--<div class="container-fluid">-->
         <!--<div class="row">-->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -21,15 +21,16 @@
                 <div class="col-md-6">
                     <img ng-src="{{movie.poster}}" onerror="this.src='/project/client/media/poster-not-found.jpg'" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
                     <br>
-                    <div layout = "row" layout-align="center center">
-                        <a class="btn-floating btn-large white" ng-click="toggleFavorite(movie)"><i ng-class="{'fa fa-heart-o fa-5x':!favorite,'fa fa-heart fa-5x':favorite}" style="color: red"></i><</a>
-                        <!--<md-button class="md-icon-button" aria-label="Favorite" ng-disabled="!currentusr">-->
-                            <!--<md-icon  ng-click="addFavorite(movie)" class="md-icon-button md-accent"><i ng-class="{'fa fa-heart-o fa-lg':!movie.favorite,'fa fa-heart fa-lg':movie.favorite}"></i></md-icon>-->
-                        <!--</md-button>-->
+                    <div layout = "column" layout-align="center center">
+                        <a class="btn-floating btn-large white" ng-click="toggleFavorite(movie)"><i ng-class="{'fa fa-heart-o fa-5x':!favorite,'fa fa-heart fa-5x':favorite}" style="color: red"></i></a>
+                        <h6>IMDB Rating: {{movie.imdbRating}}</h6>
                     </div>
                     <div layout="row" layout-align="center center">
-                        <uib-rating ng-model="rating" style="color: gold" max="10" ng-change="rateMovie(movie.imdbID,rating)"read-only="currentusr==null" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
-                        <b>(<i>Rating:</i> {{rating}}/10)</b>
+                        <h6>Your Rating: </h6>
+                        <uib-rating ng-model="rating" style="color: gold" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-change="rateMovie(movie.tmdbId,rating)" state-on="'glyphicon glyphicon-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
+                        <span><b>({{overStar || rating}}/5)</b></span>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="rating = 0;rateMovie(movie.tmdbId,rating)" ng-disabled="isReadonly">Clear</button>
+
                     </div>
                 </div>
                 <div class="col-md-3">

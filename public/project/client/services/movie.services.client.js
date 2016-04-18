@@ -15,7 +15,8 @@
             userReviewsMovie: userReviewsMovie,
             findMovieReviews: findMovieReviews,
             findUserReviews: findUserReviews,
-            userDeletesReview:userDeletesReview
+            userDeletesReview:userDeletesReview,
+            userRatesMovie:userRatesMovie
         };
         return api;
 
@@ -119,6 +120,19 @@
             var defer = $q.defer();
             var url = "/api/project/user/"+userId+"/review";
             $http.get(url)
+                .success(function(response){
+                    defer.resolve(response);
+                })
+                .error(function(err){
+                    defer.reject(err);
+                });
+            return defer.promise;
+        }
+
+        function userRatesMovie(userId,rating){
+            var defer = $q.defer();
+            var url = "/api/project/user/"+userId+"/rates";
+            $http.post(url,rating)
                 .success(function(response){
                     defer.resolve(response);
                 })

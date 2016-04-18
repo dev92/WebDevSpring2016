@@ -10,12 +10,12 @@
                         <a href="#/genres"><md-tab-label>Genres</md-tab-label></a>
                     </md-tab>
                     <md-tab>
-                        <a href="#/friends"><md-tab-label>Friends</md-tab-label></a>
+                        <a href="#/friends/{{currentusr._id}}"><md-tab-label>Friends</md-tab-label></a>
                     </md-tab>
                 </md-tabs>
             </md-content>
             <div class="card-panel">
-            <div ng-controller="GenreController" class="md-padding" ng-cloak>
+            <div class="md-padding" ng-cloak>
                 <fieldset class="standard" >
                     <legend>Your Favorite Genres:</legend>
                     <div layout="row" layout-wrap flex>
