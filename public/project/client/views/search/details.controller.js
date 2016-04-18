@@ -78,7 +78,7 @@
 
         $scope.goToProfile = function(userId){
             $location.url("/profile/"+userId)
-        }
+        };
 
 
         $scope.addReview = function(review){
@@ -140,6 +140,13 @@
                 $scope.users = response;
             },function(err){
                 $scope.users = [];
+            });
+
+        MovieService.findMovieReviews($scope.tmdbID)
+            .then(function(response){
+                $scope.reviews = response;
+            },function(err){
+                $scope.reviews = [];
             });
 
     }
