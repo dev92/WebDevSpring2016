@@ -20,7 +20,7 @@
         $scope.event = {};
 
         $scope.event.hostId = $rootScope.currentusr._id;
-        $scope.event.host = $rootScope.currentusr.firstName;
+        $scope.event.host = $rootScope.currentusr.firstName || $rootScope.currentusr.username;
         $scope.event.invitees = [];
 
         $scope.myDate = new Date();
