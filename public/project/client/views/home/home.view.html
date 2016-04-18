@@ -80,24 +80,24 @@
                         </md-input-container>
                         <md-input-container  class="md-block">
                             <md-icon><i class="fa fa-lock"></i> </md-icon>
-                            <input required ng-model="user.password" type="password" placeholder="Password">
-                            <div ng-messages="regsiterForm.password.$error">
+                            <input required ng-model="user.password" name="password" type="password" placeholder="Password">
+                            <div ng-messages="registerForm.password.$error">
                                 <div ng-message="required">Password is required.</div>
                             </div>
                         </md-input-container>
                         <md-input-container  class="md-block">
                             <md-icon><i class="fa fa-lock"></i> </md-icon>
-                            <input required ng-model="vpassword" name="password" type="password" placeholder=" Verify Password">
-                            <div ng-messages="regsiterForm.password.$error">
+                            <input required ng-model="vpassword" name="vpassword" type="password" placeholder=" Verify Password">
+                            <div ng-messages="registerForm.vpassword.$error">
                                 <div ng-message="required">Confirm Password.</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <!-- Use floating placeholder instead of label -->
                             <md-icon class="email"><i class="fa fa-envelope"></i></md-icon>
-                            <input ng-model="user.email" name="email" type="email" placeholder="Email (required)" ng-required="true">
-                            <div ng-messages="regsiterForm.email.$error">
-                                <div ng-message="required">Email is required.</div>
+                            <input ng-model="user.email" name="email" type="email" placeholder="Email">
+                            <div ng-messages="registerForm.email.$error">
+                                <div ng-message="email">Your email address is invalid</div>
                             </div>
                         </md-input-container>
                             <md-button ng-disabled="registerForm.$invalid" class="md-raised md-primary" ng-click="register(user,vpassword)">Register</md-button>
