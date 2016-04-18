@@ -17,7 +17,7 @@
 
         function formImgPath (imgpath) {
             if(imgpath == null){
-                return '/project/client/media/poster-not-found.jpg';
+                return '../project/client/media/poster-not-found.jpg';
             }else{
                 return $rootScope.basepath+"original"+imgpath;
             }

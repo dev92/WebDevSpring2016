@@ -58,7 +58,7 @@
 
 
         if(!$scope.user.hasOwnProperty("avatar")){
-            $scope.user.avatar = '/project/client/media/765-default-avatar.png';
+            $scope.user.avatar = '../project/client/media/765-default-avatar.png';
 
         }
 
