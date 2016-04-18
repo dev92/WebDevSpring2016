@@ -25,7 +25,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 text-darken-4">
         <h4>Awards</h4>
         <p>
             {{movie.Awards}}
@@ -38,5 +38,8 @@
         </ul>
         <h4>Release Year:<p>{{movie.Released}}</p></h4>
         <h4>Rated:<p>{{movie.Rated}}</p></h4>
+    </div>
+    <div class="col-xs-offset-3 col-xs-3 col-sm-offset-5 col-sm-2">
+        <button class="btn btn-primary" ng-click="linkTo('#publicSearch')">Back to Search</button>
     </div>
 </section>

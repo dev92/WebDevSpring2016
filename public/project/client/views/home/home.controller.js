@@ -53,7 +53,12 @@
                     response.poster = "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID", response.imdbID);
                     $scope.rating = Number(response.imdbRating).toFixed();
                     $scope.movie = response;
-                })
+                });
         }
+
+        $scope.linkTo = function(url) {
+            $scope.sectionType = "search";
+            $location.url(url);
+        };
     }
 })();

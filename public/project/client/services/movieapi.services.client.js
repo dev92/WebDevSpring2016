@@ -14,6 +14,7 @@
         var imdbdetailsUrl = "https://api.themoviedb.org/3/find/IMDBID?external_source=imdb_id&api_key=c8fee912d3f3866df68026f0ebadc6f6";
         var trailerUrl = "http://api.themoviedb.org/3/movie/ID/videos?api_key=c8fee912d3f3866df68026f0ebadc6f6";
         var similarMoviesUrl = "http://api.themoviedb.org/3/movie/ID/similar?api_key=c8fee912d3f3866df68026f0ebadc6f6";
+        var movieReviewsUrl = "http://api.themoviedb.org/3/movie/ID/reviews?api_key=c8fee912d3f3866df68026f0ebadc6f6";
 
 
 
@@ -22,7 +23,8 @@
             findMovieByTmdbID:findMovieByTmdbID,
             findBasePath:findBasePath,
             findTrailers:findTrailers,
-            findSimilarMovies:findSimilarMovies
+            findSimilarMovies:findSimilarMovies,
+            findMovieReviews:findMovieReviews
         };
 
         return api;
@@ -54,6 +56,11 @@
 
         function findSimilarMovies(tmdbId,callback){
             $http.get(similarMoviesUrl.replace("ID",tmdbId))
+                .success(callback);
+        }
+
+        function findMovieReviews(tmdbId,callback){
+            $http.get(movieReviewsUrl.replace("ID",tmdbId))
                 .success(callback);
         }
 
