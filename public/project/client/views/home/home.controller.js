@@ -9,6 +9,7 @@
         $scope.currentPage = 1;
         $scope.itemsPerPage = 3;
         $scope.available = true;
+        $scope.loading = true;
 
         $scope.sectionType = "search";
 
@@ -52,6 +53,7 @@
                 function (response) {
                     response.poster = "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID", response.imdbID);
                     $scope.rating = Number(response.imdbRating).toFixed();
+                    $scope.loading = false;
                     $scope.movie = response;
                 });
         }

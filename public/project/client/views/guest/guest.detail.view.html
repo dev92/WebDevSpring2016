@@ -1,10 +1,13 @@
 <section class="parallax container-fluid img-responsive" id="publicSearch">
+    <div layout="row" layout-sm="column" layout-align="space-around" class="progressbar">
+        <md-progress-circular md-mode="indeterminate" ng-show="loading" class="md-accent" md-diameter="100"></md-progress-circular>
+    </div>
     <h2 class="text-center">{{movie.Title}}</h2>
     <div class="col-md-6">
         <img ng-src="{{movie.poster}}" onerror="this.src='/project/client/media/poster-not-found.jpg'" style="height: 300px;display: block;margin: 0 auto" class="img-responsive"/>
         <br>
         <div layout="row" layout-align="center center">
-            <uib-rating ng-model="rating" style="color: gold" max="10" read-only="true" state-on="'fa fa-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
+            <uib-rating ng-model="rating" style="color: gold" max="10" read-only="true" state-on="'glyphicon glyphicon-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
             <b>(<i>IMDB Rating:</i> {{rating}}/10)</b>
         </div>
     </div>
