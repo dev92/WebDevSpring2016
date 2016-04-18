@@ -68,7 +68,7 @@
                 "userId":$scope.user._id,
                 "rating":rating
             };
-           //console.log(ratingObj);
+            //console.log(ratingObj);
             MovieService.userRatesMovie($scope.user._id,ratingObj)
                 .then(function(ratings){
                     //console.log(ratings);
@@ -108,11 +108,10 @@
                 .then(function(response){
                     $scope.reviews = response;
                 });
-        }
+        };
 
-        MovieApiService.findMovieByTmdbID(
-            $scope.tmdbID,
-            function(response) {
+        MovieApiService.findMovieByTmdbID($scope.tmdbID)
+            .then(function(response){
                 response.poster = "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID",response.imdbID)
                 //console.log(response.imdbID);
                 //$scope.rating = Number(response.imdbRating).toFixed();
@@ -122,31 +121,26 @@
 
                 $scope.movie.tmdbId = $scope.tmdbID;
 
-                MovieApiService.findTrailers($scope.tmdbID,function(response){
-                    for(var r in response.results){
-                        if(response.results[r].type == "Trailer"){
-                            $scope.movie.trailer = "http://www.youtube.com/embed/"+response.results[r].key;
-                            $scope.trailer = $sce.trustAsResourceUrl($scope.movie.trailer);
-                            break;
-                        }
+            })
+            .then(function(response){
+                return MovieApiService.findTrailers($scope.tmdbID);
+            })
+            .then(function(response){
+                for(var r in response.results) {
+                    if (response.results[r].type == "Trailer") {
+                        $scope.movie.trailer = "http://www.youtube.com/embed/" + response.results[r].key;
+                        $scope.trailer = $sce.trustAsResourceUrl($scope.movie.trailer);
+                        break;
                     }
-                });
+                }
+            });
 
-                MovieService.findUserLikes($scope.tmdbID)
-                    .then(function(response){
-                        $scope.users = response;
-                    },function(err){
-                        $scope.users = [];
-                    });
-
-                MovieService.findMovieReviews($scope.tmdbID)
-                    .then(function(response){
-                        $scope.reviews = response;
-                    },function(err){
-                        $scope.reviews = [];
-                    });
-            }
-        )
+        MovieService.findUserLikes($scope.tmdbID)
+            .then(function(response){
+                $scope.users = response;
+            },function(err){
+                $scope.users = [];
+            });
 
     }
 })();

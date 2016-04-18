@@ -27,10 +27,8 @@
 
         $scope.search = function (title) {
             //console.log(title);
-            MovieApiService.findMovieByTitle(
-                title,
-                function (response) {
-                    //console.log(response.results);
+            MovieApiService.findMovieByTitle(title)
+                .then(function (response) {
                     for (result in response.results) {
                         response.results[result].poster_path = formImgPath(response.results[result].poster_path);
                     }
@@ -40,24 +38,21 @@
                     if ($scope.totalItems > 3) {
                         $scope.available = false;
                     }
-
-
                 });
-        }
+        };
 
         $scope.details = function (tmdbId) {
 
             $scope.sectionType = "detail";
 
-            MovieApiService.findMovieByTmdbID(
-                tmdbId,
-                function (response) {
+            MovieApiService.findMovieByTmdbID(tmdbId)
+                .then(function (response) {
                     response.poster = "http://img.omdbapi.com/?i=ID&apikey=2bf5ee9".replace("ID", response.imdbID);
                     $scope.rating = Number(response.imdbRating).toFixed();
                     $scope.loading = false;
                     $scope.movie = response;
                 });
-        }
+        };
 
         $scope.linkTo = function(url) {
             $scope.movies = [];
