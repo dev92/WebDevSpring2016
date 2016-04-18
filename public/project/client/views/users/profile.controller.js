@@ -17,49 +17,76 @@
         $scope.message = null;
         $scope.disableFields = true;
         $scope.buttonType = "update";
+        $scope.user = {};
 
-        //console.log("In profile Controller!");
 
 
         if($rootScope.currentusr){
 
-            $scope.user = $rootScope.currentusr;
+            if($rootScope.currentusr._id == profileId){
 
-            if(!$scope.user.hasOwnProperty("avatar")){
-                $scope.user.avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
-            }
-
-            if($scope.user._id == profileId){
-
+                $scope.user = $rootScope.currentusr;
                 $scope.disableFields = false;
 
-            }else if($scope.user.requests.indexOf(profileId)!=-1){
-
-                $scope.buttonType = 'pending';
-
-            }else if($scope.user.friends.indexOf(profileId)!=-1){
-
-                $scope.buttonType = "none";
-
-            }else{
+            }else {
                 UserService.findUserById(profileId)
-                    .then(function(response){
+                    .then(function (response) {
+
                         $scope.user = response;
-                        $scope.buttonType = "friend";
+
+                        //console.log($scope.user);
+
+                        if($rootScope.currentusr.requests.indexOf(profileId)!=-1){
+                            $scope.buttonType = "requested";
+
+                        }else if($scope.user.requests.indexOf($rootScope.currentusr._id)!=-1){
+
+                            $scope.buttonType = 'pending';
+
+                        }else if($scope.user.friends.indexOf($rootScope.currentusr._id)!=-1){
+
+                            $scope.buttonType = "none";
+
+                        }else{
+                            $scope.buttonType = "friend";
+                        }
+
                     });
             }
+
         }
 
 
+        if(!$scope.user.hasOwnProperty("avatar")){
+            $scope.user.avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+
+        }
+
         $scope.addFriend = function(user) {
-            $mdToast.show(
-                $mdToast.simple()
-                    .textContent('Friend Request Sent!')
-                    .position('top')
-                    .theme('success-toast')
-                    .hideDelay(3000)
-            );
-            $scope.buttonType = 'pending';
+
+            UserService.UserSendsFriendRequest($rootScope.currentusr._id,user._id)
+                .then(function(response){
+
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Friend Request Sent!')
+                            .position('top')
+                            .theme('success-toast')
+                            .hideDelay(3000)
+                    );
+                    $scope.buttonType = 'pending';
+
+                },
+                function(err){
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Error sending friend request!')
+                            .position('top')
+                            .theme('error-toast')
+                            .hideDelay(3000)
+                    );
+                });
+
         };
 
 

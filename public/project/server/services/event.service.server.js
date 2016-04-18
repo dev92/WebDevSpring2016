@@ -1,7 +1,7 @@
 "use strict";
 
 
-module.exports = function(app, eventModel) {
+module.exports = function(app, eventModel,userModel) {
 
 
     app.post("/api/project/event", userCreatesEvent);
@@ -9,6 +9,8 @@ module.exports = function(app, eventModel) {
     app.delete("/api/project/user/:userId/event/:eventId", userCannotAttend);
     app.put("/api/project/event/:eventId", updateEvent);
     app.get("/api/project/user/:userId/event", findUserEvents);
+    app.get("/api/project/event/:eventId", findEventById);
+    app.get("/api/project/event/:eventId/invitees", findInvitees);
 
 
 
@@ -102,6 +104,36 @@ module.exports = function(app, eventModel) {
             }, function (err) {
                 res.status(400).send(err);
             });
+    }
+
+    function findEventById(req,res){
+        eventModel.findEventByID(req.params.eventId)
+            .then(function (event) {
+                res.json(event);
+            }, function (err) {
+                res.status(400).send(err);
+            });
+    }
+
+    function findInvitees(req,res){
+
+        eventModel.findEventByID(req.params.eventId)
+            .then(function (event) {
+
+                return userModel.FindUsersByIds(event.invitees);
+
+            }, function (err) {
+                res.status(400).send(err);
+            })
+            .then(function (users) {
+
+                res.json(users);
+
+            }, function (err) {
+
+                res.status(400).send(err);
+            });
+
     }
 
 

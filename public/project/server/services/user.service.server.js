@@ -22,7 +22,7 @@ module.exports = function(app, userModel, movieModel) {
     app.get("/api/project/user/:id/review",auth,FindUserReviewedMovies);
     app.get("/api/project/user/:id/friends",auth,FindFriendsByIds);
     app.get("/api/project/user/:id/requests",auth,FindRequestsByIds);
-    app.post("/api/project/user/:id/friend/:friendId:",auth,UserAddsFriend);
+    app.post("/api/project/user/:id/friend/:friendId",auth,UserAddsFriend);
     app.post("/api/project/user/:id/request/:friendId",auth,UserGetsFriendRequest);
     app.delete("/api/project/user/:id/friend/:friendId",auth,DeleteFriend);
     app.delete("/api/project/user/:id/request/:friendId",auth,DeleteFriendRequest);
@@ -331,28 +331,34 @@ module.exports = function(app, userModel, movieModel) {
 
 
     function UserAddsFriend(req,res){
-        userModel.userAddsFriend(req.params.id,req.params.friendId)
+
+
+        userModel.userAddsFriend(req.params.friendId,req.params.id)
             .then(function(user){
 
-                return userModel.userDeletsRequest(req.params.id,req.params.friendId);
+                return userModel.userAddsFriend(req.params.id,req.params.friendId)
 
             },function(err){
                 res.status(400).send(err);
             }
             )
             .then(function(user){
-                    userModel.userAddsFriend(req.params.friendId,req.params.id)
-                        .then(function(response){
-                            return userModel.FindUsersByIds(user.friends);
-                        });
+                    return userModel.userDeletsRequest(req.params.id,req.params.friendId);
                 },
                 function(err){
                     res.status(400).send(err);
                 }
             )
+            .then(function(response){
+                return userModel.FindUsersByIds(response.friends);
+            })
+
             .then(function(friends){
+
                 res.json(friends);
+
             },function(err){
+
                 res.status(400).send(err);
             });
     }
@@ -373,7 +379,12 @@ module.exports = function(app, userModel, movieModel) {
 
     function DeleteFriend(req,res){
 
-        userModel.deleteUserFriend(req.params.id,req.params.friendId)
+        userModel.deleteUserFriend(req.params.friendId,req.params.id)
+            .then(function(user){
+                return userModel.deleteUserFriend(req.params.id,req.params.friendId);
+            },function(err){
+                res.status(400).send(err);
+            })
             .then(function(user){
                 return userModel.FindUsersByIds(user.friends)
             },function(err){

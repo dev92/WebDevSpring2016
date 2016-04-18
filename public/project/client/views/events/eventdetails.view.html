@@ -1,7 +1,7 @@
 <div id="page-wrapper">
     <!--<div class="container-fluid">-->
     <!--<div class="row">-->
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="EventDetailController as ctrl">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <md-content>
             <md-tabs md-selected="1" md-align-tabs="top">
                 <md-tab>
@@ -19,60 +19,65 @@
             <md-content layout-padding>
                 <!--<div>-->
                     <form name="userForm">
-                        <fieldset style="border: 0" ng-disabled="otherUser">
-                        <div layout-gt-sm="row">
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Movie name</label>
-                                <input ng-model="event.movie">
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Hosted By</label>
-                                <input ng-model="event.host">
-                            </md-input-container>
-                            <md-datepicker ng-model="event.Date" md-placeholder="Enter date"></md-datepicker>
-                        </div>
-                        <div layout-gt-sm="row">
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Event Location</label>
-                                <input ng-model="event.address">
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>City</label>
-                                <input ng-model="event.city">
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>State</label>
-                                <md-select ng-model="event.state" ng-disabled="otherUser">
-                                    <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                        {{state.abbrev}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Postal Code</label>
-                                <input name="postalCode" ng-model="event.postalCode" placeholder="12345"
-                                       ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
-                                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-                                    <!--<div ng-message="required" class="my-message">You must supply a postal code.</div>-->
-                                    <div ng-message="pattern || md-maxlength" class="my-message">That doesn't look like a valid postal
-                                        code.
+                        <fieldset style="border: 0" ng-disabled="currentusr._id != event.hostId">
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Movie name</label>
+                                    <input ng-model="event.movieName">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Hosted By</label>
+                                    <input ng-model="event.host" ng-disabled="true">
+                                </md-input-container>
+                                <md-datepicker md-min-date="minDate" ng-model="event.date" md-placeholder="Enter date"></md-datepicker>
+                            </div>
+                            <div layout-gt-sm="row">
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Event Location</label>
+                                    <input ng-model="event.address">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>City</label>
+                                    <input ng-model="event.city">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>State</label>
+                                    <md-select ng-model="event.state" ng-disabled="currentusr._id != event.hostId">
+                                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                            {{state.abbrev}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Postal Code</label>
+                                    <input name="postalCode" ng-model="event.zip" placeholder="12345"
+                                           ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                                    <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                        <!--<div ng-message="required" class="my-message">You must supply a postal code.</div>-->
+                                        <div ng-message="pattern || md-maxlength" class="my-message">That doesn't look like a valid postal
+                                            code.
+                                        </div>
                                     </div>
-                                </div>
-                            </md-input-container>
-                        </div>
-                        <label> Invitees</label>
-
-                        <md-chips
-                                ng-model="ctrl.tags"
-                                md-separator-keys="ctrl.keys"
-                                placeholder="Enter names comma seperated"
-                                secondary-placeholder="Comma separated names">
-                        </md-chips>
+                                </md-input-container>
+                            </div>
+                            <label> Invitees</label>
+                            <!--md-separator-keys="keys"-->
+                            <md-contact-chips
+                                    ng-model="event.invitees"
+                                    md-contacts="querySearch($query)"
+                                    md-contact-name="username"
+                                    md-contact-image="avatar"
+                                    md-require-match="true"
+                                    md-highlight-flags="i"
+                                    filter-selected="true"
+                                    placeholder="Enter Invitees">
+                                <!--secondary-placeholder="Comma separated names">-->
+                            </md-contact-chips>
                         </fieldset>
                     </form>
                 <!--</div>-->
                 <div ng-if="currentusr._id == event.hostId" layout="row" layout-align="center center">
-                    <md-button ng-hide="true" class="md-raised md-primary" ng-click="updateEvent(event)">Update</md-button>
+                    <md-button  class="md-raised md-primary" ng-click="updateEvent(event)">Update</md-button>
                 </div>
             </md-content>
         <!--</div>-->

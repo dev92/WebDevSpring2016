@@ -14,7 +14,7 @@ module.exports = function(mongoose) {
         "gender":String,
         "city":String,
         "state":String,
-        "zip":Number,
+        "zip":String,
         "email": String,
         "phone":String,
         "role":String,

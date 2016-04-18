@@ -227,7 +227,8 @@ module.exports = function(mongoose,db) {
 
                 var friends = user.friends;
                 var index = friends.indexOf(friendId);
-                user.friends = friends.splice(index,1);
+                friends.splice(index,1);
+                user.friends = friends;
 
                 user.save(function(err, updatedUser) {
                     if(err) {
@@ -408,7 +409,8 @@ module.exports = function(mongoose,db) {
 
                 var requests = user.requests;
                 var index = requests.indexOf(friendId);
-                user.requests = requests.splice(index,1);
+                requests.splice(index,1);
+                user.requests = requests;
                 user.save(function(err, updatedUser) {
                     if(err) {
                         deferred.reject(err);

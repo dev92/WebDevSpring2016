@@ -22,13 +22,13 @@
                     <div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Movie name</label>
-                            <input ng-model="event.movie">
+                            <input ng-model="event.movieName">
                         </md-input-container>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Hosted By</label>
                             <input ng-model="event.host" ng-disabled="true">
                         </md-input-container>
-                        <md-datepicker ng-model="event.Date" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker md-min-date="minDate" ng-model="event.date" md-placeholder="Enter date"></md-datepicker>
                     </div>
                     <div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-sm>
@@ -60,13 +60,11 @@
                         </md-input-container>
                     </div>
                     <label> Invitees</label>
-
+                    <!--md-separator-keys="keys"-->
                     <md-contact-chips
                             ng-model="event.invitees"
-                            md-separator-keys="keys"
                             md-contacts="querySearch($query)"
                             md-contact-name="username"
-                            md-contact-email="email"
                             md-contact-image="avatar"
                             md-require-match="true"
                             md-highlight-flags="i"

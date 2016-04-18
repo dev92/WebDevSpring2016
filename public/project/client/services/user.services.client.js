@@ -20,7 +20,11 @@
             deleteUserById : deleteUserById,
             updateUser : updateUser,
             findUserFriends:findUserFriends,
-            deleteUserFriend:deleteUserFriend
+            deleteUserFriend:deleteUserFriend,
+            UserSendsFriendRequest:UserSendsFriendRequest,
+            FindUserRequests: FindUserRequests ,
+            DeleteUserRequest:DeleteUserRequest,
+            UserAddsFriend : UserAddsFriend
         };
 
         return service;
@@ -136,6 +140,47 @@
             var defer = $q.defer();
             var url = '/api/project/user/'+ userId+'/friend/'+friendId;
             $http.delete(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function UserSendsFriendRequest(userId,friendId){
+            var defer = $q.defer();
+            var url = "/api/project/user/"+userId+"/request/"+friendId;
+            $http.post(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+
+        function FindUserRequests (userId){
+            var defer = $q.defer();
+            var url = "/api/project/user/"+userId+"/requests";
+            $http.get(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function DeleteUserRequest (userId,friendId){
+            var defer = $q.defer();
+            var url = "/api/project/user/"+userId+"/request/"+friendId;
+            $http.delete(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function UserAddsFriend(userId,friendId){
+            var defer = $q.defer();
+            var url = "/api/project/user/"+userId+"/friend/"+friendId;
+            $http.post(url)
                 .success(function(response){
                     defer.resolve(response);
                 });

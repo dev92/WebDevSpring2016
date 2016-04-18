@@ -5,13 +5,19 @@
 
     function FriendsController($scope, $rootScope,UserService) {
 
-        $scope.imagePath = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+
         $scope.friends = [];
+        $scope.requests = [];
 
         if($rootScope.currentusr){
             UserService.findUserFriends($rootScope.currentusr._id)
                 .then(function (response) {
                    $scope.friends = response;
+                });
+
+            UserService.FindUserRequests($rootScope.currentusr._id)
+                .then(function (response) {
+                    $scope.requests = response;
                 });
         }
 
@@ -20,8 +26,28 @@
             UserService.deleteUserFriend(userId,friend._id)
                 .then(function(response){
                     $scope.friends = response;
-                })
+                });
 
+        }
+
+        $scope.removeRequest = function(userId,friend){
+            UserService.DeleteUserRequest(userId,friend._id)
+                .then(function(response){
+                    $scope.requests = response;
+                });
+
+        }
+
+        $scope.addRequest = function(userId,friend) {
+            UserService.UserAddsFriend(userId, friend._id)
+                .then(function(response){
+                    console.log(response);
+                    $scope.friends = response;
+                    return UserService.FindUserRequests(userId);
+                })
+                .then(function (response) {
+                    $scope.requests = response;
+                });
         }
 
     }

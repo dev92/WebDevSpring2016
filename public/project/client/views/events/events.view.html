@@ -21,21 +21,26 @@
                 <tr>
                     <th class="text-center">Movie Name</th>
                     <th class="text-center">Hosted By</th>
+                    <th class="text-center">Date</th>
                     <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="event in events">
-                    <td class="text-center"><a href="#/eventDetails/{{eventId}}">{{event.movieName}}</a></td>
-                    <td class="text-center">{{event.host}}</td>
-                    <td>
-                        <a ng-click="deleteEvent(event)" ng-if="currentusr._id == 'event.hostId'"
-                           class="btn-floating btn-small waves-effect waves-light red pull-right">
-                            <i class="fa fa-times fa-3x" aria-hidden="true"></i>
+                    <td align="center" class="text-center"><h5><a href="#/eventDetails/{{event._id}}">{{event.movieName}}</a></h5></td>
+                    <td align="center" class="text-center"><h5><a href="#/profile/{{event.hostId}}">{{event.host}}</a></h5></td>
+                    <td align="center"><h5>{{event.date | date:"MM/dd/yyyy"}}</h5></td>
+                    <td align="center">
+                        <a ng-click="deleteEvent(event)" ng-if="currentusr._id == event.hostId"
+                           class="btn-floating btn-small waves-effect waves-light red">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <md-tooltip md-direction="right">
+                                Delete Event?
+                            </md-tooltip>
                         </a>
-                        <a ng-click="notAttending(event)" ng-if="currentusr._id != 'event.hostId'"
-                           class="btn-floating btn-small waves-effect waves-light red pull-right">
-                            <i class="fa fa-thumbs-o-down fa-3x" aria-hidden="true"></i>
+                        <a  ng-click="notAttending(event)" ng-if="currentusr._id != event.hostId"
+                           class="btn-floating btn-small waves-effect waves-light red">
+                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                             <md-tooltip md-direction="right">
                                 Not Attending?
                             </md-tooltip>

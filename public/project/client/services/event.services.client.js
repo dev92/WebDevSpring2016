@@ -10,6 +10,8 @@
 
         var service = {
             findAllEventsForUser : findAllEventsForUser,
+            findEventById : findEventById,
+            findInviteesByIds : findInviteesByIds,
             deleteEventForUser : deleteEventForUser,
             updateEvent : updateEvent,
             createEvent : createEvent,
@@ -68,6 +70,26 @@
             var defer = $q.defer();
             var url = "/api/project/host/"+hostId+"/event/"+eventId;
             $http.delete(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function findEventById(eventId){
+            var defer = $q.defer();
+            var url = '/api/project/event/'+ eventId;
+            $http.get(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function findInviteesByIds(eventId){
+            var defer = $q.defer();
+            var url = '/api/project/event/'+ eventId+'/invitees';
+            $http.get(url)
                 .success(function(response){
                     defer.resolve(response);
                 });

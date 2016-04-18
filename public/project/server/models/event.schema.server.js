@@ -10,7 +10,7 @@ module.exports = function(mongoose) {
         "address": String,
         "city":String,
         "state":String,
-        "zip":Number,
+        "zip":String,
         "email": String,
         "phone":String,
         "date":Date,

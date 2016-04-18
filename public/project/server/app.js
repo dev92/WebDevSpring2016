@@ -8,6 +8,6 @@ module.exports = function(app,mongoose,db) {
 
     require("./services/movie.service.server.js")(app, movieModel,userModel);
     require("./services/user.service.server.js")(app, userModel, movieModel);
-    require("./services/event.service.server.js")(app, eventModel);
+    require("./services/event.service.server.js")(app, eventModel,userModel);
 
 };
