@@ -11,6 +11,7 @@
         $scope.movie = null;
         $scope.favorite = false;
         $scope.user = $rootScope.currentusr;
+        $scope.loading = true;
 
         //console.log($scope.user);
 
@@ -116,7 +117,9 @@
                 //console.log(response.imdbID);
                 //$scope.rating = Number(response.imdbRating).toFixed();
 
+                $scope.loading = false;
                 $scope.movie = response;
+
                 $scope.movie.tmdbId = $scope.tmdbID;
 
                 MovieApiService.findTrailers($scope.tmdbID,function(response){

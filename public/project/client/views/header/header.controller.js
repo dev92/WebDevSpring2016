@@ -17,11 +17,11 @@
         };
 
         $scope.reset = function() {
+            $rootScope.currentusr = null;
             UserService
                 .logout()
                 .then(
                     function(response){
-                        $rootScope.currentusr = null;
                         $location.url("/home");
                     },
                     function(err) {
