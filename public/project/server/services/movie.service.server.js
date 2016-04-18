@@ -176,9 +176,13 @@ module.exports = function(app, movieModel, userModel) {
             })
             .then(function(movie){
                 res.json(movie.userReviews);
+
             },function(err){
-                res.status(400).send(err);
-            });
+                return movieModel.createMovie(req.body);
+            })
+            .then(function(movie){
+                res.json(movie.userReviews);
+            })
     }
 
     function findUserFavorites(req,res){

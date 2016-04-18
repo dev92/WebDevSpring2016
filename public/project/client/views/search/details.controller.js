@@ -81,7 +81,7 @@
         };
 
 
-        $scope.addReview = function(review){
+        $scope.addReview = function(review,movie){
             var newReview = {
                 "tmdbId":$scope.tmdbID,
                 "userId":$scope.user._id,
@@ -92,9 +92,17 @@
                 "movieTitle":$scope.movie.Title
             };
 
-            MovieService.userReviewsMovie(newReview)
+            var newMovie = {
+                "title":movie.Title,
+                "imdbId": movie.imdbID,
+                "tmdbId": $scope.tmdbID,
+                "poster": movie.poster,
+                "trailer": movie.trailer,
+                "userReviews":[newReview]
+            };
+
+            MovieService.userReviewsMovie(newMovie,$scope.user._id)
                 .then(function(response){
-                    console.log(response);
                     $scope.reviews = response;
                     $scope.newreview = null;
                 })

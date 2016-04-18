@@ -29,10 +29,3 @@ md-toast {
     width: 60px;
     height: 80px;
 }
-
-ul#actors li {
-    display: inline;
-    list-style-type: none;
-    padding-right: 20px;
-    float: left;
-}

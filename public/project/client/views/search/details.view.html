@@ -25,7 +25,7 @@
                         <a class="btn-floating btn-large white" ng-click="toggleFavorite(movie)"><i ng-class="{'fa fa-heart-o fa-5x':!favorite,'fa fa-heart fa-5x':favorite}" style="color: red"></i></a>
                         <h6>IMDB Rating: {{movie.imdbRating}}</h6>
                     </div>
-                    <div layout="row" layout-align="center center">
+                    <div layout-gt-xs="row" layout-xs="column" layout-align="center center">
                         <h6>Your Rating: </h6>
                         <uib-rating ng-model="rating" style="color: gold" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null" ng-change="rateMovie(movie.tmdbId,rating)" state-on="'glyphicon glyphicon-star fa-lg'" state-off="'glyphicon glyphicon-star-empty fa-lg'" aria-labelledby="custom-icons-1"></uib-rating>
                         <span><b>({{overStar || rating}}/5)</b></span>
@@ -45,7 +45,7 @@
 
                     <h4>Actors</h4>
 
-                    <ul id="actors">
+                    <ul>
                         <li ng-repeat="actorName in movie.Actors.split(',')">
                             {{actorName}}
                         </li>
@@ -83,12 +83,12 @@
                     </div>
                 <!--</div>-->
                 <!--<hr>-->
-                <md-divider></md-divider>
                 <div class="row" md-padding>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="divider-new">User Likes</div>
                         <div layout="column" layout-align="center center">
                             <a class="btn-floating btn-large waves-effect waves-light white" data-toggle="collapse" data-target="#likes"><i class="fa fa-thumbs-up fa-lg" style="color: dodgerblue" aria-hidden="true"></i>
-                                <md-tooltip md-direction="top">
+                                <md-tooltip md-direction="right">
                                     User Likes
                                 </md-tooltip>
                             </a>
@@ -100,27 +100,38 @@
                             </md-list-item>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <md-input-container class="md-block md-icon-right">
-                            <label>Review...</label>
-                            <textarea ng-model="newreview" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-                            <!--<a class="btn-floating btn-medium waves-effect waves-light blue" ng-click="addReview(newreview)"><i class="fa fa-pencil-square-o"></i></a>-->
-                            <md-icon style="display: inline-block" class="md-icon-button md-primary" ng-click="addReview(newreview)" aria-label="review"><i class="fa fa-pencil-square-o fa-lg"></i></md-icon>
-                        </md-input-container>
+                    <div class="divider-new">Reviews</div>
+                    <div class="col-md-8">
+                        <div layout="column" layout-align="center center">
+                            <a class="btn-floating btn-large waves-effect waves-light white" data-toggle="collapse" data-target="#reviews"><i class="fa fa-pencil-square-o" style="color: orangered" aria-hidden="true"></i>
+                                <md-tooltip md-direction="left">
+                                    User Reviews
+                                </md-tooltip>
+                            </a>
+                        </div>
+                        <div id="reviews"  class="collapse">
+                            <div layout="row" layout-align="center center" layout-wrap class="md-inline-form">
+                                <md-input-container class="md-block">
+                                    <label>Review...</label>
+                                    <textarea ng-model="newreview" md-maxlength="150" rows="2" md-select-on-focus></textarea>
+                                    <!--<md-icon style="display: inline-block" class="md-icon-button md-primary" ng-click="addReview(newreview,movie)" aria-label="review"><i class="fa fa-pencil-square-o fa-lg"></i></md-icon>-->
+                                </md-input-container>
+                                <a class="btn-floating btn-small waves-effect waves-light green" ng-click="addReview(newreview,movie)" aria-label="review"><i class="fa fa-check-square-o" aria-hidden="true"></i></a>
+                            </div>
                         <h5 class="md-no-sticky">Reviews:</h5>
                         <md-list-item ng-repeat="review in reviews" class="md-3-line md-long-text">
                             <img alt="{{ review.username }}" ng-src="{{ review.avatar }}" class="md-avatar" />
                             <div class="md-list-item-text">
                                 <h3><a href="#/profile/{{review.userId}}">{{ review.username }}</a></h3>
-                                <i class="fa fa-quote-left fa-pull-left" aria-hidden="true"></i>
                                 <p>
+                                    <i class="fa fa-quote-left fa-pull-left" aria-hidden="true"></i>
                                     {{review.review}}
                                     <a ng-if="review.userId == currentusr._id" ng-click="editReview(review.review)"
-                                       class="btn-floating btn-small waves-effect waves-light orange pull-right">
+                                       class="btn-floating btn-small waves-effect waves-light orange">
                                         <i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
                                     </a>
                                     <a ng-if="review.userId == currentusr._id" ng-click="removeReview(review)"
-                                       class="btn-floating btn-small waves-effect waves-light red pull-right">
+                                       class="btn-floating btn-small waves-effect waves-light red">
                                         <i class="fa fa-times fa-3x" aria-hidden="true"></i>
                                     </a>
                                 </p>
@@ -128,6 +139,7 @@
                                 <!--<a ng-if="review.userId == currentusr._id" class="btn-floating btn-medium waves-effect waves-light red"><i class="fa fa-times" aria-hidden="true"></i></a>-->
                             </div>
                         </md-list-item>
+                        </div>
                     <!--<h5>Reviews: </h5>-->
                         <!--<ul class="fa-ul">-->
                             <!--<li ng-repeat="review in reviews">-->

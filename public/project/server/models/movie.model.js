@@ -158,20 +158,21 @@ module.exports = function(mongoose,db) {
         MovieModel.findOne({'tmdbId':movieId}, function(err, doc) {
 
             // reject promise if error
-            if (err) {
+            if (err || !doc) {
                 deferred.reject(err);
             } else {
                 var reviewedUsers = doc.userReviews;
                 var found = false;
+                var newReview = reviewedMovie.userReviews[0];
                 for(var m in reviewedUsers){
-                    if(reviewedUsers[m].userId == reviewedMovie.userId){
-                        reviewedUsers[m].review = reviewedMovie.review;
+                    if(reviewedUsers[m].userId == newReview.userId){
+                        reviewedUsers[m].review = newReview.review;
                         found = true;
                         break;
                     }
                 }
                 if(!found){
-                    doc.userReviews.push(reviewedMovie);
+                    doc.userReviews.push(newReview);
                 }else{
                     doc.userReviews = reviewedUsers;
                 }

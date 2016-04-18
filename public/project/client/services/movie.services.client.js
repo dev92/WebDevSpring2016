@@ -76,11 +76,11 @@
             return defer.promise;
         }
 
-        function userReviewsMovie(review){
+        function userReviewsMovie(movie,userId){
 
             var defer = $q.defer();
-            var url = "/api/project/user/"+review.userId+"/review/"+review.tmdbId;
-            $http.post(url,review)
+            var url = "/api/project/user/"+userId+"/review/"+movie.tmdbId;
+            $http.post(url,movie)
                 .success(function(response){
                     defer.resolve(response);
                 })
