@@ -126,15 +126,15 @@
                                 <p>
                                     <i class="fa fa-quote-left fa-pull-left" aria-hidden="true"></i>
                                     {{review.review}}
-                                    <a ng-if="review.userId == currentusr._id" ng-click="editReview(review.review)"
-                                       class="btn-floating btn-small waves-effect waves-light orange">
-                                        <i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
-                                    </a>
-                                    <a ng-if="review.userId == currentusr._id" ng-click="removeReview(review)"
-                                       class="btn-floating btn-small waves-effect waves-light red">
-                                        <i class="fa fa-times fa-3x" aria-hidden="true"></i>
-                                    </a>
                                 </p>
+                                <a ng-if="review.userId == currentusr._id" ng-click="editReview(review.review)"
+                                   class="btn-floating btn-small waves-effect waves-light orange">
+                                    <i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
+                                </a>
+                                <a ng-if="review.userId == currentusr._id" ng-click="removeReview(review)"
+                                   class="btn-floating btn-small waves-effect waves-light red">
+                                    <i class="fa fa-times fa-3x" aria-hidden="true"></i>
+                                </a>
                                 <!--<a ng-if="review.userId == currentusr._id" class="btn-floating btn-medium waves-effect waves-light orange"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
                                 <!--<a ng-if="review.userId == currentusr._id" class="btn-floating btn-medium waves-effect waves-light red"><i class="fa fa-times" aria-hidden="true"></i></a>-->
                             </div>
