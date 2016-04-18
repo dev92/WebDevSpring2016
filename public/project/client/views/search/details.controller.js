@@ -94,6 +94,7 @@
 
             MovieService.userReviewsMovie(newReview)
                 .then(function(response){
+                    console.log(response);
                     $scope.reviews = response;
                     $scope.newreview = null;
                 })
@@ -144,6 +145,7 @@
 
         MovieService.findMovieReviews($scope.tmdbID)
             .then(function(response){
+                console.log(response);
                 $scope.reviews = response;
             },function(err){
                 $scope.reviews = [];
