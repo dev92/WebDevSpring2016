@@ -103,7 +103,7 @@ module.exports = function(app, userModel, movieModel,eventModel) {
 
         var newUser = req.body;
 
-        newUser.role = 'admin';
+        newUser.role = 'general';
 
 
 
