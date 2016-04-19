@@ -26,6 +26,7 @@
             if($rootScope.currentusr._id == profileId){
 
                 $scope.user = $rootScope.currentusr;
+                delete $scope.user.password;
                 $scope.disableFields = false;
 
             }else {
@@ -94,10 +95,13 @@
 
         $scope.update = function(user,vpassword) {
 
-            if (user.password != vpassword) {
-                console.log("Password dont match!");
+            if (user.password != vpassword && user.password!='' && vpassword!=null) {
                 $scope.message = "Passwords must match";
                 return;
+            }
+
+            if(user.password == ""){
+                delete user.password;
             }
 
             UserService.updateUser(user._id,user)

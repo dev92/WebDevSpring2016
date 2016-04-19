@@ -1,6 +1,7 @@
 "use strict";
 
 var q = require("q");
+var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(mongoose,db) {
 
@@ -101,7 +102,12 @@ module.exports = function(mongoose,db) {
                 response.firstName = user.firstName;
                 response.lastName = user.lastName;
                 response.username = user.username;
-                response.password = user.password;
+
+                if(user.hasOwnProperty("password")){
+                    if(!bcrypt.compareSync(user.password,response.password))
+                        response.password = bcrypt.hashSync(user.password);
+                }
+
                 response.email = user.email;
                 response.phone = user.phone;
                 response.role = user.role;
@@ -155,7 +161,7 @@ module.exports = function(mongoose,db) {
     function FindUserByUsername(username){
 
         var deferred = q.defer();
-        UserModel.findOne({username: username}, function(err, user) {
+        UserModel.findOne(username, function(err, user) {
             if(err) {
                 deferred.reject(err);
             } else {

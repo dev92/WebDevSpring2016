@@ -2,6 +2,7 @@
 
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
+var bcrypt           = require("bcrypt-nodejs");
 //var fs = require("fs");
 
 module.exports = function(app, userModel, movieModel,eventModel) {
@@ -43,14 +44,17 @@ module.exports = function(app, userModel, movieModel,eventModel) {
 
     function localStrategy(username, password, done) {
         userModel
-            .FindUserByCredentials({username: username, password: password})
+            .FindUserByUsername({username: username})
             .then(
                 function(user) {
-                    if (!user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
 
+                    }else{
+                        
                         return done(null, false);
                     }
-                    return done(null, user);
+
                 },
                 function(err) {
                     if (err) {
@@ -107,6 +111,7 @@ module.exports = function(app, userModel, movieModel,eventModel) {
                     if(user) {
                         res.json(null);
                     } else {
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.Create(newUser);
                     }
                 },
@@ -152,17 +157,7 @@ module.exports = function(app, userModel, movieModel,eventModel) {
 
         userModel.FindById(userId)
             .then(function(user){
-                //fs.exists(user.avatar, function(exist) {
-                //    if (exist) {
-                //        console.log("Going to delete an existing file");
-                //        fs.unlink(user.avatar, function(err) {
-                //            if (err) {
-                //                return console.error(err);
-                //            }
-                //            console.log("File deleted successfully!");
-                //        });
-                //    }
-                //});
+
                 user.avatar = "/project/uploads/"+filename;
                 return userModel.Update(userId,user);
             },function(err){
