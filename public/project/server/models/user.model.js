@@ -104,8 +104,9 @@ module.exports = function(mongoose,db) {
                 response.username = user.username;
 
                 if(user.hasOwnProperty("password")){
-                    if(!bcrypt.compareSync(user.password,response.password))
-                        response.password = bcrypt.hashSync(user.password);
+                    response.password = bcrypt.hashSync(user.password);
+                }else{
+                    response.password = response.password;
                 }
 
                 response.email = user.email;
@@ -161,7 +162,7 @@ module.exports = function(mongoose,db) {
     function FindUserByUsername(username){
 
         var deferred = q.defer();
-        UserModel.findOne(username, function(err, user) {
+        UserModel.findOne({username:username}, function(err, user) {
             if(err) {
                 deferred.reject(err);
             } else {
@@ -483,7 +484,12 @@ module.exports = function(mongoose,db) {
                 deferred.reject(err);
             } else {
                 var reviewedMovies = doc.moviesReviewed;
-                var newReview = reviewedMovie.userReviews[0];
+                if(reviewedMovie.hasOwnProperty('tempReview')){
+                    var newReview = reviewedMovie.tempReview;
+                }else{
+                    var newReview = reviewedMovie;
+                }
+
                 var found = false;
                 for(var m in reviewedMovies){
                     if(reviewedMovies[m].tmdbId == newReview.tmdbId){

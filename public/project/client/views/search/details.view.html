@@ -121,32 +121,29 @@
                         <h5 class="md-no-sticky">Reviews:</h5>
                         <md-list-item ng-repeat="review in reviews" class="md-3-line md-long-text">
                             <img alt="{{ review.username }}" ng-src="{{ review.avatar }}" class="md-avatar" />
-                            <div class="md-list-item-text">
+                            <div class="md-list-item-text md-long-text">
                                 <h3><a href="#/profile/{{review.userId}}">{{ review.username }}</a></h3>
-                                <p>
+                                <p flex>
                                     <i class="fa fa-quote-left fa-pull-left" aria-hidden="true"></i>
                                     {{review.review}}
                                 </p>
-                                <a ng-if="review.userId == currentusr._id" ng-click="editReview(review.review)"
-                                   class="btn-floating btn-small waves-effect waves-light orange">
+                                <a  ng-click="editReview(review.review)" ng-if="currentusr._id == review.userId"
+                                    class="btn-floating btn-small waves-effect waves-light orange">
                                     <i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
+                                    <md-tooltip md-direction="left" md-autohide="true">
+                                        Edit
+                                    </md-tooltip>
                                 </a>
-                                <a ng-if="review.userId == currentusr._id" ng-click="removeReview(review)"
+                                <a ng-click="removeReview(review)" ng-if="currentusr._id == review.userId"
                                    class="btn-floating btn-small waves-effect waves-light red">
                                     <i class="fa fa-times fa-3x" aria-hidden="true"></i>
+                                    <md-tooltip md-direction="right"  md-autohide="true">
+                                        Delete
+                                    </md-tooltip>
                                 </a>
-                                <!--<a ng-if="review.userId == currentusr._id" class="btn-floating btn-medium waves-effect waves-light orange"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
-                                <!--<a ng-if="review.userId == currentusr._id" class="btn-floating btn-medium waves-effect waves-light red"><i class="fa fa-times" aria-hidden="true"></i></a>-->
                             </div>
                         </md-list-item>
                         </div>
-                    <!--<h5>Reviews: </h5>-->
-                        <!--<ul class="fa-ul">-->
-                            <!--<li ng-repeat="review in reviews">-->
-                                <!--<i class="fa-li fa fa-chevron-right" aria-hidden="true"></i>-->
-                                <!--<h6><a href="#/profile/{{user._id}}">{{review}}</a></h6>-->
-                            <!--</li>-->
-                        <!--</ul>-->
                     </div>
                 </div>
             </div>

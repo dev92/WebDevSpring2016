@@ -5,12 +5,12 @@
 
     function ReviewsController($scope, $rootScope, $location, MovieService) {
 
-        $scope.movies = [];
+        $scope.reviews = [];
         $scope.buttonType = "edit";
 
         MovieService.findUserReviews($rootScope.currentusr._id)
             .then(function (response) {
-                $scope.movies = response;
+                $scope.reviews = response;
             });
 
 
@@ -19,9 +19,9 @@
         }
 
         $scope.submitReview = function(review){
-            MovieService.userReviewsMovie(review)
+            MovieService.userReviewsMovie(review,$rootScope.currentusr._id)
                 .then(function(response){
-                    $scope.movies = response;
+                    $scope.reviews = response;
                     $scope.buttonType = "edit";
                 });
         }
@@ -29,7 +29,7 @@
         $scope.removeReview = function(review){
             MovieService.userDeletesReview(review.userId,review.tmdbId)
                 .then(function(response){
-                    $scope.movies = response;
+                    $scope.reviews = response;
                 });
         }
     }

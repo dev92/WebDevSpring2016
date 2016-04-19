@@ -98,6 +98,9 @@
             if (user.password != vpassword && user.password!='' && vpassword!=null) {
                 $scope.message = "Passwords must match";
                 return;
+            }else if(user.password!='' && vpassword==null && user.password){
+                $scope.message = "Enter verify password!";
+                return
             }
 
             if(user.password == ""){
@@ -107,7 +110,7 @@
             UserService.updateUser(user._id,user)
                 .then(function(response){
                     $rootScope.currentusr = response;
-                    $location.path('/profile/'+user._id);
+                    $location.url('/profile/'+user._id);
                 });
             }
         }

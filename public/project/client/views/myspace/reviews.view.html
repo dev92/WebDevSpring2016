@@ -20,27 +20,27 @@
             </md-toolbar>
             <md-content>
                 <md-list flex>
-                    <md-list-item class="md-3-line"  ng-repeat="movie in movies">
-                        <img ng-src={{movie.poster}} class="img-responsive rect-img" alt="{{movie.movieTitle}}">
+                    <md-list-item class="md-3-line"  ng-repeat="review in reviews">
+                        <img ng-src={{review.poster}} class="img-responsive rect-img" alt="{{review.movieTitle}}">
                         <div class="md-list-item-text md-long-text">
-                            <h3><a href="#/detail/{{movie.tmdbId}}">{{movie.movieTitle}}</a></h3>
+                            <h3><a href="#/detail/{{review.tmdbId}}">{{review.movieTitle}}</a></h3>
                             <md-input-container class="md-block" ng-if="buttonType == 'submit'">
-                                <textarea ng-model="movie.review" md-maxlength="150" rows="5" md-select-on-focus aria-label="review"></textarea>
+                                <textarea ng-model="review.review" md-maxlength="150" rows="5" md-select-on-focus aria-label="review"></textarea>
                             </md-input-container>
                             <p ng-if="buttonType == 'edit'">
                                 <i class="fa fa-quote-left fa-pull-left" aria-hidden="true"></i>
-                                {{movie.review}}
+                                {{review.review}}
                             </p>
                         </div>
-                        <a ng-click="editReview(movie)" ng-if="buttonType == 'edit'"
+                        <a ng-click="editReview(review)" ng-if="buttonType == 'edit'"
                            class="btn-floating btn-small waves-effect waves-light orange pull-right">
                             <i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
                         </a>
-                        <a ng-click="submitReview(movie)" ng-if="buttonType == 'submit'"
+                        <a ng-click="submitReview(review)" ng-if="buttonType == 'submit'"
                            class="btn-floating btn-small waves-effect waves-light green pull-right">
                             <i class="fa fa-check fa-3x" aria-hidden="true"></i>
                         </a>
-                        <a  ng-click="removeReview(movie)"
+                        <a  ng-click="removeReview(review)"
                             class="btn-floating btn-small waves-effect waves-light red pull-right">
                             <i class="fa fa-times fa-3x" aria-hidden="true"></i>
                         </a>

@@ -43,15 +43,16 @@ module.exports = function(app, userModel, movieModel,eventModel) {
 
 
     function localStrategy(username, password, done) {
+        //console.log(username,password);
         userModel
-            .FindUserByUsername({username: username})
+            .FindUserByUsername(username)
             .then(
                 function(user) {
                     if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
 
                     }else{
-                        
+
                         return done(null, false);
                     }
 
@@ -100,7 +101,7 @@ module.exports = function(app, userModel, movieModel,eventModel) {
 
         var newUser = req.body;
 
-        newUser.role = 'general';
+        newUser.role = 'admin';
 
 
 

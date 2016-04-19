@@ -163,7 +163,12 @@ module.exports = function(mongoose,db) {
             } else {
                 var reviewedUsers = doc.userReviews;
                 var found = false;
-                var newReview = reviewedMovie.userReviews[0];
+
+                if(reviewedMovie.hasOwnProperty('tempReview')){
+                    var newReview = reviewedMovie.tempReview;
+                }else{
+                    var newReview = reviewedMovie;
+                }
                 for(var m in reviewedUsers){
                     if(reviewedUsers[m].userId == newReview.userId){
                         reviewedUsers[m].review = newReview.review;

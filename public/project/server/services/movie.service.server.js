@@ -178,7 +178,9 @@ module.exports = function(app, movieModel, userModel) {
                 res.json(movie.userReviews);
 
             },function(err){
-                return movieModel.createMovie(req.body);
+                var movie = req.body;
+                movie.userReviews = [movie.tempReview];
+                return movieModel.createMovie();
             })
             .then(function(movie){
                 res.json(movie.userReviews);

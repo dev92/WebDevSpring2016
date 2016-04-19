@@ -12,6 +12,7 @@
         $scope.favorite = false;
         $scope.loading = true;
 
+
         //console.log($scope.user);
 
         if($rootScope.currentusr.moviesLiked.indexOf($scope.tmdbID) !=-1){
@@ -97,7 +98,7 @@
                 "tmdbId": $scope.tmdbID,
                 "poster": movie.poster,
                 "trailer": movie.trailer,
-                "userReviews":[newReview]
+                "tempReview":newReview
             };
 
             MovieService.userReviewsMovie(newMovie,$rootScope.currentusr._id)
