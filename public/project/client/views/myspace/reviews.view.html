@@ -25,7 +25,7 @@
                         <div class="md-list-item-text md-long-text">
                             <h3><a href="#/detail/{{review.tmdbId}}">{{review.movieTitle}}</a></h3>
                             <md-input-container class="md-block" ng-if="buttonType == 'submit'">
-                                <textarea ng-model="review.review" md-maxlength="150" rows="5" md-select-on-focus aria-label="review"></textarea>
+                                <textarea ng-model="review.review" md-maxlength="150" rows="2" md-select-on-focus aria-label="review"></textarea>
                             </md-input-container>
                             <p ng-if="buttonType == 'edit'">
                                 <i class="fa fa-quote-left fa-pull-left" aria-hidden="true"></i>

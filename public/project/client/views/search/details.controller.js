@@ -82,6 +82,11 @@
 
 
         $scope.addReview = function(review,movie){
+
+            if(review == ''|| !review){
+                return;
+            }
+
             var newReview = {
                 "tmdbId":$scope.tmdbID,
                 "userId":$rootScope.currentusr._id,
@@ -101,7 +106,6 @@
                 "tempReview":newReview
             };
 
-            console.log(newMovie);
 
             MovieService.userReviewsMovie(newMovie,$rootScope.currentusr._id)
                 .then(function(response){
