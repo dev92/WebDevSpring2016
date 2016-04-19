@@ -48,11 +48,15 @@ module.exports = function(app, userModel, movieModel,eventModel) {
             .FindUserByUsername(username)
             .then(
                 function(user) {
-                    if (user && bcrypt.compareSync(password, user.password)) {
-                        return done(null, user);
-
-                    }else{
-
+                    if(user) {
+                        bcrypt.compare(password, user.password, function (err, res) {
+                            if (res) {
+                                return done(null, user);
+                            }
+                        });
+                    }
+                    //if (user && bcrypt.compareSync(password, user.password)) {
+                    else{
                         return done(null, false);
                     }
 
@@ -101,7 +105,7 @@ module.exports = function(app, userModel, movieModel,eventModel) {
 
         var newUser = req.body;
 
-        newUser.role = 'general';
+        newUser.role = 'admin';
 
 
 
@@ -112,7 +116,13 @@ module.exports = function(app, userModel, movieModel,eventModel) {
                     if(user) {
                         res.json(null);
                     } else {
-                        newUser.password = bcrypt.hashSync(newUser.password);
+                        bcrypt.hash(newUser.password,null,null, function(err, hash) {
+                            // Store hash in your password DB.
+                            newUser.password = hash;
+                        },function(err){
+                            console.log(err);
+                        });
+                        //newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.Create(newUser);
                     }
                 },

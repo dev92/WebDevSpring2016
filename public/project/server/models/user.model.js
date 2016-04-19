@@ -104,11 +104,15 @@ module.exports = function(mongoose,db) {
                 response.username = user.username;
 
                 if(user.hasOwnProperty("password")){
-                    response.password = bcrypt.hashSync(user.password);
-                }else{
-                    response.password = response.password;
+                    bcrypt.hash(user.password, null,null, function(err, hash) {
+                        // Store hash in your password DB.
+                        if(err){
+                            deferred.reject(err);
+                        }
+                        response.password = hash;
+                    });
+                    //response.password = bcrypt.hashSync(user.password);
                 }
-
                 response.email = user.email;
                 response.phone = user.phone;
                 response.role = user.role;
