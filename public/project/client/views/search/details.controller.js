@@ -10,19 +10,18 @@
         $scope.reviews = [];
         $scope.movie = null;
         $scope.favorite = false;
-        $scope.user = $rootScope.currentusr;
         $scope.loading = true;
 
         //console.log($scope.user);
 
-        if($scope.user.moviesLiked.indexOf($scope.tmdbID) !=-1){
+        if($rootScope.currentusr.moviesLiked.indexOf($scope.tmdbID) !=-1){
             $scope.favorite = true
         }
 
-        var elementPos = $scope.user.moviesRated.map(function(x) {return x.tmdbId; }).indexOf($scope.tmdbID);
+        var elementPos = $rootScope.currentusr.moviesRated.map(function(x) {return x.tmdbId; }).indexOf($scope.tmdbID);
 
         if(elementPos != -1){
-            $scope.rating = $scope.user.moviesRated[elementPos].rating;
+            $scope.rating = $rootScope.currentusr.moviesRated[elementPos].rating;
         }
 
 
@@ -41,13 +40,13 @@
                 };
 
                 //console.log(movie);
-                MovieService.userLikesMovie($scope.user._id,newMovie)
+                MovieService.userLikesMovie($rootScope.currentusr._id,newMovie)
                     .then(function (response) {
                         //console.log(response);
                         $scope.users = response;
                     });
             }else{
-                MovieService.userDislikesMovie($scope.user._id,movie.tmdbId)
+                MovieService.userDislikesMovie($rootScope.currentusr._id,movie.tmdbId)
                     .then(function (response) {
                         //console.log(response);
                         $scope.users = response;
@@ -65,11 +64,11 @@
         $scope.rateMovie = function(id,rating){
             var ratingObj = {
                 "tmdbId":id,
-                "userId":$scope.user._id,
+                "userId":$rootScope.currentusr._id,
                 "rating":rating
             };
             //console.log(ratingObj);
-            MovieService.userRatesMovie($scope.user._id,ratingObj)
+            MovieService.userRatesMovie($rootScope.currentusr._id,ratingObj)
                 .then(function(ratings){
                     //console.log(ratings);
                     $scope.rating = rating;
@@ -84,12 +83,12 @@
         $scope.addReview = function(review,movie){
             var newReview = {
                 "tmdbId":$scope.tmdbID,
-                "userId":$scope.user._id,
-                "username":$scope.user.username,
-                "avatar":$scope.user.avatar,
+                "userId":$rootScope.currentusr._id,
+                "username":$rootScope.currentusr.username,
+                "avatar":$rootScope.currentusr.avatar,
                 "review":review,
-                "poster":$scope.movie.poster,
-                "movieTitle":$scope.movie.Title
+                "poster":movie.poster,
+                "movieTitle":movie.Title
             };
 
             var newMovie = {
@@ -101,7 +100,7 @@
                 "userReviews":[newReview]
             };
 
-            MovieService.userReviewsMovie(newMovie,$scope.user._id)
+            MovieService.userReviewsMovie(newMovie,$rootScope.currentusr._id)
                 .then(function(response){
                     $scope.reviews = response;
                     $scope.newreview = null;
@@ -153,7 +152,6 @@
 
         MovieService.findMovieReviews($scope.tmdbID)
             .then(function(response){
-                console.log(response);
                 $scope.reviews = response;
             },function(err){
                 $scope.reviews = [];

@@ -477,16 +477,17 @@ module.exports = function(mongoose,db) {
                 deferred.reject(err);
             } else {
                 var reviewedMovies = doc.moviesReviewed;
+                var newReview = reviewedMovie.userReviews[0];
                 var found = false;
                 for(var m in reviewedMovies){
-                    if(reviewedMovies[m].imdbId == reviewedMovie.imdbId){
-                        reviewedMovies[m].review = reviewedMovie.review;
+                    if(reviewedMovies[m].tmdbId == newReview.tmdbId){
+                        reviewedMovies[m].review = newReview.review;
                         found = true;
                         break;
                     }
                 }
                 if(!found){
-                    doc.moviesReviewed.push(reviewedMovie);
+                    doc.moviesReviewed.push(newReview);
                 }else{
                     doc.moviesReviewed = reviewedMovies;
                 }

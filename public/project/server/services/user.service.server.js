@@ -4,7 +4,7 @@ var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
 //var fs = require("fs");
 
-module.exports = function(app, userModel, movieModel) {
+module.exports = function(app, userModel, movieModel,eventModel) {
 
     var auth = authorized;
 
@@ -16,7 +16,7 @@ module.exports = function(app, userModel, movieModel) {
     app.post  ('/api/project/register',       register);
     app.get   ('/api/project/loggedin',  loggedin);
 
-    app.get("/api/project/user",auth,FindAll);
+    app.get("/api/project/admin/user",auth,FindAll);
     app.get("/api/project/user/:id",auth,FindById);
     app.get("/api/project/user/:id/movie",auth,FindUserLikedMovies);
     app.get("/api/project/user/:id/review",auth,FindUserReviewedMovies);
@@ -221,7 +221,7 @@ module.exports = function(app, userModel, movieModel) {
             .Update(req.params.id, newUser)
             .then(
                 function(user){
-                    if(!isAdmin(req.user) || req.session.passport.user._id == req.params.id){
+                    if(!isAdmin(req.user) && req.session.passport.user._id == req.params.id){
                         return user;
                     }else{
                         return userModel.FindAll();

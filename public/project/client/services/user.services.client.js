@@ -74,7 +74,7 @@
 
         function findAllUsers() {
             var defer = $q.defer();
-            var url = '/api/project/user';
+            var url = "/api/project/admin/user";
             $http.get(url)
                 .success(function(response){
                     defer.resolve(response);
@@ -119,7 +119,6 @@
             var url = '/api/project/user/'+ userId;
             $http.put(url, user)
                 .success(function(response){
-                    console.log(response);
                     defer.resolve(response);
                 });
             return defer.promise;

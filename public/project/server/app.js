@@ -7,7 +7,7 @@ module.exports = function(app,mongoose,db) {
     var eventModel = require("./models/event.model.js")(mongoose,db);
 
     require("./services/movie.service.server.js")(app, movieModel,userModel);
-    require("./services/user.service.server.js")(app, userModel, movieModel);
+    require("./services/user.service.server.js")(app, userModel, movieModel,eventModel);
     require("./services/event.service.server.js")(app, eventModel,userModel);
     require("./services/movieapi.service.server.js")(app);
 
