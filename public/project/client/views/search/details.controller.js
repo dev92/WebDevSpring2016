@@ -101,6 +101,8 @@
                 "tempReview":newReview
             };
 
+            console.log(newMovie);
+
             MovieService.userReviewsMovie(newMovie,$rootScope.currentusr._id)
                 .then(function(response){
                     $scope.reviews = response;

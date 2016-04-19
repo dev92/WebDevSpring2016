@@ -180,7 +180,7 @@ module.exports = function(app, movieModel, userModel) {
             },function(err){
                 var movie = req.body;
                 movie.userReviews = [movie.tempReview];
-                return movieModel.createMovie();
+                return movieModel.createMovie(movie);
             })
             .then(function(movie){
                 res.json(movie.userReviews);
