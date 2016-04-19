@@ -48,15 +48,13 @@ module.exports = function(app, userModel, movieModel,eventModel) {
             .FindUserByUsername(username)
             .then(
                 function(user) {
-                    if(user) {
-                        bcrypt.compare(password, user.password, function (err, res) {
-                            if (res) {
-                                return done(null, user);
-                            }
-                        });
+                    if(user && bcrypt.compareSync(password, user.password)){
+
+                        return done(null, user);
                     }
                     //if (user && bcrypt.compareSync(password, user.password)) {
                     else{
+
                         return done(null, false);
                     }
 
@@ -105,7 +103,7 @@ module.exports = function(app, userModel, movieModel,eventModel) {
 
         var newUser = req.body;
 
-        newUser.role = 'general';
+        newUser.role = 'admin';
 
 
 
@@ -114,15 +112,14 @@ module.exports = function(app, userModel, movieModel,eventModel) {
             .then(
                 function(user){
                     if(user) {
+
                         res.json(null);
+
                     } else {
-                        bcrypt.hash(newUser.password,null,null, function(err, hash) {
-                            // Store hash in your password DB.
-                            newUser.password = hash;
-                        });
-                        //newUser.password = bcrypt.hashSync(newUser.password);
+
                         return userModel.Create(newUser);
                     }
+                        //newUser.password = bcrypt.hashSync(newUser.password);
                 },
                 function(err){
                     res.status(400).send(err);
@@ -282,10 +279,6 @@ module.exports = function(app, userModel, movieModel,eventModel) {
                     // if the user does not already exist
                     if(user == null) {
                         // create a new user
-                        bcrypt.hash(newUser.password,null,null, function(err, hash) {
-                            // Store hash in your password DB.
-                            newUser.password = hash;
-                        });
                         return userModel.Create(newUser)
                             .then(
                                 // fetch all the users

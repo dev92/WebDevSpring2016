@@ -30,6 +30,8 @@
 
         $scope.update = function(userId,user) {
 
+            delete user.password;
+
             user.genres = $scope.selected;
 
             UserService.updateUser(userId,user)

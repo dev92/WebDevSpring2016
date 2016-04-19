@@ -35,6 +35,8 @@ module.exports = function(mongoose,db) {
 
         var deferred = q.defer();
 
+        user.password = bcrypt.hashSync(user.password);
+
         UserModel.create(user, function(err, document) {
             if (err) {
                 // reject promise if error
@@ -45,6 +47,7 @@ module.exports = function(mongoose,db) {
             }
 
         });
+
         return deferred.promise;
         //var msg = checkExistingUser(user);
         //if(msg == null){
@@ -102,17 +105,6 @@ module.exports = function(mongoose,db) {
                 response.firstName = user.firstName;
                 response.lastName = user.lastName;
                 response.username = user.username;
-
-                if(user.hasOwnProperty("password")){
-                    bcrypt.hash(user.password, null,null, function(err, hash) {
-                        // Store hash in your password DB.
-                        if(err){
-                            deferred.reject(err);
-                        }
-                        response.password = hash;
-                    });
-                    //response.password = bcrypt.hashSync(user.password);
-                }
                 response.email = user.email;
                 response.phone = user.phone;
                 response.role = user.role;
@@ -129,9 +121,15 @@ module.exports = function(mongoose,db) {
                 response.moviesReviewed = user.moviesReviewed;
                 response.avatar = user.avatar;
 
+                if(user.hasOwnProperty("password")){
+                    response.password = bcrypt.hashSync(user.password);
+                    //response.password = bcrypt.hashSync(user.password);
+                }
+
                 response.save(function(err, document) {
                     deferred.resolve(document);
                 });
+
             }
         });
         return deferred.promise;
