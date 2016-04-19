@@ -119,8 +119,6 @@ module.exports = function(app, userModel, movieModel,eventModel) {
                         bcrypt.hash(newUser.password,null,null, function(err, hash) {
                             // Store hash in your password DB.
                             newUser.password = hash;
-                        },function(err){
-                            console.log(err);
                         });
                         //newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.Create(newUser);
@@ -284,6 +282,10 @@ module.exports = function(app, userModel, movieModel,eventModel) {
                     // if the user does not already exist
                     if(user == null) {
                         // create a new user
+                        bcrypt.hash(newUser.password,null,null, function(err, hash) {
+                            // Store hash in your password DB.
+                            newUser.password = hash;
+                        });
                         return userModel.Create(newUser)
                             .then(
                                 // fetch all the users
