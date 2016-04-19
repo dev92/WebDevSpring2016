@@ -29,6 +29,7 @@
         }
 
 
+
         function handleSuccess(response) {
             for(var user in response){
                 delete response[user].password;
@@ -108,6 +109,10 @@
 
                 UserService.deleteUserById(user._id)
                     .then(function(response){
+
+                        for(var user in response){
+                            delete response[user].password;
+                        }
                         $scope.users = response;
 
                     }, function(err){
@@ -124,6 +129,10 @@
 
             UserService.updateUser(user._id,user)
                 .then(function(response){
+
+                    for(var user in response){
+                        delete response[user].password;
+                    }
 
                     $scope.users = response;
                     $scope.newuser = {};
