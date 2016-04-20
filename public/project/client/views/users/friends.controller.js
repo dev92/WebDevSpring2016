@@ -46,7 +46,7 @@
         $scope.addRequest = function(userId,friend) {
             UserService.UserAddsFriend(userId, friend._id)
                 .then(function(response){
-                    console.log(response);
+                    //console.log(response);
                     $scope.friends = response;
                     return UserService.FindUserRequests(userId);
                 })

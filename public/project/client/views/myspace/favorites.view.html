@@ -27,7 +27,7 @@
         </md-content>
         <div class="well" style="background-color: rgba(96, 125, 139, 0.7)">
             <div class="md-padding" layout="row" layout-xs="column" layout-align="center center" flex="33" layout-wrap>
-                <md-card  ng-repeat="movie in movies">
+                <md-card  ng-repeat="movie in movies.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                     <md-card-title>
                         <md-card-title-text>
                             <span class="md-subhead">{{movie.title}}</span>
@@ -50,6 +50,13 @@
                         </md-button>
                     </md-card-actions>
                 </md-card>
+            </div>
+            <div layout="row" layout-align="center center">
+                <uib-pagination ng-hide="available" total-items="totalItems"
+                                ng-model="currentPage"
+                                max-size="3"
+                                items-per-page="itemsPerPage">
+                </uib-pagination>
             </div>
         </div>
         <!--</div>-->

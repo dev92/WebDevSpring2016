@@ -35,7 +35,6 @@
 
                         $scope.user = response;
 
-                        console.log($scope.user);
 
                         if($rootScope.currentusr.requests.indexOf(profileId)!=-1){
                             $scope.buttonType = "requested";

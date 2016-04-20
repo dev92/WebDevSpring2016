@@ -7,6 +7,10 @@
 
         $scope.movies = [];
 
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 3;
+        $scope.available = true;
+
         var profileId = $routeParams.userId;
         $scope.otherUser = profileId;
 
@@ -17,6 +21,12 @@
         MovieService.findUserLikedMovies(profileId)
             .then(function(response){
                 $scope.movies = response;
+
+                $scope.totalItems = $scope.movies.length;
+
+                if($scope.totalItems > 3){
+                    $scope.available = false;
+                }
             });
 
         $scope.removeFavorite = function(tmdbId){
@@ -26,6 +36,12 @@
                 })
                 .then(function(movies){
                     $scope.movies = movies;
+
+                    $scope.totalItems = $scope.movies.length;
+
+                    if($scope.totalItems > 3){
+                        $scope.available = false;
+                    }
                 });
         }
 
