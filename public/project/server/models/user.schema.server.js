@@ -25,6 +25,7 @@ module.exports = function(mongoose) {
         "moviesRated":[ratingSchema],
         "moviesReviewed":[reviewSchema],
         "avatar": String,
+        "type":String
         //"eventsInvited":[String]
     }, {collection: "project.cinePhilia.user"});
 

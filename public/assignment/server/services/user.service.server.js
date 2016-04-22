@@ -1,130 +1,129 @@
 "use strict";
 
-var passport         = require('passport');
-var LocalStrategy    = require('passport-local').Strategy;
+//var passport         = require('passport');
+//var LocalStrategy    = require('passport-local').Strategy;
 
 
-module.exports = function(app, userModel) {
+module.exports = function(app, asgmtuserModel) {
 
     var auth = authorized;
+    var isAdmin = isAdmin;
+    //passport.use(new LocalStrategy(assignmentStrategy));
+    //passport.serializeUser(serializeUser);
+    //passport.deserializeUser(deserializeUser);
 
-    app.post  ('/api/assignment/login', passport.authenticate('local'), login);
-    app.post  ('/api/assignment/logout',         logout);
-    app.post  ('/api/assignment/register',       register);
-    app.get   ('/api/assignment/loggedin',  loggedin);
+    //app.post  ('/api/assignment/login', passport.authenticate('assignment'), login);
+    //app.post  ('/api/assignment/logout',         logout);
+    //app.post  ('/api/assignment/register',       register);
+    //app.get   ('/api/assignment/loggedin',  loggedin);
 
-
-    app.get("/api/assignment/admin/user", auth ,FindAllUsers);
-    //app.get("/api/assignment/user/:id",auth ,FindById);
+    app.get("/api/assignment/user/:id",auth ,FindById);
+    app.get("/api/assignment/admin/user", isAdmin ,FindAllUsers);
+    app.get("/api/assignment/admin/user/:id",isAdmin ,AdminFindById);
     app.put("/api/assignment/user/:id",auth,UpdateUser);
-    app.delete("/api/assignment/admin/user/:id",auth, DeleteUser);
-    app.post("/api/assignment/admin/user", auth, CreateUser);
+    app.delete("/api/assignment/admin/user/:id",isAdmin, DeleteUser);
+    app.post("/api/assignment/admin/user", isAdmin, CreateUser);
+    app.put("/api/assignment/admin/user/:id",isAdmin,UpdateUserByAdmin);
 
 
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
 
+    //function assignmentStrategy(username, password, done) {
+    //    userModel
+    //        .FindUserByCredentials({username: username, password: password})
+    //        .then(
+    //            function(user) {
+    //                if (!user) {
+    //
+    //                    return done(null, false);
+    //                }
+    //                return done(null, user);
+    //            },
+    //            function(err) {
+    //                if (err) {
+    //                    return done(err);
+    //                }
+    //            }
+    //        );
+    //}
+    //
+    //function serializeUser(user, done) {
+    //    done(null, user);
+    //}
+    //
+    //function deserializeUser(user, done) {
+    //    userModel
+    //        .FindById(user._id)
+    //        .then(
+    //            function(user){
+    //                done(null, user);
+    //            },
+    //            function(err){
+    //                done(err, null);
+    //            }
+    //        );
+    //}
 
-    function localStrategy(username, password, done) {
-        userModel
-            .FindUserByCredentials({username: username, password: password})
-            .then(
-                function(user) {
-                    if (!user) {
+    //function login(req, res) {
+    //    var user = req.user;
+    //    res.json(user);
+    //}
 
-                        return done(null, false);
-                    }
-                    return done(null, user);
-                },
-                function(err) {
-                    if (err) {
-                        return done(err);
-                    }
-                }
-            );
-    }
-
-    function serializeUser(user, done) {
-        done(null, user);
-    }
-
-    function deserializeUser(user, done) {
-        userModel
-            .FindById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }
-
-    function login(req, res) {
-        var user = req.user;
-        res.json(user);
-    }
-
-    function loggedin(req, res) {
-        res.send(req.isAuthenticated() ? req.user : '0');
-    }
-
-    function logout(req, res) {
-        req.logOut();
-        res.send(200);
-    }
-
-    function register(req, res) {
-
-        var newUser = req.body;
-        if(newUser.hasOwnProperty("roles")){
-            newUser.roles.push('student');
-        }else{
-            newUser.roles = ['student'];
-        }
-
-
-        userModel
-            .FindUserByUsername(newUser.username)
-            .then(
-                function(user){
-                    if(user) {
-                        res.json(null);
-                    } else {
-                        return userModel.Create(newUser);
-                    }
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            )
-            .then(
-                function(user){
-                    if(user){
-                        req.login(user, function(err) {
-                            if(err) {
-                                res.status(400).send(err);
-                            } else {
-                                res.json(user);
-                            }
-                        });
-                    }
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
-    }
+    //function loggedin(req, res) {
+    //    res.send(req.isAuthenticated() ? req.user : '0');
+    //}
+    //
+    //function logout(req, res) {
+    //    req.logOut();
+    //    res.send(200);
+    //}
+    //
+    //function register(req, res) {
+    //
+    //    var newUser = req.body;
+    //    if(newUser.hasOwnProperty("roles")){
+    //        newUser.roles.push('student');
+    //    }else{
+    //        newUser.roles = ['student'];
+    //    }
+    //
+    //
+    //    userModel
+    //        .FindUserByUsername(newUser.username)
+    //        .then(
+    //            function(user){
+    //                if(user) {
+    //                    res.json(null);
+    //                } else {
+    //                    return userModel.Create(newUser);
+    //                }
+    //            },
+    //            function(err){
+    //                res.status(400).send(err);
+    //            }
+    //        )
+    //        .then(
+    //            function(user){
+    //                if(user){
+    //                    req.login(user, function(err) {
+    //                        if(err) {
+    //                            res.status(400).send(err);
+    //                        } else {
+    //                            res.json(user);
+    //                        }
+    //                    });
+    //                }
+    //            },
+    //            function(err){
+    //                res.status(400).send(err);
+    //            }
+    //        );
+    //}
 
 
 
     function FindAllUsers(req,res){
 
-        if(isAdmin(req.user)) {
-
-            userModel
+            asgmtuserModel
                 .FindAll()
                 .then(
                     function (users) {
@@ -134,21 +133,43 @@ module.exports = function(app, userModel) {
                         res.status(400).send(err);
                     }
                 );
-        } else {
-            res.status(403).send("Unautorized access!");
-        }
+    }
+
+
+    function AdminFindById(req,res){
+        asgmtuserModel
+            .FindById(req.params.id)
+            .then(
+                function(user){
+                    res.json(user);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+    }
+
+    function FindById(req,res){
+        asgmtuserModel
+            .FindById(req.params.id)
+            .then(
+                function(user){
+                    res.json(user);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
     }
 
 
     function DeleteUser(req, res) {
 
-        if(isAdmin(req.user)) {
-
-            userModel
+        asgmtuserModel
                 .Delete(req.params.id)
                 .then(
                     function(user){
-                        return userModel.FindAll();
+                        return asgmtuserModel.FindAll();
                     },
                     function(err){
                         res.status(400).send(err);
@@ -160,25 +181,31 @@ module.exports = function(app, userModel) {
                     function(err){
                         res.status(400).send(err);
                     });
-            } else {
-                res.status(403);
-            }
     }
 
     function UpdateUser(req, res) {
 
         var newUser = req.body;
 
-        userModel
+        asgmtuserModel
+            .Update(req.params.id, newUser)
+                .then(function(user){
+                    res.json(user);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
+    }
+
+    function UpdateUserByAdmin(req, res) {
+
+        var newUser = req.body;
+
+        asgmtuserModel
             .Update(req.params.id, newUser)
             .then(
                 function(user){
-                    if(!isAdmin(req.user) || req.session.passport.user._id == req.params.id){
-                        return user;
-                    }else{
-                        return userModel.FindAll();
-                    }
-
+                        return asgmtuserModel.FindAll();
                 },
                 function(err){
                     res.status(400).send(err);
@@ -201,7 +228,7 @@ module.exports = function(app, userModel) {
         }
 
         // first check if a user already exists with the username
-        userModel
+        asgmtuserModel
             .FindUserByUsername(newUser.username)
             .then(
                 function(user){
@@ -220,7 +247,7 @@ module.exports = function(app, userModel) {
                             );
                         // if the user already exists, then just fetch all the users
                     } else {
-                        return userModel.FindAll();
+                        return  asgmtuserModel.FindAll();
                     }
                 },
                 function(err){
@@ -238,12 +265,14 @@ module.exports = function(app, userModel) {
     }
 
 
-    function isAdmin(user) {
+    function isAdmin(req,res,next) {
 
-        if(user.roles.indexOf("admin") > -1) {
-            return true
+        if(req.user.roles.indexOf("admin") > -1 && req.isAuthenticated() ) {
+            next()
+        }else{
+            res.status(403).send("Authentication failed!");
         }
-        return false;
+        //return false;
     }
 
 

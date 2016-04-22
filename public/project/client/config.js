@@ -119,7 +119,7 @@
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
-            if (user !== '0' && user.role =='admin')
+            if (user != '0' && user.role =='admin' && user.type!='assignment')
             {
                 $rootScope.currentusr = user;
                 deferred.resolve();
@@ -143,7 +143,7 @@
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
-            if (user !== '0')
+            if (user != '0' && user.type!='assignment')
             {
                 $rootScope.currentusr = user;
                 deferred.resolve();
@@ -168,7 +168,7 @@
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
-            if (user !== '0')
+            if (user != '0' && user.type!='assignment')
             {
                 $rootScope.currentusr = user;
 

@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("AdminController", AdminController);
 
-    function AdminController($scope,$location,UserService){
+    function AdminController($scope,UserService){
 
         $scope.reverse = false;
         $scope.predicate = 'username';
@@ -25,11 +25,14 @@
 
 
         function handleSuccess(response) {
+
+            for(var user in response){
+                delete response[user].password;
+            }
             $scope.users = response;
         }
 
         function handleError(error) {
-            console.log(error);
             $scope.error = error;
         }
 
@@ -41,6 +44,10 @@
         function add(user){
             UserService.createUser(user)
                 .then(function(response){
+
+                    for(var user in response){
+                        delete response[user].password;
+                    }
 
                     $scope.users = response;
                     $scope.newuser = {};
@@ -65,7 +72,11 @@
 
         function update(user){
 
-            UserService.updateUser(user._id,user)
+            if(user.password == null || user.password ==''){
+                delete user.password;
+            }
+
+            UserService.updateUserByAdmin(user._id,user)
                 .then(function(response){
 
                     $scope.users = response;

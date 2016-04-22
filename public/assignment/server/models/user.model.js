@@ -2,13 +2,14 @@
 
 //var uuid = require('node-uuid');
 var q = require("q");
+var bcrypt = require("bcrypt-nodejs");
 
 
 module.exports = function(mongoose,db) {
 
     //var users = require("./user.mock.json");
     var UserSchema = require('./user.schema.server.js')(mongoose);
-    var UserModel  = db.model("UserModel", UserSchema);
+    var UserModel  = db.model("UserModelAsgmt", UserSchema);
 
 
     var api = {
@@ -26,6 +27,9 @@ module.exports = function(mongoose,db) {
     function Create(user){
 
         var deferred = q.defer();
+
+        user.type = 'assignment';
+        user.password = bcrypt.hashSync(user.password);
 
         UserModel.create(user, function(err, document) {
             if (err) {
@@ -90,10 +94,14 @@ module.exports = function(mongoose,db) {
                 response.firstName = user.firstName;
                 response.lastName = user.lastName;
                 response.username = user.username;
-                response.password = user.password;
+                //response.password = user.password;
                 response.emails = user.emails;
                 response.phones = user.phones;
                 response.roles = user.roles;
+
+                if(user.hasOwnProperty("password")){
+                    response.password = bcrypt.hashSync(user.password);
+                }
 
 
                 response.save(function(err, document) {

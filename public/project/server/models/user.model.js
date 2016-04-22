@@ -7,7 +7,7 @@ module.exports = function(mongoose,db) {
 
     //var users = require("./users.mock.json");
     var UserSchema = require('./user.schema.server.js')(mongoose);
-    var UserModel  = db.model("UserModel", UserSchema);
+    var UserModel  = db.model("UserModelProject", UserSchema);
 
 
     var api = {
@@ -34,6 +34,8 @@ module.exports = function(mongoose,db) {
     function Create(user){
 
         var deferred = q.defer();
+
+        user.type = 'project';
 
         user.password = bcrypt.hashSync(user.password);
 

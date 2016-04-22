@@ -15,11 +15,14 @@
             logout: logout,
             register: register,
             findAllUsers : findAllUsers,
+            findById: findById,
+            AdminfindById: AdminfindById,
             //findUserByCredentials:findUserByCredentials,
             //findUserByUsername : findUserByUsername,
             createUser : createUser,
             deleteUserById : deleteUserById,
-            updateUser : updateUser
+            updateUser : updateUser,
+            updateUserByAdmin : updateUserByAdmin
         };
 
         return service;
@@ -76,6 +79,26 @@
             return defer.promise;
         }
 
+        function findById(userId){
+            var defer = $q.defer();
+            var url = '/api/assignment/user'+userId;
+            $http.get(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function AdminfindById(userId){
+            var defer = $q.defer();
+            var url = '/api/assignment/admin/user'+userId;
+            $http.get(url)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
 
         //function findUserByCredentials(username, password) {
         //    var defer = $q.defer();
@@ -111,6 +134,16 @@
         function updateUser(userId, user) {
             var defer = $q.defer();
             var url = '/api/assignment/user/'+ userId;
+            $http.put(url, user)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function updateUserByAdmin(userId, user) {
+            var defer = $q.defer();
+            var url = '/api/assignment/admin/user/'+ userId;
             $http.put(url, user)
                 .success(function(response){
                     defer.resolve(response);

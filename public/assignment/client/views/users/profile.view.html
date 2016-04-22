@@ -1,5 +1,9 @@
 <h1 class="page-header">Profile</h1>
 <div class="form-horizontal" ng-controller="ProfileController" ng-form name="profileForm">
+    <div ng-show = "message" class="alert alert-danger fade in">
+        <button type = "button" class = "close" data-dismiss = "alert" aria-hidden = "true">&times</button>
+        {{message}}
+    </div>
     <div class="form-group">
         <label for="inputusername" class="col-sm-2 control-label">Username: </label>
         <div class="col-sm-10">
@@ -24,7 +28,7 @@
             <input type="password" ng-model = "currentuser.password" class="form-control" id="inputPassword" placeholder="Password">
         </div>
     </div>
-    <div ng-class="validate(currentuser,vpassword)">
+    <div class="form-group">
         <label for="verifypswd" class="col-sm-2 control-label">Verify Password:</label>
         <div class="col-sm-10">
             <input type="password" ng-model = "vpassword" class="form-control" id="verifypswd" placeholder="Password">
@@ -50,7 +54,7 @@
         </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10 text-center">
-            <button ng-disabled= hide class="btn btn-primary btn-lg" ng-click="update(currentuser)">Update</button>
+            <button class="btn btn-primary btn-lg" ng-click="update(currentuser)">Update</button>
         </div>
     </div>
 </div>

@@ -5,17 +5,24 @@ var LocalStrategy    = require('passport-local').Strategy;
 var bcrypt           = require("bcrypt-nodejs");
 //var fs = require("fs");
 
-module.exports = function(app, userModel, movieModel,eventModel) {
+module.exports = function(app, userModel, movieModel,asgmtUserModel) {
 
     var auth = authorized;
 
     var multer  = require('multer');
     var upload = multer({ dest: __dirname+'/../../uploads' });
 
-    app.post  ('/api/project/login', passport.authenticate('local'), login);
-    app.post  ('/api/project/logout',         logout);
-    app.post  ('/api/project/register',       register);
-    app.get   ('/api/project/loggedin',  loggedin);
+    app.post  ('/api/project/login', passport.authenticate('project'), projectLogin);
+    app.post  ('/api/project/logout',         projectLogout);
+    app.post  ('/api/project/register',       projectRegister);
+    app.get   ('/api/project/loggedin',  projectLoggedin);
+
+
+    app.post  ('/api/assignment/login', passport.authenticate('assignment'), assignmentLogin);
+    app.post  ('/api/assignment/logout',         logout);
+    app.post  ('/api/assignment/register',       register);
+    app.get   ('/api/assignment/loggedin',  loggedin);
+
 
     app.get("/api/project/admin/user",auth,FindAll);
     app.get("/api/project/user/:id",auth,FindById);
@@ -37,14 +44,40 @@ module.exports = function(app, userModel, movieModel,eventModel) {
     app.post("/api/project/upload", upload.single('myAvatar'), auth, uploadImage);
 
 
-    passport.use(new LocalStrategy(localStrategy));
+    passport.use('project',new LocalStrategy(projectStrategy));
+    passport.use('assignment',new LocalStrategy(assignmentStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
 
-    function localStrategy(username, password, done) {
+    function projectStrategy(username, password, done) {
         //console.log(username,password);
         userModel
+            .FindUserByUsername(username)
+            .then(
+                function(user) {
+                    if(user && bcrypt.compareSync(password, user.password)){
+
+                        return done(null, user);
+                    }
+                    //if (user && bcrypt.compareSync(password, user.password)) {
+                    else{
+
+                        return done(null, false);
+                    }
+
+                },
+                function(err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            );
+    }
+
+
+    function assignmentStrategy(username, password, done) {
+        asgmtUserModel
             .FindUserByUsername(username)
             .then(
                 function(user) {
@@ -72,34 +105,57 @@ module.exports = function(app, userModel, movieModel,eventModel) {
     }
 
     function deserializeUser(user, done) {
-        userModel
-            .FindById(user._id)
-            .then(
-                function(user){
-                    done(null, user);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
+
+        if(user.type == 'project'){
+
+            userModel
+                .FindById(user._id)
+                .then(
+                    function(user){
+                        done(null, user);
+                    },
+                    function(err){
+                        done(err, null);
+                    }
+                );
+            }
+        else if(user.type == 'assignment'){
+            asgmtUserModel
+                .FindById(user._id)
+                .then(
+                    function(user){
+                        done(null, user);
+                    },
+                    function(err){
+                        done(err, null);
+                    }
+                );
+        }
+
     }
 
-    function login(req, res) {
+    function projectLogin(req, res) {
 
         var user = req.user;
         res.json(user);
     }
 
-    function loggedin(req, res) {
+    function assignmentLogin(req, res) {
+
+        var user = req.user;
+        res.json(user);
+    }
+
+    function projectLoggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
 
-    function logout(req, res) {
+    function projectLogout(req, res) {
         req.logOut();
         res.send(200);
     }
 
-    function register(req, res) {
+    function projectRegister(req, res) {
 
         var newUser = req.body;
 
@@ -120,6 +176,58 @@ module.exports = function(app, userModel, movieModel,eventModel) {
                         return userModel.Create(newUser);
                     }
                         //newUser.password = bcrypt.hashSync(newUser.password);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
+
+    function register(req, res) {
+
+        var newUser = req.body;
+        if(newUser.hasOwnProperty("roles")){
+            newUser.roles.push('student');
+        }else{
+            newUser.roles = ['student'];
+        }
+
+
+        asgmtUserModel
+            .FindUserByUsername(newUser.username)
+            .then(
+                function(user){
+                    if(user) {
+                        res.json(null);
+                    } else {
+                        return asgmtUserModel.Create(newUser);
+                    }
                 },
                 function(err){
                     res.status(400).send(err);
