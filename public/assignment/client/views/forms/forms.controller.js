@@ -26,16 +26,23 @@
         var currentForm = {};
 
         $scope.addForm = function() {
-            if($scope.formName!=null) {
+
+
+            if($scope.formName == null || $scope.formName =='') {
+
+                currentForm.title = "New Form";
+
+            }else {
                 currentForm.title = $scope.formName;
-                FormService.createFormForUser($rootScope.currentusr._id, currentForm)
-                    .then(function(response){
-                        $scope.forms.push(response);
-                    });
-                $scope.formName = null;
-                currentForm = {};
             }
-        }
+
+            FormService.createFormForUser($rootScope.currentusr._id, currentForm)
+                .then(function(response){
+                    $scope.forms.push(response);
+                });
+            $scope.formName = null;
+            currentForm = {};
+        };
 
         $scope.updateForm = function(){
             if($scope.formName!=null) {

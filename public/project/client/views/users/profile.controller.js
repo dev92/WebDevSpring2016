@@ -109,6 +109,8 @@
             UserService.updateUser(user._id,user)
                 .then(function(response){
                     $rootScope.currentusr = response;
+                    //$scope.user = $rootScope.currentusr;
+                    //delete $scope.user.password;
                     $location.url('/profile/'+user._id);
                 });
             }

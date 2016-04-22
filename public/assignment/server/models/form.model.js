@@ -123,7 +123,6 @@ module.exports = function(mongoose,db) {
             } else {
                 formToUpdate.title = form.title;
                 formToUpdate.updated = Date.now();
-                console.log(formToUpdate);
                 formToUpdate.save(function(err, updatedForm) {
                     deferred.resolve(updatedForm);
                 });
