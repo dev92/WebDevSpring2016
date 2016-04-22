@@ -127,17 +127,18 @@
                 delete user.password;
             }
 
-            UserService.updateUser(user._id,user)
+            UserService.updateUserByAdmin(user._id,user)
                 .then(function(response){
+
+                    $scope.newuser = {};
+                    $scope.selectedUserIndex = null;
+                    $scope.disable = true;
 
                     for(var user in response){
                         delete response[user].password;
                     }
 
                     $scope.users = response;
-                    $scope.newuser = {};
-                    $scope.selectedUserIndex = null;
-                    $scope.disable = true;
 
                 }, function(err){
                     $scope.error = err;

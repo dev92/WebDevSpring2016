@@ -26,6 +26,9 @@
             if($rootScope.currentusr._id == profileId){
 
                 $scope.user = $rootScope.currentusr;
+
+                console.log($scope.user);
+
                 delete $scope.user.password;
                 $scope.disableFields = false;
 

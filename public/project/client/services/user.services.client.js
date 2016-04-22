@@ -19,6 +19,7 @@
             createUser : createUser,
             deleteUserById : deleteUserById,
             updateUser : updateUser,
+            updateUserByAdmin : updateUserByAdmin,
             findUserFriends:findUserFriends,
             deleteUserFriend:deleteUserFriend,
             UserSendsFriendRequest:UserSendsFriendRequest,
@@ -117,6 +118,16 @@
         function updateUser(userId, user) {
             var defer = $q.defer();
             var url = '/api/project/user/'+ userId;
+            $http.put(url, user)
+                .success(function(response){
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function updateUserByAdmin(userId, user) {
+            var defer = $q.defer();
+            var url = '/api/project/admin/user/'+ userId;
             $http.put(url, user)
                 .success(function(response){
                     defer.resolve(response);

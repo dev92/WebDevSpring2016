@@ -35,6 +35,7 @@ module.exports = function(app, userModel, movieModel,asgmtUserModel) {
     app.delete("/api/project/user/:id/friend/:friendId",auth,DeleteFriend);
     app.delete("/api/project/user/:id/request/:friendId",auth,DeleteFriendRequest);
     app.put("/api/project/user/:id",auth,UpdateUser);
+    app.put("/api/project/admin/user/:id",auth,UpdateUserByAdmin);
     //app.post("/api/project/user/:id/likes/:imdbId",auth,UserLikesMovie);
     app.post("/api/project/user/:id/rates",auth,UserRatesMovie);
     //app.post("/api/project/user/:id/review",auth,UserReviewsMovie);
@@ -330,12 +331,7 @@ module.exports = function(app, userModel, movieModel,asgmtUserModel) {
             .Update(req.params.id, newUser)
             .then(
                 function(user){
-                    if(!isAdmin(req.user) && req.session.passport.user._id == req.params.id){
                         return user;
-                    }else{
-                        return userModel.FindAll();
-                    }
-
                 },
                 function(err){
                     res.status(400).send(err);
@@ -347,6 +343,34 @@ module.exports = function(app, userModel, movieModel,asgmtUserModel) {
                 function(err){
                     res.status(400).send(err);
                 });
+    }
+
+    function UpdateUserByAdmin(req,res){
+
+        var newUser = req.body;
+
+        if(isAdmin(req.user)) {
+
+            userModel
+                .Update(req.params.id, newUser)
+                .then(
+                    function (user) {
+                        return userModel.FindAll();
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                )
+                .then(function (users) {
+                        res.json(users);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    });
+        }
+        else{
+            res.status(403);
+        }
     }
 
     function DeleteUser(req, res){
