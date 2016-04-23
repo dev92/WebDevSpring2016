@@ -4,10 +4,10 @@
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr>
-            <th class="table-text-center"><span ng-click="sort('username')" class="glybutton" ng-class="{'glyphicon glyphicon-sort-by-alphabet-alt':reverse,'glyphicon glyphicon-sort-by-alphabet':!reverse}"></span> Username</th>
+            <th class="table-text-center"><span ng-click="sort('username')" class="glybutton" ng-class="{'glyphicon glyphicon-sort-by-alphabet-alt':usrname_reverse,'glyphicon glyphicon-sort-by-alphabet':!usrname_reverse}"></span> Username</th>
             <th class="table-text-center"> Password</th>
-            <th class="table-text-center"><span ng-click="sort('firstName')" class="glybutton" ng-class="{'glyphicon glyphicon-sort-by-alphabet-alt':reverse,'glyphicon glyphicon-sort-by-alphabet':!reverse}"></span> First Name</th>
-            <th class="table-text-center"><span ng-click="sort('lastName')" class="glybutton" ng-class="{'glyphicon glyphicon-sort-by-alphabet-alt':reverse,'glyphicon glyphicon-sort-by-alphabet':!reverse}"></span> Last Name</th>
+            <th class="table-text-center"><span ng-click="sort('firstName')" class="glybutton" ng-class="{'glyphicon glyphicon-sort-by-alphabet-alt':first_reverse,'glyphicon glyphicon-sort-by-alphabet':!first_reverse}"></span> First Name</th>
+            <th class="table-text-center"><span ng-click="sort('lastName')" class="glybutton" ng-class="{'glyphicon glyphicon-sort-by-alphabet-alt':last_reverse,'glyphicon glyphicon-sort-by-alphabet':!last_reverse}"></span> Last Name</th>
             <th class="table-text-center"> Roles</th>
             <th class="table-text-center"> Actions</th>
         </tr>
@@ -34,7 +34,7 @@
             </td>
             <td>
                 <div class="input-group col-xs-12">
-                    <input ng-model="newuser.roles" ng-list type="text" class="form-control" placeholder="role1, role2">
+                    <input ng-model="newuser.roles" ng-list type="text" class="form-control" placeholder="role1, role2" ng-list>
                 </div>
             </td>
             <td>

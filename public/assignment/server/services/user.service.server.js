@@ -223,9 +223,13 @@ module.exports = function(app, asgmtuserModel) {
 
         var newUser = req.body;
 
-        if(newUser.roles == null || newUser.roles.length < 1) {
-            newUser.roles.push("student");
+        if(!newUser.hasOwnProperty("roles")){
+            newUser.roles = ['student'];
         }
+
+        //else if(newUser.roles == null || newUser.roles.length < 1) {
+        //    newUser.roles.push("student");
+        //}
 
         // first check if a user already exists with the username
         asgmtuserModel
@@ -235,11 +239,11 @@ module.exports = function(app, asgmtuserModel) {
                     // if the user does not already exist
                     if(user == null) {
                         // create a new user
-                        return userModel.Create(newUser)
+                        return asgmtuserModel.Create(newUser)
                             .then(
                                 // fetch all the users
                                 function(){
-                                    return userModel.FindAll();
+                                    return asgmtuserModel.FindAll();
                                 },
                                 function(err){
                                     res.status(400).send(err);
