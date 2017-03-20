@@ -74,8 +74,8 @@ section {
     position: relative;
     width: 100%;
     height: 100%;
-    max-height: 600px;
-    background: url("../media/dev_snow.jpg") no-repeat top center scroll;
+    max-height: 800px;
+    background: url("../media/SanDiego_skyline.jpg") no-repeat top center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
