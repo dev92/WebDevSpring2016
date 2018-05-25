@@ -8,6 +8,8 @@ var session  = require('express-session');
 var mongoose = require("mongoose");
 var connectionString = 'mongodb://127.0.0.1:27017/WebDev2016'; // for local
 
+console.log(process.env.MLAB_USERNAME);
+
 if(process.env.MLAB_USERNAME) { // check if running remotely
     var username = process.env.MLAB_USERNAME; // get from environment
     var password = process.env.MLAB_PASSWORD;
