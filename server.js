@@ -11,10 +11,16 @@ var connectionString = 'mongodb://127.0.0.1:27017/WebDev2016'; // for local
 if(process.env.MLAB_USERNAME) { // check if running remotely
     var username = process.env.MLAB_USERNAME; // get from environment
     var password = process.env.MLAB_PASSWORD;
-    connectionString = 'mongodb://' + username + ':' + password;
-    connectionString += '@ds235860.mlab.com:35860/heroku_9w9phl17';
+    connectionString = 'mongodb+srv://' + username + ':' + password;
+        //'mongodb://' + username + ':' + password;
+    // mongodb+srv://
+    connectionString += '@webdev2016.vzvax.mongodb.net/WebDev2016?retryWrites=true&w=majority'
+        //'@ds235860.mlab.com:35860/heroku_9w9phl17';
+    //@webdev2016.vzvax.mongodb.net/WebDev2016?retryWrites=true&w=majority
 }
-var db = mongoose.connect(connectionString);
+var db = mongoose.connect(connectionString, {
+    useMongoClient: true,
+});
 
 
 app.use(bodyParser.json());
@@ -22,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
 
 
-//console.log(process.env.SESSION_SECRET);
+console.log(process.env.SESSION_SECRET);
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
