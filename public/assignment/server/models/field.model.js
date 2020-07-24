@@ -2,12 +2,12 @@
 
 var q = require("q");
 
-module.exports = function(mongoose,db) {
+module.exports = function(mongoose) {
     //var forms = require("./form.mock.json");
     var FormSchema = require('./form.schema.server.js')(mongoose);
-    var FormModel = db.model("FormModelForField", FormSchema);
+    var FormModel = mongoose.model("FormModelForField", FormSchema);
 
-    var api = {
+    return {
         //CRUD for fields in a form
 
         AddFormField: AddFormField,
@@ -17,7 +17,6 @@ module.exports = function(mongoose,db) {
         DeleteFormField: DeleteFormField,
         ReorderFormFields: ReorderFormFields
     };
-    return api;
 
     function AddFormField(formId,field){
 
@@ -76,10 +75,10 @@ module.exports = function(mongoose,db) {
             if (err) {
                 deferred.reject(err);
             } else {
-                var fields = form.fields;
-                for(var f in fields){
-                    if(fields[f]._id == fieldId){
-                        deferred.resolve(fields[f]);
+                let fields = form.fields;
+                for(const field of fields){
+                    if(field._id === fieldId){
+                        deferred.resolve(field);
                         break;
                     }
                 }
@@ -108,9 +107,9 @@ module.exports = function(mongoose,db) {
             if (err) {
                 deferred.reject(err);
             } else {
-                var fields = form.fields;
-                for (var f in fields) {
-                    if (fields[f]._id == fieldId) {
+                const fields = form.fields;
+                for (const f in fields) {
+                    if (fields[f]._id === fieldId) {
                         fields[f] = field;
                         break;
                     }
@@ -158,7 +157,7 @@ module.exports = function(mongoose,db) {
                 var formFields = form.fields;
 
                 for(var i=0; i<formFields.length; i++){
-                    if(formFields[i]._id == fieldId){
+                    if(formFields[i]._id === fieldId){
                         formFields.splice(i,1);
                     }
                 }

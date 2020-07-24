@@ -3,14 +3,14 @@
 var q = require("q");
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function(mongoose,db) {
+module.exports = function(mongoose) {
 
     //var users = require("./users.mock.json");
     var UserSchema = require('./user.schema.server.js')(mongoose);
-    var UserModel  = db.model("UserModelProject", UserSchema);
+    var UserModel  = mongoose.model("UserModelProject", UserSchema);
 
 
-    var api = {
+    return {
         Create: Create,
         FindAll: FindAll,
         FindById: FindById,
@@ -26,10 +26,9 @@ module.exports = function(mongoose,db) {
         userRatesMovie: userRatesMovie,
         userReviewsMovie: userReviewsMovie,
         deleteUserReview: deleteUserReview,
-        userDislikesMovie:userDislikesMovie,
-        deleteUserFriend:deleteUserFriend,
+        userDislikesMovie: userDislikesMovie,
+        deleteUserFriend: deleteUserFriend,
     };
-    return api;
 
     function Create(user){
 
@@ -447,8 +446,8 @@ module.exports = function(mongoose,db) {
             } else {
                 var ratedMovies = doc.moviesRated;
                 var found = false;
-                for(var m in ratedMovies){
-                    if(ratedMovies[m].tmdbId == ratedMovie.tmdbId){
+                for(const m in ratedMovies){
+                    if(ratedMovies[m].tmdbId === ratedMovie.tmdbId){
                         ratedMovies[m].rating = ratedMovie.rating;
                         found = true;
                         break;
@@ -495,8 +494,8 @@ module.exports = function(mongoose,db) {
                 }
 
                 var found = false;
-                for(var m in reviewedMovies){
-                    if(reviewedMovies[m].tmdbId == newReview.tmdbId){
+                for(const m in reviewedMovies){
+                    if(reviewedMovies[m].tmdbId === newReview.tmdbId){
                         reviewedMovies[m].review = newReview.review;
                         found = true;
                         break;
@@ -536,7 +535,7 @@ module.exports = function(mongoose,db) {
                 deferred.reject(err);
             } else {
                 var reviewedMovies = doc.moviesReviewed;
-                for(var m in reviewedMovies){
+                for(const m in reviewedMovies){
                     if(reviewedMovies[m].tmdbId == tmdbId){
                         reviewedMovies.splice(m,1);
                         break;

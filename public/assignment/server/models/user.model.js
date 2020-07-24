@@ -5,14 +5,14 @@ var q = require("q");
 var bcrypt = require("bcrypt-nodejs");
 
 
-module.exports = function(mongoose,db) {
+module.exports = function(mongoose) {
 
     //var users = require("./user.mock.json");
     var UserSchema = require('./user.schema.server.js')(mongoose);
-    var UserModel  = db.model("UserModelAsgmt", UserSchema);
+    var UserModel  = mongoose.model("UserModelAsgmt", UserSchema);
 
 
-    var api = {
+    return {
         Create: Create,
         FindAll: FindAll,
         FindById: FindById,
@@ -22,7 +22,6 @@ module.exports = function(mongoose,db) {
         FindUserByCredentials: FindUserByCredentials
         //checkExistingUser:checkExistingUser
     };
-    return api;
 
     function Create(user){
 

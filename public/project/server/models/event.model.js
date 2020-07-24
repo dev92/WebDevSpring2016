@@ -1,11 +1,11 @@
 var q = require("q");
 
-module.exports = function(mongoose,db) {
+module.exports = function(mongoose) {
 
     var EventSchema = require('./event.schema.server.js')(mongoose);
-    var EventModel  = db.model("EventModel", EventSchema);
+    var EventModel  = mongoose.model("EventModel", EventSchema);
 
-    var api = {
+    return {
         findEventByID: findEventByID,
         FindEventsByUserId: FindEventsByUserId,
         CreateEvent: CreateEvent,
@@ -13,7 +13,6 @@ module.exports = function(mongoose,db) {
         DeleteEvent: DeleteEvent,
         RemoveUser: RemoveUser
     };
-    return api;
 
 
 

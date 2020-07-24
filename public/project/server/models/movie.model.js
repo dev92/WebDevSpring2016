@@ -2,24 +2,23 @@
 
 var q = require("q");
 
-module.exports = function(mongoose,db) {
+module.exports = function(mongoose) {
 
     // load movie schema from movie model
     var MovieSchema = require('./movie.schema.server.js')(mongoose);
-    var MovieModel  = db.model("MovieModel", MovieSchema);
+    var MovieModel  = mongoose.model("MovieModel", MovieSchema);
 
     //var movies = require("./movies.mock.json");
 
-    var api = {
+    return {
         findMovieByTmdbID: findMovieByTmdbID,
         findMoviesByTmdbIDs: findMoviesByTmdbIDs,
         createMovie: createMovie,
         userLikesMovie: userLikesMovie,
-        userDislikesMovie:userDislikesMovie,
+        userDislikesMovie: userDislikesMovie,
         userReviewsMovie: userReviewsMovie,
         deleteMovieReview: deleteMovieReview,
     };
-    return api;
 
 
     function userLikesMovie (tmdbID, userId) {
@@ -169,8 +168,8 @@ module.exports = function(mongoose,db) {
                 }else{
                     var newReview = reviewedMovie;
                 }
-                for(var m in reviewedUsers){
-                    if(reviewedUsers[m].userId == newReview.userId){
+                for(const m in reviewedUsers){
+                    if(reviewedUsers[m].userId === newReview.userId){
                         reviewedUsers[m].review = newReview.review;
                         found = true;
                         break;
@@ -210,9 +209,8 @@ module.exports = function(mongoose,db) {
                 deferred.reject(err);
             } else {
                 var reviewedUsers = doc.userReviews;
-                var found = false;
-                for(var m in reviewedUsers){
-                    if(reviewedUsers[m].userId == userId){
+                for(const m in reviewedUsers){
+                    if(reviewedUsers[m].userId === userId){
                         reviewedUsers.splice(m,1);
                         break;
                     }

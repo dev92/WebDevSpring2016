@@ -18,9 +18,7 @@ if(process.env.MLAB_USERNAME) { // check if running remotely
         //'@ds235860.mlab.com:35860/heroku_9w9phl17';
     //@webdev2016.vzvax.mongodb.net/WebDev2016?retryWrites=true&w=majority
 }
-var db = mongoose.connect(connectionString, {
-    useMongoClient: true,
-});
+var db = mongoose.connect(connectionString);
 
 
 app.use(bodyParser.json());
@@ -31,7 +29,8 @@ app.use(multer());
 console.log(process.env.SESSION_SECRET);
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: "FormMaker",
+    //process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true
 }));

@@ -3,12 +3,12 @@
 //var uuid = require('node-uuid');
 var q = require("q");
 
-module.exports = function(mongoose,db) {
+module.exports = function(mongoose) {
     //var forms = require("./form.mock.json");
     var FormSchema = require('./form.schema.server.js')(mongoose);
-    var FormModel  = db.model("FormModel", FormSchema);
+    var FormModel  = mongoose.model("FormModel", FormSchema);
 
-    var api = {
+    return {
         Create: Create,
         FindAll: FindAll,
         FindFormByTitle: FindFormByTitle,
@@ -18,7 +18,6 @@ module.exports = function(mongoose,db) {
         Delete: Delete
 
     };
-    return api;
 
     function Create(form, userId){
         var deferred = q.defer();
